@@ -1,5 +1,5 @@
 import { Link, useLocation } from "react-router-dom";
-
+import MenuIcon from "@mui/icons-material/Menu";
 export const NavBar = () => {
   const location = useLocation();
 
@@ -33,7 +33,7 @@ export const NavBar = () => {
               ))}
             </nav>
             <div className="lg:hidden">
-              <button className="bg-red-300 px-1 rounded-md">menu</button>
+              <MenuIcon className="text-white" />
             </div>
           </div>
         </div>

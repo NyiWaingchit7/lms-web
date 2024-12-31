@@ -20,6 +20,12 @@ body {
   .home-btn {
     @apply px-2 py-1  text-white rounded-lg text-[12px] capitalize cursor-pointer;
   }
+  .card-hover {
+    @apply bg-white bg-opacity-20 backdrop-blur-md  border border-white/20 z-20;
+  }
+  .card-header {
+    @apply font-semibold  md:text-lg;
+  }
 }
 
 .nav-underline {
@@ -53,4 +59,14 @@ body {
   transition: transform 0.3s ease-out;
   transform-origin: left;
   transform: scale(1);
+}
+.glass-card {
+  background: rgba(255, 255, 255, 0.2); /* Semi-transparent white */
+  border-radius: 10px;
+  padding: 20px 30px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.37);
+  backdrop-filter: blur(10px); /* Frosted glass effect */
+  -webkit-backdrop-filter: blur(10px); /* For Safari */
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  color: #fff;
 }
