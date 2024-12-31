@@ -8,3 +8,9 @@ html {
   padding: 0;
   box-sizing: border-box;
 }
+
+@layer utilities {
+  .container {
+    @apply max-w-screen-xl mx-auto py-2 px-5 lg:px-0;
+  }
+}

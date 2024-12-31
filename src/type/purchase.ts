@@ -1,5 +1,5 @@
 import { Lecture } from "./lecture";
-import { Student } from "./student";
+import { Student } from "./auth";
 
 export interface Purchase {
   id?: number;
