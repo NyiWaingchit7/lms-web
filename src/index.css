@@ -7,10 +7,50 @@ html {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  scroll-behavior: smooth;
+}
+body {
+  background-color: #f8f8ff;
 }
 
 @layer utilities {
   .container {
-    @apply max-w-screen-xl mx-auto py-2 px-5 lg:px-0;
+    @apply max-w-screen-xl mx-auto py-2 px-5 xl:px-0;
   }
+  .home-btn {
+    @apply px-2 py-1  text-white rounded-lg text-[12px] capitalize cursor-pointer;
+  }
+}
+
+.nav-underline {
+  position: relative;
+}
+.nav-underline::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 3px;
+  transform: scale(0);
+  bottom: 0;
+  left: 0;
+  background-color: white;
+  transition: transform 0.3s ease-out;
+  transform-origin: left;
+}
+
+.nav-underline:hover::after {
+  transform: scale(1);
+}
+.nav-active::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 3px;
+  transform: scale(0);
+  bottom: 0;
+  left: 0;
+  background-color: white;
+  transition: transform 0.3s ease-out;
+  transform-origin: left;
+  transform: scale(1);
 }

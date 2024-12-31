@@ -1,8 +1,10 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 export const NavBar = () => {
+  const location = useLocation();
+
   return (
-    <div className="bg-gray-500 sticky top-0">
+    <div className="bg-green  sticky top-0 overflow-x-hidden z-10">
       <div className="container flex justify-between items-center">
         <div className="flex items-center gap-5 md:gap-32">
           <div className="">
@@ -10,14 +12,24 @@ export const NavBar = () => {
               <img
                 src="/logo.png"
                 alt="logo"
-                className="w-14 md:w-20 mx-auto"
+                className="w-14 md:w-20 mx-auto fill-white"
               />
             </Link>
           </div>
           <div>
             <nav className=" items-center gap-3 text-white hidden lg:flex">
               {navItem.map((item, index) => (
-                <div key={index}>{item.name}</div>
+                <Link to={`/${item.path}`} key={index}>
+                  <div
+                    className={`text-[15px] nav-underline transition-all ease-in-out duration-300  ${
+                      location.pathname.includes(`/${item.path}`)
+                        ? "nav-active"
+                        : ""
+                    }`}
+                  >
+                    {item.name} {location.pathname.includes(`/${item.path}`)}
+                  </div>
+                </Link>
               ))}
             </nav>
             <div className="lg:hidden">
@@ -38,10 +50,10 @@ export const NavBar = () => {
 export const navItem = [
   {
     name: "Home",
-    path: "/",
+    path: "",
   },
   {
     name: "Courses",
-    path: "/lectures",
+    path: "lectures",
   },
 ];
