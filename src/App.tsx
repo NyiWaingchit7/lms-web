@@ -6,10 +6,12 @@ import { Layout } from "./component/layout/Layout";
 import { Title } from "./component/layout/Title";
 import { useAppDispatch, useAppSelector } from "./store/hooks";
 import { getAppLecture } from "./store/slice/appSlice";
+import { Skeleton } from "@mui/material";
 
 function App() {
   const lectures = useAppSelector((store) => store.app.lectures);
   const dispatch = useAppDispatch();
+  const loading = useAppSelector((store) => store.app.isLoading);
   useEffect(() => {
     dispatch(getAppLecture());
   }, []);
@@ -61,12 +63,27 @@ function App() {
             View all
           </p>
         </div>
-        <div className="  grid grid-cols-2 gap-3 md:grid-cols-4">
-          {lectures
-            .filter((item) => item.isPremium === false)
-            .map((data) => (
-              <CourseCard key={data.id} data={data} />
-            ))}
+        <div className="  grid grid-cols-1 gap-1 xl:gap-3 md:grid-cols-4">
+          {loading ? (
+            Array(4)
+              .fill(0)
+              .map((_, index) => (
+                <Skeleton
+                  animation="wave"
+                  key={index}
+                  variant="rounded"
+                  height={200}
+                />
+              ))
+          ) : lectures.length > 0 ? (
+            lectures
+              .filter((item) => item.isPremium === false)
+              .map((data) => <CourseCard key={data.id} data={data} />)
+          ) : (
+            <div className="flex justify-center items-center h-[200px]">
+              <p>There is no data</p>
+            </div>
+          )}
         </div>
       </div>
       <div className="container">
@@ -76,7 +93,7 @@ function App() {
             View all
           </p>
         </div>
-        <div className="container  grid grid-cols-2 gap-3 md:grid-cols-4 overflow-hidden">
+        <div className=" grid grid-cols-1 gap-1 xl :gap-3 md:grid-cols-4 ">
           {lectures
             .filter((item) => item.isPremium)
             .map((data) => (

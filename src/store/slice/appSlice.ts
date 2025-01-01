@@ -15,14 +15,17 @@ export const getAppLecture = createAsyncThunk(
   "get/lecture",
   async (_, thunkApi) => {
     try {
+      thunkApi.dispatch(setAppLoading(true));
       const { response, data } = await fetchFunction({
         url: "lectures",
       });
       if (!response.ok) {
         toast.error(data.message);
+        return;
       }
 
       thunkApi.dispatch(setAppLecture(data.data.data));
+      thunkApi.dispatch(setAppLoading(false));
     } catch (error) {
       console.log(error);
     }
@@ -63,6 +66,9 @@ export const appSlice = createSlice({
     setAppPayment: (state, action) => {
       state.lectures = action.payload;
     },
+    setAppLoading: (state, action) => {
+      state.isLoading = action.payload;
+    },
   },
 });
 
@@ -72,5 +78,6 @@ export const {
   setAppPayment,
   setAppSetting,
   setAppTagline,
+  setAppLoading,
 } = appSlice.actions;
 export default appSlice.reducer;
