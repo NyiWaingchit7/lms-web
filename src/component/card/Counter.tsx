@@ -18,7 +18,7 @@ const Counter = ({ end = 12 }: { end: number }) => {
 
   useEffect(() => {
     if (inView) {
-      animate(count, end, { duration: 2 });
+      animate(count, end, { duration: 3 });
     }
   }, [inView, count, end]);
 

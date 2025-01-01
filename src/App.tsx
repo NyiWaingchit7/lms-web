@@ -1,10 +1,18 @@
+import { useEffect } from "react";
 import "./App.css";
 import Counter from "./component/card/Counter";
 import { CourseCard } from "./component/card/course/CourseCard";
 import { Layout } from "./component/layout/Layout";
 import { Title } from "./component/layout/Title";
+import { useAppDispatch, useAppSelector } from "./store/hooks";
+import { getAppLecture } from "./store/slice/appSlice";
 
 function App() {
+  const lectures = useAppSelector((store) => store.app.lectures);
+  const dispatch = useAppDispatch();
+  useEffect(() => {
+    dispatch(getAppLecture());
+  }, []);
   return (
     <Layout>
       <Title title="Home" />
@@ -46,18 +54,18 @@ function App() {
         </div>
       </div>
 
-      <div className="container">
+      <div className="container mb-10">
         <div className="flex justify-between items-center">
           <h3 className="card-header">Free Courses</h3>
           <p className="cursor-pointer text-xs sm:text-sm hover:underline ">
             View all
           </p>
         </div>
-        <div className="  grid grid-cols-2 gap-3 md:grid-cols-4 overflow-hidden mb-10">
-          {Array(4)
-            .fill(0)
-            .map((_, index) => (
-              <CourseCard key={index} />
+        <div className="  grid grid-cols-2 gap-3 md:grid-cols-4">
+          {lectures
+            .filter((item) => item.isPremium === false)
+            .map((data) => (
+              <CourseCard key={data.id} data={data} />
             ))}
         </div>
       </div>
@@ -69,10 +77,10 @@ function App() {
           </p>
         </div>
         <div className="container  grid grid-cols-2 gap-3 md:grid-cols-4 overflow-hidden">
-          {Array(4)
-            .fill(0)
-            .map((_, index) => (
-              <CourseCard free={false} key={index} />
+          {lectures
+            .filter((item) => item.isPremium)
+            .map((data) => (
+              <CourseCard data={data} key={data.id} />
             ))}
         </div>
       </div>

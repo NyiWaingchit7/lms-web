@@ -1,8 +1,9 @@
 import OpenInNewIcon from "@mui/icons-material/OpenInNew";
+import { Lecture } from "../../../type/lecture";
 interface Props {
-  free?: boolean;
+  data: Lecture;
 }
-export const CourseCard = ({ free = true }: Props) => {
+export const CourseCard = ({ data }: Props) => {
   return (
     <div className="shadow-md p-3 rounded-lg relative cursor-pointer ">
       <div className="relative">
@@ -15,15 +16,19 @@ export const CourseCard = ({ free = true }: Props) => {
           alt=""
         />
       </div>
-      <h3 className="text-xs md:text-lg font-semibold mt-5">
-        Javascript Development
-      </h3>
-      {!free && (
+      <h3 className="text-xs md:text-lg font-semibold mt-5">{data.title}</h3>
+      {data.isPremium && (
         <div>
-          <p className="line-through text-[10px] sm:text-xs sm:inline">
-            100000MMK
+          {data.discount_price && (
+            <p className="line-through text-[10px] sm:text-xs sm:inline">
+              {data.price?.toLocaleString()} MMK
+            </p>
+          )}
+          <p className="text-xs sm:text-sm inline sm:ms-2">
+            {data.discount_price?.toLocaleString() ||
+              data.price?.toLocaleString()}{" "}
+            MMK
           </p>
-          <p className="text-xs sm:text-sm inline sm:ms-2">90000MMK</p>
         </div>
       )}
     </div>
