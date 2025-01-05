@@ -1,10 +1,10 @@
-import { Lecture } from "./lecture";
 import { Student } from "./auth";
+import { Course } from "./course";
 
 export interface Purchase {
   id?: number;
   student?: Student;
-  lecture?: Lecture;
+  lecture?: Course;
   studentId?: number;
   lectureId?: number;
   payment_status?: PaymentStatus;
@@ -17,7 +17,7 @@ export interface PurchaseSlice {
   data: Purchase;
   isLoading: boolean;
   students: Student[];
-  lectures: Lecture[];
+  lectures: Course[];
 }
 
 export interface CreatePurchase {

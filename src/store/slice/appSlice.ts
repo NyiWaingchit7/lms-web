@@ -7,6 +7,7 @@ const initialState: AppSlice = {
   error: null,
   lectures: [],
   tagLines: [],
+  free_lectures: [],
   setting: null,
   pages: [],
   payment: [],
@@ -16,21 +17,46 @@ export const getAppLecture = createAsyncThunk(
   async (_, thunkApi) => {
     try {
       thunkApi.dispatch(setAppLoading(true));
-      const { response, data } = await fetchFunction({
-        url: "lectures",
-      });
-      if (!response.ok) {
-        toast.error(data.message);
-        return;
-      }
+      const preLec = await getAppPreLecture();
+      const freeLec = await getAppFreeLecture();
 
-      thunkApi.dispatch(setAppLecture(data.data.data));
+      thunkApi.dispatch(setAppLecture(preLec));
+      thunkApi.dispatch(setAppFree(freeLec));
+
       thunkApi.dispatch(setAppLoading(false));
     } catch (error) {
       console.log(error);
     }
   }
 );
+export const getAppPreLecture = async () => {
+  try {
+    const { response, data } = await fetchFunction({
+      url: "lectures?isPremium=true",
+    });
+    if (!response.ok) {
+      toast.error(data.message);
+      return;
+    }
+    return data.data.data;
+  } catch (error) {
+    console.log(error);
+  }
+};
+export const getAppFreeLecture = async () => {
+  try {
+    const { response, data } = await fetchFunction({
+      url: "lectures?isPremium=false",
+    });
+    if (!response.ok) {
+      toast.error(data.message);
+      return;
+    }
+    return data.data.data;
+  } catch (error) {
+    console.log(error);
+  }
+};
 export const getAppTagLine = createAsyncThunk(
   "get/lecture",
   async (_, thunkApi) => {
@@ -53,6 +79,9 @@ export const appSlice = createSlice({
   reducers: {
     setAppLecture: (state, action) => {
       state.lectures = action.payload;
+    },
+    setAppFree: (state, action) => {
+      state.free_lectures = action.payload;
     },
     setAppTagline: (state, action) => {
       state.lectures = action.payload;
@@ -79,5 +108,6 @@ export const {
   setAppSetting,
   setAppTagline,
   setAppLoading,
+  setAppFree,
 } = appSlice.actions;
 export default appSlice.reducer;

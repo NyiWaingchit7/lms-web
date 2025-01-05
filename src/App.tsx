@@ -10,6 +10,8 @@ import { Skeleton } from "@mui/material";
 
 function App() {
   const lectures = useAppSelector((store) => store.app.lectures);
+  const freeLectures = useAppSelector((store) => store.app.free_lectures);
+
   const dispatch = useAppDispatch();
   const loading = useAppSelector((store) => store.app.isLoading);
   useEffect(() => {
@@ -56,9 +58,39 @@ function App() {
         </div>
       </div>
 
-      <div className="container mb-10">
+      <div className="container">
         <div className="flex justify-between items-center">
           <h3 className="card-header">Free Courses</h3>
+
+          <p className="cursor-pointer text-xs sm:text-sm hover:underline ">
+            View all
+          </p>
+        </div>
+        <div className=" grid grid-cols-1 gap-1 xl :gap-3 md:grid-cols-4 ">
+          {loading ? (
+            Array(4)
+              .fill(0)
+              .map((_, index) => (
+                <Skeleton
+                  animation="wave"
+                  key={index}
+                  variant="rounded"
+                  height={200}
+                />
+              ))
+          ) : freeLectures.length > 0 ? (
+            freeLectures.map((data) => <CourseCard key={data.id} data={data} />)
+          ) : (
+            <div className="flex justify-center items-center h-[200px]">
+              <p>There is no data</p>
+            </div>
+          )}
+        </div>
+      </div>
+      <div className="container mb-10">
+        <div className="flex justify-between items-center">
+          <h3 className="card-header">Premium Courses</h3>
+
           <p className="cursor-pointer text-xs sm:text-sm hover:underline ">
             View all
           </p>
@@ -76,29 +108,12 @@ function App() {
                 />
               ))
           ) : lectures.length > 0 ? (
-            lectures
-              .filter((item) => item.isPremium === false)
-              .map((data) => <CourseCard key={data.id} data={data} />)
+            lectures.map((data) => <CourseCard key={data.id} data={data} />)
           ) : (
             <div className="flex justify-center items-center h-[200px]">
               <p>There is no data</p>
             </div>
           )}
-        </div>
-      </div>
-      <div className="container">
-        <div className="flex justify-between items-center">
-          <h3 className="card-header">Premium Courses</h3>
-          <p className="cursor-pointer text-xs sm:text-sm hover:underline ">
-            View all
-          </p>
-        </div>
-        <div className=" grid grid-cols-1 gap-1 xl :gap-3 md:grid-cols-4 ">
-          {lectures
-            .filter((item) => item.isPremium)
-            .map((data) => (
-              <CourseCard data={data} key={data.id} />
-            ))}
         </div>
       </div>
     </Layout>

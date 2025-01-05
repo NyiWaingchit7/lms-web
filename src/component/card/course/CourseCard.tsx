@@ -1,11 +1,15 @@
 import OpenInNewIcon from "@mui/icons-material/OpenInNew";
-import { Lecture } from "../../../type/lecture";
+import { Course } from "../../../type/course";
+import { Link } from "react-router-dom";
 interface Props {
-  data: Lecture;
+  data: Course;
 }
 export const CourseCard = ({ data }: Props) => {
   return (
-    <div className="shadow-md p-3 rounded-lg relative cursor-pointer ">
+    <Link
+      to={`/courses/${data.id}`}
+      className="shadow-md p-3 rounded-lg relative cursor-pointer "
+    >
       <div className="relative h-[150px]">
         <div className="absolute top-0 left-0 w-full h-full flex bg-white bg-opacity-10 backdrop-blur-sm justify-center items-center  bg-black/50 opacity-0 hover:opacity-100 rounded-t-lg transition-opacity duration-500 ease-in-out">
           <OpenInNewIcon className="text-white" />
@@ -34,6 +38,6 @@ export const CourseCard = ({ data }: Props) => {
           )}
         </div>
       )}
-    </div>
+    </Link>
   );
 };

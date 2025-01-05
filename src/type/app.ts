@@ -1,4 +1,4 @@
-import { Lecture } from "./lecture";
+import { Course } from "./course";
 import { Page } from "./page";
 import { PaymentAccount } from "./payment";
 import { Setting } from "./setting";
@@ -6,7 +6,8 @@ import { TagLine } from "./tagline";
 
 export interface AppSlice {
   isLoading: boolean;
-  lectures: Lecture[];
+  lectures: Course[];
+  free_lectures: Course[];
   pages: Page[];
   setting: Setting | null;
   tagLines: TagLine[];

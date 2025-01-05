@@ -6,7 +6,7 @@ interface Props {
 }
 export const Layout = ({ children }: Props) => {
   return (
-    <div className="">
+    <div className="min-h-screen">
       <TagLine />
       <NavBar />
       <div className="min-h-screen">{children}</div>

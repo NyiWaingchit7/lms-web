@@ -1,6 +1,6 @@
 import { Category } from "./category";
 
-export interface Lecture {
+export interface Course {
   id?: number;
   title: string;
   description: string;
@@ -9,12 +9,22 @@ export interface Lecture {
   discount_price?: number;
   assetUrl?: string;
   categories: Category[];
+  Lesson: Lesson[];
 }
-
-export interface Lecture {
-  items: Lecture[];
+export interface Lesson {
+  id?: number;
+  title: string;
+  description: string;
+  content: string;
+  assetImage?: string;
+  assetVideo?: string;
+  lectureId?: number;
+}
+export interface CourseSlice {
+  items: Course[];
   isLoading: boolean;
   page: number;
   has_more_page: boolean;
   error: Error | null;
+  detail: Course | null;
 }

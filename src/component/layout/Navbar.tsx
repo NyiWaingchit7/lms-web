@@ -4,7 +4,7 @@ export const NavBar = () => {
   const location = useLocation();
 
   return (
-    <div className="bg-green  sticky top-0 overflow-x-hidden z-10">
+    <div className="bg-green  sticky top-0 z-10">
       <div className="container flex justify-between items-center">
         <div className="flex items-center gap-5 md:gap-32">
           <div className="">
@@ -22,9 +22,7 @@ export const NavBar = () => {
                 <Link to={`/${item.path}`} key={index}>
                   <div
                     className={`text-[15px] nav-underline transition-all ease-in-out duration-300  ${
-                      location.pathname.includes(`/${item.path}`)
-                        ? "nav-active"
-                        : ""
+                      location.pathname === `/${item.path}` ? "nav-active" : ""
                     }`}
                   >
                     {item.name} {location.pathname.includes(`/${item.path}`)}
@@ -54,6 +52,6 @@ export const navItem = [
   },
   {
     name: "Courses",
-    path: "lectures",
+    path: "courses",
   },
 ];
