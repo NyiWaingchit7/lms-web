@@ -70,6 +70,25 @@ body {
   border: 1px solid rgba(255, 255, 255, 0.18);
   color: #fff;
 }
-.no-scrollbar {
-  scrollbar-width: none;
+.no-arrows {
+  -ms-overflow-style: none;
+}
+
+.no-arrows::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+
+.no-arrows::-webkit-scrollbar-button {
+  display: none !important; /* Completely hide the arrows */
+}
+
+.no-arrows::-webkit-scrollbar-thumb {
+  background: #888; /* Thumb color */
+  border-radius: 6px; /* Optional: Rounded thumb */
+}
+
+.no-arrows::-webkit-scrollbar-track {
+  background: #f4f4f4; /* Track color */
+  border-radius: 6px; /* Optional: Rounded track */
 }

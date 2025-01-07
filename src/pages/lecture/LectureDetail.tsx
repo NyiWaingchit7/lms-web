@@ -41,7 +41,7 @@ export const CoursesDetail = () => {
                       className="w-full"
                     />{" "}
                   </div>
-                  <div className="flex flex-col gap-3 max-h-20 overflow-y-auto no-scrollbar">
+                  <div className="flex flex-col gap-3 max-h-20 overflow-y-auto no-arrows">
                     {data.Lesson.map((item) => (
                       <div className="border border-black border-opacity-20 rounded-lg p-4 shadow-sm">
                         <img
