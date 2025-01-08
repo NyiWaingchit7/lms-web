@@ -1,11 +1,14 @@
 import { Link, useLocation } from "react-router-dom";
 import MenuIcon from "@mui/icons-material/Menu";
+import { SideBarDrawer } from "./Drawer";
+import { useState } from "react";
 export const NavBar = () => {
   const location = useLocation();
+  const [open, setOpen] = useState(false);
 
   return (
     <div className="bg-green  sticky top-0 z-10">
-      <div className="container flex justify-between items-center">
+      <div className="container flex justify-between items-center overflow-x-hidden">
         <div className="flex items-center gap-5 md:gap-32">
           <div className="">
             <Link to={"/"}>
@@ -31,16 +34,17 @@ export const NavBar = () => {
               ))}
             </nav>
             <div className="lg:hidden">
-              <MenuIcon className="text-white" />
+              <MenuIcon className="text-white" onClick={() => setOpen(true)} />
             </div>
           </div>
         </div>
         <div className="">
-          <button className="bg-black px-3 py-2 text-white rounded-md">
-            Log in
-          </button>
+          <Link to={"/log-in"}>
+            <button className="btn-login">Log in</button>
+          </Link>
         </div>
       </div>
+      <SideBarDrawer open={open} setOpen={setOpen} />
     </div>
   );
 };

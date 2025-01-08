@@ -11,7 +11,7 @@ export const CourseCard = ({ data }: Props) => {
       className="shadow-md p-3 rounded-lg relative cursor-pointer "
     >
       <div className="relative h-[150px]">
-        <div className="absolute top-0 left-0 w-full h-full flex bg-white bg-opacity-10 backdrop-blur-sm justify-center items-center  bg-black/50 opacity-0 hover:opacity-100 rounded-t-lg transition-opacity duration-500 ease-in-out">
+        <div className="glass-card">
           <OpenInNewIcon className="text-white" />
         </div>
         <img

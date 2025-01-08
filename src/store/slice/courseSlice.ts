@@ -40,6 +40,9 @@ export const handleGetCourses = createAsyncThunk(
         return;
       } else {
         thunkApi.dispatch(setCourses(data.data.data));
+        thunkApi.dispatch(hasMorePage(data.data.has_more_pages));
+        console.log(data.data.has_more_pages);
+
         thunkApi.dispatch(courseLoading(false));
       }
     } catch (error) {

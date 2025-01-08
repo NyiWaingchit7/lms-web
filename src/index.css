@@ -26,6 +26,9 @@ body {
   .card-header {
     @apply font-semibold  md:text-lg;
   }
+  .glass-card {
+    @apply absolute top-0 left-0 w-full h-full flex bg-black bg-opacity-5 backdrop-blur-[3px] justify-center items-center  bg-black/50 opacity-0 hover:opacity-100 rounded-t-lg transition-opacity duration-500 ease-in-out;
+  }
 }
 
 .nav-underline {
@@ -60,16 +63,7 @@ body {
   transform-origin: left;
   transform: scale(1);
 }
-.glass-card {
-  background: rgba(255, 255, 255, 0.2); /* Semi-transparent white */
-  border-radius: 10px;
-  padding: 20px 30px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.37);
-  backdrop-filter: blur(10px); /* Frosted glass effect */
-  -webkit-backdrop-filter: blur(10px); /* For Safari */
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  color: #fff;
-}
+
 .no-arrows {
   -ms-overflow-style: none;
 }
@@ -91,4 +85,107 @@ body {
 .no-arrows::-webkit-scrollbar-track {
   background: #f4f4f4; /* Track color */
   border-radius: 6px; /* Optional: Rounded track */
+}
+.MuiAccordionSummary-content {
+  font-size: 15px;
+}
+.btn-login {
+  padding: 8px 15px;
+  border: 1px solid #f4f4f4;
+  color: #f4f4f4;
+  border-radius: 10px;
+  position: relative;
+  overflow: hidden;
+  transition: color 0.3s ease;
+}
+.btn-login::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 100%;
+  background-color: #f4f4f4;
+  transition: width 0.3s ease;
+  z-index: -1;
+}
+.btn-login:hover::before {
+  width: 100%;
+}
+.btn-login:hover {
+  color: black;
+}
+.loading-dots {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+}
+
+.loadmore-btn {
+  padding: 5px 10px;
+  color: #f4f4f4;
+  background-color: #0d5a69;
+  border-radius: 10px;
+}
+
+.dot {
+  width: 15px;
+  height: 15px;
+  background-color: #0d5a69;
+  border-radius: 50%;
+  animation: dotPulse 1.5s infinite ease-in-out;
+}
+
+.dot:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.dot:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+@keyframes dotPulse {
+  0%,
+  80%,
+  100% {
+    transform: scale(0);
+  }
+  40% {
+    transform: scale(1);
+  }
+}
+
+.login-btn {
+  padding: 8px 15px;
+  border: 1px solid #0d5a69;
+  color: black;
+  border-radius: 5px;
+  position: relative;
+  overflow: hidden;
+  transition: color 0.3s ease;
+  width: 100%;
+}
+.login-btn::before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 0%;
+  background-color: #0d5a69;
+  transition: height 0.3s ease;
+  z-index: -1;
+}
+.login-btn:hover::before {
+  height: 100%;
+}
+.login-btn:hover {
+  color: #f4f4f4;
+}
+.MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
+  border: 1px dashed #0d5a69 !important;
+}
+.MuiInputLabel-root.Mui-focused {
+  color: #0d5a69 !important;
 }

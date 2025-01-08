@@ -6,16 +6,16 @@ import {
   clearCourses,
   courseLoading,
   handleGetCourses,
-  setCourses,
 } from "../../store/slice/courseSlice";
 import { Skeleton } from "@mui/material";
 import { Title } from "../../component/layout/Title";
+import { CardLoadMore } from "../../component/card/CardLoadMore";
 
 export const CoursesPage = () => {
   const courses = useAppSelector((store) => store.coursee.items);
   const dispatch = useAppDispatch();
   const loading = useAppSelector((store) => store.coursee.isLoading);
-  console.log(courses);
+  const loadMore = useAppSelector((store) => store.coursee.has_more_page);
 
   useEffect(() => {
     dispatch(courseLoading(true));
@@ -49,6 +49,17 @@ export const CoursesPage = () => {
             </div>
           )}
         </div>
+        {loadMore ? (
+          <div className="mt-5 flex justify-center">
+            {loading ? (
+              <CardLoadMore />
+            ) : (
+              <button className="loadmore-btn">Load More</button>
+            )}
+          </div>
+        ) : (
+          ""
+        )}
       </div>
     </Layout>
   );
