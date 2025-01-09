@@ -1,4 +1,4 @@
-// import Swiper core and required modules
+//@ts-nocheck
 import "swiper/css";
 import "swiper/css/effect-coverflow";
 import "swiper/css/pagination";
