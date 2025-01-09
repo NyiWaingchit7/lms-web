@@ -9,6 +9,7 @@ const initialState: CourseSlice = {
   has_more_page: false,
   page: 1,
   detail: null,
+  loadmore_button: false,
 };
 
 export const handleGetCourses = createAsyncThunk(
@@ -41,9 +42,9 @@ export const handleGetCourses = createAsyncThunk(
       } else {
         thunkApi.dispatch(setCourses(data.data.data));
         thunkApi.dispatch(hasMorePage(data.data.has_more_pages));
-        console.log(data.data.has_more_pages);
 
         thunkApi.dispatch(courseLoading(false));
+        thunkApi.dispatch(setLoadMore(false));
       }
     } catch (error) {
       console.log(error);
@@ -85,6 +86,9 @@ export const courseSlice = createSlice({
     courseLoading: (state, action) => {
       state.isLoading = action.payload;
     },
+    setLoadMore: (state, action) => {
+      state.loadmore_button = action.payload;
+    },
     clearCourses: (state) => {
       state.items = [];
     },
@@ -97,5 +101,6 @@ export const {
   courseLoading,
   clearCourses,
   setCourseDetail,
+  setLoadMore,
 } = courseSlice.actions;
 export default courseSlice.reducer;

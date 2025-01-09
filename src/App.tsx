@@ -13,6 +13,8 @@ import {
   Skeleton,
 } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import { SwiperWrapper } from "./component/swiper/SwiperWrapper";
+import { SwiperSlide } from "swiper/react";
 function App() {
   const lectures = useAppSelector((store) => store.app.lectures);
   const freeLectures = useAppSelector((store) => store.app.free_lectures);
@@ -70,20 +72,28 @@ function App() {
             View all
           </p>
         </div>
-        <div className=" grid grid-cols-1 gap-1 xl md:grid-cols-2  lg:grid-cols-4">
+        <div className="">
           {loading ? (
-            Array(4)
-              .fill(0)
-              .map((_, index) => (
-                <Skeleton
-                  animation="wave"
-                  key={index}
-                  variant="rounded"
-                  height={200}
-                />
-              ))
+            <div className="grid grid-cols-1 gap-1 xl:gap-3 md:grid-cols-4 mt-5">
+              {Array(4)
+                .fill(0)
+                .map((_, index) => (
+                  <Skeleton
+                    animation="wave"
+                    key={index}
+                    variant="rounded"
+                    height={200}
+                  />
+                ))}
+            </div>
           ) : freeLectures.length > 0 ? (
-            freeLectures.map((data) => <CourseCard key={data.id} data={data} />)
+            <SwiperWrapper>
+              {freeLectures.map((data) => (
+                <SwiperSlide key={data.id}>
+                  <CourseCard data={data} />
+                </SwiperSlide>
+              ))}
+            </SwiperWrapper>
           ) : (
             <div className="flex justify-center items-center h-[200px]">
               <p>There is no data</p>
@@ -99,20 +109,28 @@ function App() {
             View all
           </p>
         </div>
-        <div className=" grid grid-cols-1 gap-1 md:gap-3 xl md:grid-cols-2  lg:grid-cols-4">
+        <div className="">
           {loading ? (
-            Array(4)
-              .fill(0)
-              .map((_, index) => (
-                <Skeleton
-                  animation="wave"
-                  key={index}
-                  variant="rounded"
-                  height={200}
-                />
-              ))
+            <div className="grid grid-cols-1 gap-1 xl:gap-3 md:grid-cols-4 mt-5">
+              {Array(4)
+                .fill(0)
+                .map((_, index) => (
+                  <Skeleton
+                    animation="wave"
+                    key={index}
+                    variant="rounded"
+                    height={200}
+                  />
+                ))}
+            </div>
           ) : lectures.length > 0 ? (
-            lectures.map((data) => <CourseCard key={data.id} data={data} />)
+            <SwiperWrapper>
+              {lectures.map((data) => (
+                <SwiperSlide key={data.id}>
+                  <CourseCard data={data} />
+                </SwiperSlide>
+              ))}
+            </SwiperWrapper>
           ) : (
             <div className="flex justify-center items-center h-[200px]">
               <p>There is no data</p>

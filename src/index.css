@@ -189,3 +189,19 @@ body {
 .MuiInputLabel-root.Mui-focused {
   color: #0d5a69 !important;
 }
+.swiper-button-prev,
+.swiper-button-next {
+  font-size: 5px !important;
+  color: #0d5a69 !important;
+  font-weight: bold;
+}
+.swiper-button-disabled {
+  display: none !important;
+}
+.swiper-pagination-bullet-active {
+  background-color: #0d5a69 !important;
+}
+.swiper-button-prev::after,
+.swiper-button-next::after {
+  font-size: 30px !important;
+}

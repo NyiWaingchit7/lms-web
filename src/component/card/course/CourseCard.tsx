@@ -3,12 +3,15 @@ import { Course } from "../../../type/course";
 import { Link } from "react-router-dom";
 interface Props {
   data: Course;
+  shadow?: boolean;
 }
-export const CourseCard = ({ data }: Props) => {
+export const CourseCard = ({ data, shadow }: Props) => {
   return (
     <Link
       to={`/courses/${data.id}`}
-      className="shadow-md p-3 rounded-lg relative cursor-pointer "
+      className={`p-3 rounded-lg relative cursor-pointer w-full ${
+        shadow ? "shadow-md" : ""
+      }`}
     >
       <div className="relative h-[150px]">
         <div className="glass-card">

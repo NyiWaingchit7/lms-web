@@ -27,4 +27,5 @@ export interface CourseSlice {
   has_more_page: boolean;
   error: Error | null;
   detail: Course | null;
+  loadmore_button: boolean;
 }
