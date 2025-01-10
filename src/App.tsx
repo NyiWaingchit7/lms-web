@@ -151,7 +151,7 @@ function App() {
             <div className="w-full flex justify-between gap-3 items-center overflow-x-auto">
               {category.map((data) => (
                 <Link
-                  to={"/"}
+                  to={`/categories/${data.id}/${data.name}`}
                   className="flex-shrink-0 flex  flex-col justify-between gap-3 items-center"
                   key={data.id}
                 >

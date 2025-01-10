@@ -19,10 +19,12 @@ export const handleGetCourses = createAsyncThunk(
       page = 1,
       searchKey = "",
       isPremium = "",
+      categoryId = null,
     }: {
       page?: number;
       searchKey?: string;
       isPremium?: string;
+      categoryId?: null | number;
     },
     thunkApi
   ) => {
@@ -31,6 +33,7 @@ export const handleGetCourses = createAsyncThunk(
         page: page.toString(),
         searchKey,
         isPremium: isPremium?.toString(),
+        categoryId: categoryId?.toString() || "",
       };
       const queryString = new URLSearchParams(param).toString();
       const { data, response } = await fetchFunction({
