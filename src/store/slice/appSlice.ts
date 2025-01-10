@@ -11,6 +11,7 @@ const initialState: AppSlice = {
   setting: null,
   pages: [],
   payment: [],
+  category: [],
 };
 export const getAppLecture = createAsyncThunk(
   "get/lecture",
@@ -73,6 +74,22 @@ export const getAppTagLine = createAsyncThunk(
     }
   }
 );
+export const getCategory = createAsyncThunk(
+  "get/lecture",
+  async (_, thunkApi) => {
+    try {
+      const { response, data } = await fetchFunction({
+        url: "categories",
+      });
+      if (!response.ok) {
+        toast.error(data.message);
+      }
+      thunkApi.dispatch(setCategory(data.data.data));
+    } catch (error) {
+      console.log(error);
+    }
+  }
+);
 export const appSlice = createSlice({
   name: "appSlice",
   initialState,
@@ -98,6 +115,9 @@ export const appSlice = createSlice({
     setAppLoading: (state, action) => {
       state.isLoading = action.payload;
     },
+    setCategory: (state, action) => {
+      state.category = action.payload;
+    },
   },
 });
 
@@ -109,5 +129,6 @@ export const {
   setAppTagline,
   setAppLoading,
   setAppFree,
+  setCategory,
 } = appSlice.actions;
 export default appSlice.reducer;

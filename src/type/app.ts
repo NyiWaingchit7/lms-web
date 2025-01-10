@@ -1,3 +1,4 @@
+import { Category } from "./category";
 import { Course } from "./course";
 import { Page } from "./page";
 import { PaymentAccount } from "./payment";
@@ -13,4 +14,5 @@ export interface AppSlice {
   tagLines: TagLine[];
   payment: PaymentAccount[];
   error: Error | null;
+  category: Category[];
 }

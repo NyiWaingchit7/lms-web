@@ -5,7 +5,7 @@ import courseReducer from "./slice/courseSlice";
 export const store = configureStore({
   reducer: {
     app: appReducer,
-    coursee: courseReducer,
+    courses: courseReducer,
   },
 });
 

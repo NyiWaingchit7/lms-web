@@ -7,11 +7,11 @@ import { courseDetail, courseLoading } from "../../store/slice/courseSlice";
 import { Title } from "../../component/layout/Title";
 
 export const CoursesDetail = () => {
-  const data = useAppSelector((store) => store.coursee.detail) as Course;
+  const data = useAppSelector((store) => store.courses.detail) as Course;
   const param = useParams();
   const id = Number(param.id);
   const dispatch = useAppDispatch();
-  const loading = useAppSelector((store) => store.coursee.isLoading);
+  const loading = useAppSelector((store) => store.courses.isLoading);
   useEffect(() => {
     dispatch(courseDetail({ id }));
     dispatch(courseLoading(true));

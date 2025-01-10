@@ -9,11 +9,9 @@ export const CourseCard = ({ data, shadow }: Props) => {
   return (
     <Link
       to={`/courses/${data.id}`}
-      className={`p-3 rounded-lg relative cursor-pointer w-full ${
-        shadow ? "shadow-md" : ""
-      }`}
+      className={`p-3 rounded-lg relative cursor-pointer w-full `}
     >
-      <div className="relative h-[150px]">
+      <div className="relative h-[170px]">
         <div className="glass-card">
           <OpenInNewIcon className="text-white" />
         </div>
@@ -23,7 +21,7 @@ export const CourseCard = ({ data, shadow }: Props) => {
           alt=""
         />
       </div>
-      <h3 className="text-xs md:text-lg font-semibold mt-5">{data.title}</h3>
+      <h3 className="text-xs md:text-lg font-semibold mt-3">{data.title}</h3>
       {data.isPremium && (
         <div>
           <p className="text-xs sm:text-sm inline ">

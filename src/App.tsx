@@ -5,7 +5,7 @@ import { CourseCard } from "./component/card/course/CourseCard";
 import { Layout } from "./component/layout/Layout";
 import { Title } from "./component/layout/Title";
 import { useAppDispatch, useAppSelector } from "./store/hooks";
-import { getAppLecture } from "./store/slice/appSlice";
+import { getAppLecture, getCategory } from "./store/slice/appSlice";
 import {
   Accordion,
   AccordionDetails,
@@ -15,14 +15,16 @@ import {
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { SwiperWrapper } from "./component/swiper/SwiperWrapper";
 import { SwiperSlide } from "swiper/react";
+import { Link } from "react-router-dom";
 function App() {
-  const lectures = useAppSelector((store) => store.app.lectures);
-  const freeLectures = useAppSelector((store) => store.app.free_lectures);
+  const { lectures, free_lectures, isLoading, category } = useAppSelector(
+    (store) => store.app
+  );
 
   const dispatch = useAppDispatch();
-  const loading = useAppSelector((store) => store.app.isLoading);
   useEffect(() => {
     dispatch(getAppLecture());
+    dispatch(getCategory());
   }, []);
   return (
     <Layout>
@@ -51,6 +53,7 @@ function App() {
           </div>
         </div>
       </div>
+
       <div className="container mb-10 overflow-x-hidden">
         <div className="flex justify-between items-center  gap-3">
           {Object.entries(data).map(([key, value]) => (
@@ -65,16 +68,11 @@ function App() {
       </div>
 
       <div className="container ">
-        <div className="flex justify-between items-center">
-          <h3 className="card-header">Free Courses</h3>
+        <h3 className="card-header">Free Courses</h3>
 
-          <p className="cursor-pointer text-xs sm:text-sm hover:underline ">
-            View all
-          </p>
-        </div>
         <div className="">
-          {loading ? (
-            <div className="grid grid-cols-1 gap-1 xl:gap-3 md:grid-cols-4 mt-5">
+          {isLoading ? (
+            <div className="grid grid-cols-1 gap-1 xl:gap-3 md:grid-cols-4 mt-3">
               {Array(4)
                 .fill(0)
                 .map((_, index) => (
@@ -86,9 +84,9 @@ function App() {
                   />
                 ))}
             </div>
-          ) : freeLectures.length > 0 ? (
+          ) : free_lectures.length > 0 ? (
             <SwiperWrapper>
-              {freeLectures.map((data) => (
+              {free_lectures.map((data) => (
                 <SwiperSlide key={data.id}>
                   <CourseCard data={data} />
                 </SwiperSlide>
@@ -102,16 +100,11 @@ function App() {
         </div>
       </div>
       <div className="container mb-10 overflow-x-hidden">
-        <div className="flex justify-between items-center">
-          <h3 className="card-header">Premium Courses</h3>
+        <h3 className="card-header">Premium Courses</h3>
 
-          <p className="cursor-pointer text-xs sm:text-sm hover:underline ">
-            View all
-          </p>
-        </div>
         <div className="">
-          {loading ? (
-            <div className="grid grid-cols-1 gap-1 xl:gap-3 md:grid-cols-4 mt-5">
+          {isLoading ? (
+            <div className="grid grid-cols-1 gap-1 xl:gap-3 md:grid-cols-4 mt-3">
               {Array(4)
                 .fill(0)
                 .map((_, index) => (
@@ -131,6 +124,48 @@ function App() {
                 </SwiperSlide>
               ))}
             </SwiperWrapper>
+          ) : (
+            <div className="flex justify-center items-center h-[200px]">
+              <p>There is no data</p>
+            </div>
+          )}
+        </div>
+      </div>
+      <div className="container mb-10">
+        <div className="">
+          {isLoading ? (
+            <div className="grid grid-cols-1 gap-1 xl:gap-3 md:grid-cols-4 mt-5">
+              {Array(4)
+                .fill(0)
+                .map((_, index) => (
+                  <Skeleton
+                    animation="wave"
+                    key={index}
+                    variant="circular"
+                    height={150}
+                    width={150}
+                  />
+                ))}
+            </div>
+          ) : category.length > 0 ? (
+            <div className="w-full flex justify-between gap-3 items-center overflow-x-auto">
+              {category.map((data) => (
+                <Link
+                  to={"/"}
+                  className="flex-shrink-0 flex  flex-col justify-between gap-3 items-center"
+                  key={data.id}
+                >
+                  <img
+                    className="w-30 h-30 object-cover rounded-full"
+                    src={data.assetUrl}
+                    alt={data.name}
+                  />
+                  <h4 className="text-lg font-semibold text-center">
+                    {data.name}
+                  </h4>
+                </Link>
+              ))}
+            </div>
           ) : (
             <div className="flex justify-center items-center h-[200px]">
               <p>There is no data</p>

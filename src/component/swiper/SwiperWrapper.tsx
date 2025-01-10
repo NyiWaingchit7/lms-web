@@ -54,7 +54,7 @@ export const SwiperWrapper = ({ children }: Props) => {
         ]}
         pagination={{ clickable: true }}
         navigation
-        className="mx-auto mt-5"
+        className="mx-auto !pb-5 md:pb-10"
         speed={1000}
       >
         {children}
