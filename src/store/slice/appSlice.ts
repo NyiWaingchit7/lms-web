@@ -101,16 +101,16 @@ export const appSlice = createSlice({
       state.free_lectures = action.payload;
     },
     setAppTagline: (state, action) => {
-      state.lectures = action.payload;
+      state.tagLines = action.payload;
     },
     setAppSetting: (state, action) => {
       state.lectures = action.payload;
     },
     setAppPages: (state, action) => {
-      state.lectures = action.payload;
+      state.pages = action.payload;
     },
     setAppPayment: (state, action) => {
-      state.lectures = action.payload;
+      state.payment = action.payload;
     },
     setAppLoading: (state, action) => {
       state.isLoading = action.payload;

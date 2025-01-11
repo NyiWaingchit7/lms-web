@@ -148,19 +148,19 @@ function App() {
                 ))}
             </div>
           ) : category.length > 0 ? (
-            <div className="w-full flex justify-between gap-3 items-center overflow-x-auto">
+            <div className="flex justify-between gap-4 items-center overflow-x-auto no-scrollbar">
               {category.map((data) => (
                 <Link
                   to={`/categories/${data.id}/${data.name}`}
-                  className="flex-shrink-0 flex  flex-col justify-between gap-3 items-center"
+                  className="flex-shrink-0 flex-auto flex  flex-col justify-between gap-3 items-center"
                   key={data.id}
                 >
                   <img
-                    className="w-30 h-30 object-cover rounded-full"
+                    className="w-25 h-25 md:w-30 md:h-30 object-cover rounded-full"
                     src={data.assetUrl}
                     alt={data.name}
                   />
-                  <h4 className="text-lg font-semibold text-center">
+                  <h4 className="text-xs md:text-lg font-semibold text-center">
                     {data.name}
                   </h4>
                 </Link>

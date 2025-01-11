@@ -1,10 +1,11 @@
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { Layout } from "../../component/layout/Layout";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { Course } from "../../type/course";
 import { useEffect } from "react";
 import { courseDetail, courseLoading } from "../../store/slice/courseSlice";
 import { Title } from "../../component/layout/Title";
+import { Chip } from "@mui/material";
 
 export const CoursesDetail = () => {
   const data = useAppSelector((store) => store.courses.detail) as Course;
@@ -26,11 +27,27 @@ export const CoursesDetail = () => {
           <div>
             <img
               src={data?.assetUrl || ""}
-              className="w-full h-full  md:h-[400px] object-cover mb-10"
+              className="w-full h-full   object-cover mb-10"
               alt=""
             />
             <div className="container">
-              <h2 className="font-semibold text-2xl mb-5">{data?.title}</h2>
+              <div className="flex gap-5 items-start">
+                <h2 className="font-semibold text-2xl mb-5">{data?.title}</h2>
+                <div className="flex gap-2">
+                  {data?.categories?.map((item) => (
+                    <Link
+                      to={`/categories/${item.id}/${item.name}`}
+                      key={item.id}
+                    >
+                      <Chip
+                        label={item?.name}
+                        variant="outlined"
+                        color="success"
+                      />
+                    </Link>
+                  ))}
+                </div>
+              </div>
               <p className="ms-5"> {data?.description} </p>
             </div>
             {data?.Lesson?.length ? (
@@ -46,6 +63,7 @@ export const CoursesDetail = () => {
                       <h3 className="text-lg font-semibold">
                         {data?.Lesson[0]?.title}
                       </h3>
+
                       <p className="text-sm"> {data?.Lesson[0].description} </p>
                       <p
                         dangerouslySetInnerHTML={{

@@ -11,7 +11,7 @@ export default {
         black: "#141414",
         red: "#FF0000",
         green: "#0d5a69",
-
+        brown: "#693b0d",
         "black-2": "#010101",
         body: "#64748B",
         bodydark: "#AEB7C0",

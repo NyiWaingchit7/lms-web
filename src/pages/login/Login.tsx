@@ -38,7 +38,7 @@ export const Login = () => {
             <p className="text-end underline text-green "> Forget password</p>
           </Link>
           <div className="flex justify-center mt-3 relative">
-            <button className="login-btn z-1" style={{}}>
+            <button className="login-btn z-1 w-full" style={{}}>
               Log in
             </button>
           </div>

@@ -53,7 +53,7 @@ export const Register = () => {
           </div>
 
           <div className="flex justify-center mt-3 relative">
-            <button className="login-btn z-1" style={{}}>
+            <button className="login-btn z-1 w-full" style={{}}>
               Register
             </button>
           </div>
