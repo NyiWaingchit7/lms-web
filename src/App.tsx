@@ -16,6 +16,7 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { SwiperWrapper } from "./component/swiper/SwiperWrapper";
 import { SwiperSlide } from "swiper/react";
 import { Link } from "react-router-dom";
+import { Loading } from "./component/loading/Loading";
 function App() {
   const { lectures, free_lectures, isLoading, category } = useAppSelector(
     (store) => store.app
@@ -29,6 +30,7 @@ function App() {
   return (
     <Layout>
       <Title title="Home" />
+      {isLoading ? <Loading /> : ""}
       <div
         className="mb-10 h-[162px] md:h-[400px] md:bg-center"
         style={{

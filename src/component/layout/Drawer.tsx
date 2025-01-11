@@ -1,6 +1,7 @@
 import { Drawer } from "@mui/material";
 import { navItem } from "./Navbar";
 import { Link } from "react-router-dom";
+import CloseIcon from "@mui/icons-material/Close";
 interface Props {
   open: boolean;
   setOpen: (datt?: any) => void;
@@ -12,14 +13,18 @@ export const SideBarDrawer = ({ open, setOpen }: Props) => {
       onClose={() => setOpen(false)}
       aria-modal="true"
       aria-hidden="false"
-      className="lg:hidden"
+      className="w-screen relative lg:hidden"
+      id="sidebar"
     >
-      <div className="w-64 bg-green min-h-screen">
-        <div className="flex flex-col gap-3 mt-10 px-3 text-white">
+      <div className="w-screen !overflow-hidden flex justify-center mt-20">
+        <CloseIcon
+          className="absolute top-5 right-5 text-white !text-3xl"
+          onClick={() => setOpen(false)}
+        />
+        <div className=" flex flex-col gap-3 mt-10 px-3 text-white font-medium text-xl sm:text-3xl">
           {navItem.map((data) => (
             <Link className="" key={data.name} to={`/${data.path}`}>
               {data.name}
-              <hr className="mt-3" />
             </Link>
           ))}
         </div>

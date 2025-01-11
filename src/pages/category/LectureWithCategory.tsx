@@ -12,6 +12,7 @@ import {
 import { CourseCard } from "../../component/card/course/CourseCard";
 import { CardLoadMore } from "../../component/card/CardLoadMore";
 import { Skeleton } from "@mui/material";
+import { Loading } from "../../component/loading/Loading";
 
 export const LectureWithCategory = () => {
   const param = useParams();
@@ -47,16 +48,19 @@ export const LectureWithCategory = () => {
         <div></div>
         <div className="relative grid grid-cols-1 gap-1 xl:gap-3 md:grid-cols-4 mt-5">
           {isLoading ? (
-            Array(4)
-              .fill(0)
-              .map((_, index) => (
-                <Skeleton
-                  animation="wave"
-                  key={index}
-                  variant="rounded"
-                  height={200}
-                />
-              ))
+            <>
+              {Array(4)
+                .fill(0)
+                .map((_, index) => (
+                  <Skeleton
+                    animation="wave"
+                    key={index}
+                    variant="rounded"
+                    height={200}
+                  />
+                ))}
+              <Loading />
+            </>
           ) : courses.length > 0 ? (
             courses.map((data) => (
               <CourseCard key={data.id} data={data} shadow={true} />

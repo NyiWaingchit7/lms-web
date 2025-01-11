@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import { courseDetail, courseLoading } from "../../store/slice/courseSlice";
 import { Title } from "../../component/layout/Title";
 import { Chip } from "@mui/material";
+import { Loading } from "../../component/loading/Loading";
 
 export const CoursesDetail = () => {
   const data = useAppSelector((store) => store.courses.detail) as Course;
@@ -25,9 +26,10 @@ export const CoursesDetail = () => {
   return (
     <Layout>
       <Title title={data?.title || ""} />
+
       <div>
         {loading ? (
-          <div>loading</div>
+          <Loading />
         ) : (
           <div>
             <img
@@ -38,7 +40,7 @@ export const CoursesDetail = () => {
             <div className="container">
               <div className="flex gap-5 items-start">
                 <h2 className="font-semibold text-2xl mb-5">{data?.title}</h2>
-                <div className="flex gap-2">
+                <div className="flex gap-2 flex-wrap">
                   {data?.categories?.map((item) => (
                     <Link
                       to={`/categories/${item.id}/${item.name}`}
