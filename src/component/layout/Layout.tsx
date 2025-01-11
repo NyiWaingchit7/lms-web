@@ -7,11 +7,11 @@ interface Props {
 }
 export const Layout = ({ children }: Props) => {
   return (
-    <>
+    <div className="flex flex-col min-h-screen">
       <TagLine />
       <NavBar />
-      <div className="min-h-screen">{children}</div>
+      <div className="flex-grow">{children}</div>
       <Footer />
-    </>
+    </div>
   );
 };

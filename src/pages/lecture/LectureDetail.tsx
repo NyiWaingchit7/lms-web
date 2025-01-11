@@ -6,7 +6,6 @@ import { useEffect, useState } from "react";
 import { courseDetail, courseLoading } from "../../store/slice/courseSlice";
 import { Title } from "../../component/layout/Title";
 import { Chip } from "@mui/material";
-import ReactPlayer from "react-player";
 
 export const CoursesDetail = () => {
   const data = useAppSelector((store) => store.courses.detail) as Course;
@@ -58,7 +57,7 @@ export const CoursesDetail = () => {
             </div>
             {data?.Lesson?.length ? (
               <div className="container">
-                <div className="md:grid border border-black shadow-md border-opacity-10 rounded-lg p-3 py-10  md:grid-cols-2 gap-3">
+                <div className="md:grid border border-black shadow-sm border-opacity-10 rounded-lg p-3 py-10  md:grid-cols-2 gap-3">
                   <div className="">
                     <div className="w-full h-[400px]">
                       <iframe
@@ -84,7 +83,7 @@ export const CoursesDetail = () => {
                       ></p>
                     </div>
                   </div>
-                  <div className="flex flex-col gap-3 h-[400px] overflow-y-auto no-arrows">
+                  <div className="flex flex-col gap-3 h-[400px] mt-5 md:mt-0 overflow-y-auto no-arrows">
                     {/* {data.Lesson.map((item) => (
                       <div
                         key={item.id}
@@ -117,7 +116,11 @@ export const CoursesDetail = () => {
                 </div>
               </div>
             ) : (
-              ""
+              <div className="container relative my-5 h-[300px] bg-white shadow-sm rounded-lg ">
+                <p className="text-center absolute top-1/2 left-1/2 translate-y-1/2 -translate-x-1/2">
+                  There is no lesson yet!
+                </p>
+              </div>
             )}
           </div>
         )}
