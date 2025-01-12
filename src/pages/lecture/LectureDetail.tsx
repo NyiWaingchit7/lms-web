@@ -61,7 +61,7 @@ export const CoursesDetail = () => {
               <div className="container">
                 <div className="md:grid border border-black shadow-sm border-opacity-10 rounded-lg p-3 py-10  md:grid-cols-2 gap-3">
                   <div className="">
-                    <div className="w-full h-[400px]">
+                    <div className="w-full md:h-[400px]">
                       <iframe
                         src={onPlay?.url}
                         title="YouTube video player"

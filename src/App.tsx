@@ -18,9 +18,8 @@ import { SwiperSlide } from "swiper/react";
 import { Link } from "react-router-dom";
 import { Loading } from "./component/loading/Loading";
 function App() {
-  const { lectures, free_lectures, isLoading, category } = useAppSelector(
-    (store) => store.app
-  );
+  const { lectures, free_lectures, isLoading, category, setting } =
+    useAppSelector((store) => store.app);
 
   const dispatch = useAppDispatch();
   useEffect(() => {
@@ -42,7 +41,7 @@ function App() {
         <div className="container flex items-center justify-center md:h-[350px]">
           <div className="max-w-screen-sm text-center text-white drop-shadow-2xl">
             <h3 className="md:text-5xl font-semibold ">
-              Welcome to Akone Learn!
+              Welcome to {setting?.app_name || "test"}!
             </h3>
             <p className=" font-semibold text-[10px] md:text-sm">
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum modi

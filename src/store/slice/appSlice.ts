@@ -58,6 +58,23 @@ export const getAppFreeLecture = async () => {
     console.log(error);
   }
 };
+
+export const getAppSetting = createAsyncThunk(
+  "get/lecture",
+  async (_, thunkApi) => {
+    try {
+      const { response, data } = await fetchFunction({
+        url: "settings",
+      });
+      if (!response.ok) {
+        toast.error(data.message);
+      }
+      thunkApi.dispatch(setAppSetting(data.settings));
+    } catch (error) {
+      console.log(error);
+    }
+  }
+);
 export const getAppTagLine = createAsyncThunk(
   "get/lecture",
   async (_, thunkApi) => {
@@ -104,7 +121,7 @@ export const appSlice = createSlice({
       state.tagLines = action.payload;
     },
     setAppSetting: (state, action) => {
-      state.lectures = action.payload;
+      state.setting = action.payload;
     },
     setAppPages: (state, action) => {
       state.pages = action.payload;
