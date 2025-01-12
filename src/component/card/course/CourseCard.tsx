@@ -5,7 +5,7 @@ interface Props {
   data: Course;
   shadow?: boolean;
 }
-export const CourseCard = ({ data, shadow }: Props) => {
+export const CourseCard = ({ data }: Props) => {
   return (
     <Link
       to={`/courses/${data.id}`}

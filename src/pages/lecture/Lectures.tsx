@@ -4,7 +4,6 @@ import { Layout } from "../../component/layout/Layout";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import {
   cleanCourseSlice,
-  clearCourses,
   courseLoading,
   handleGetCourses,
   pageIncrement,
