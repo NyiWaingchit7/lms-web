@@ -32,31 +32,12 @@ export const CoursesDetail = () => {
           <Loading />
         ) : (
           <div>
-            <img
+            {/* <img
               src={data?.assetUrl || ""}
               className="w-full h-full   object-cover mb-10"
               alt=""
-            />
-            <div className="container">
-              <div className="flex gap-5 items-start">
-                <h2 className="font-semibold text-2xl mb-5">{data?.title}</h2>
-                <div className="flex gap-2 flex-wrap">
-                  {data?.categories?.map((item) => (
-                    <Link
-                      to={`/categories/${item.id}/${item.name}`}
-                      key={item.id}
-                    >
-                      <Chip
-                        label={item?.name}
-                        variant="outlined"
-                        color="success"
-                      />
-                    </Link>
-                  ))}
-                </div>
-              </div>
-              <p className="ms-5"> {data?.description} </p>
-            </div>
+            /> */}
+
             {data?.Lesson?.length ? (
               <div className="container">
                 <div className="md:grid border border-black shadow-sm border-opacity-10 rounded-lg p-3 py-10  md:grid-cols-2 gap-3">
@@ -76,16 +57,9 @@ export const CoursesDetail = () => {
                         {/* {data?.Lesson[0]?.title} */}
                         {onPlay?.title}
                       </h3>
-
-                      <p className="text-sm"> {data?.Lesson[0].description} </p>
-                      <p
-                        dangerouslySetInnerHTML={{
-                          __html: data?.Lesson[0]?.content,
-                        }}
-                      ></p>
                     </div>
                   </div>
-                  <div className="flex flex-col gap-3 h-[400px] mt-5 md:mt-0 overflow-y-auto no-arrows">
+                  <div className="flex flex-col gap-3 h-[400px] mt-5 md:mt-0 overflow-y-auto no-arrows px-2">
                     {/* {data.Lesson.map((item) => (
                       <div
                         key={item.id}
@@ -103,7 +77,11 @@ export const CoursesDetail = () => {
                     {dummyVideo.map((item) => (
                       <div
                         key={item.title}
-                        className="border border-black border-opacity-20 flex items-center gap-3 cursor-pointer rounded-lg p-4 shadow-sm hover:border-opacity-90 transition duration-300"
+                        className={`border border-black border-opacity-20 flex items-center gap-3 cursor-pointer rounded-lg p-4 shadow-sm hover:border-opacity-90 transition duration-300 ${
+                          item?.title === onPlay?.title
+                            ? "border-2 !border-green"
+                            : ""
+                        }`}
                         onClick={() => setPlay(item)}
                       >
                         <img
@@ -126,6 +104,30 @@ export const CoursesDetail = () => {
             )}
           </div>
         )}
+        <div className="container">
+          <div className="flex gap-5 items-start">
+            <h2 className="font-semibold text-2xl mb-5">{data?.title}</h2>
+            <div className="flex gap-2 flex-wrap">
+              {data?.categories?.map((item) => (
+                <Link to={`/categories/${item.id}/${item.name}`} key={item.id}>
+                  <Chip label={item?.name} variant="outlined" color="success" />
+                </Link>
+              ))}
+            </div>
+          </div>
+          {data?.isPremium ? (
+            <div>
+              <span className="font-semibold me-3">
+                {" "}
+                Price - {data?.discount_price || data?.price}MMK
+              </span>
+              <button className="login-btn text-sm">Buy Now</button>
+            </div>
+          ) : (
+            ""
+          )}
+          <p className="ms-5 mt-5"> {data?.description} </p>
+        </div>
       </div>
     </Layout>
   );
