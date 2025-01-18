@@ -36,7 +36,9 @@ body {
     @apply absolute top-0 left-0 w-full h-full flex bg-black bg-opacity-5 backdrop-blur-[3px] justify-center items-center  bg-black/50 opacity-0 hover:opacity-100 rounded-t-lg transition-opacity duration-500 ease-in-out;
   }
 }
-
+.glass-card:hover .course-detail-icon {
+  transform: scale(1) !important;
+}
 .nav-underline {
   position: relative;
 }
@@ -246,11 +248,39 @@ body {
 }
 .course-card {
   position: relative;
-  height: 100%;
+  height: 150px;
+  width: 100%;
 }
-.course-card::before {
-  content: "";
+.course-card::after {
+  position: absolute;
+  inset: 0;
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+  content: "";
+  transition: all 0.3s;
+}
+.course-title,
+.course-price,
+.course-detail-icon {
+  transform: scale(0) !important;
+  transition: all 0.3s ease-in-out !important;
+}
+.course-card:hover::after {
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(5px);
+}
+.course-card:hover .course-title,
+.course-card:hover .course-price,
+.course-card:hover .course-detail-icon {
+  transform: scale(1) !important;
+}
+
+@media (max-width: 992px) {
+  .course-title,
+  .course-price,
+  .course-detail-icon {
+    transform: scale(1) !important;
+  }
 }

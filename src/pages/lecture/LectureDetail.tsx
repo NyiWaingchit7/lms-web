@@ -105,8 +105,8 @@ export const CoursesDetail = () => {
           </div>
         )}
         <div className="container">
-          <div className="flex gap-5 items-start">
-            <h2 className="font-semibold text-2xl mb-5">{data?.title}</h2>
+          <div className="flex gap-5 items-center">
+            <h2 className="font-semibold md:text-2xl">{data?.title}</h2>
             <div className="flex gap-2 flex-wrap">
               {data?.categories?.map((item) => (
                 <Link to={`/categories/${item.id}/${item.name}`} key={item.id}>
