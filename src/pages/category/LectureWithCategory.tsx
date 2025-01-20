@@ -1,18 +1,18 @@
 import { useParams } from "react-router-dom";
-import { Layout } from "../../component/layout/Layout";
-import { Title } from "../../component/layout/Title";
 import { useState, useEffect } from "react";
-import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import {
   pageIncrement,
   handleGetCourses,
   courseLoading,
   cleanCourseSlice,
-} from "../../store/slice/courseSlice";
-import { CourseCard } from "../../component/card/course/CourseCard";
-import { CardLoadMore } from "../../component/card/CardLoadMore";
+} from "@/store/slice/courseSlice";
 import { Skeleton } from "@mui/material";
-import { Loading } from "../../component/loading/Loading";
+import { useAppDispatch, useAppSelector } from "@/store/hooks";
+import { Layout } from "@/component/layout/Layout";
+import { Title } from "@/component/layout/Title";
+import { CourseCard } from "@/component/card/course/CourseCard";
+import { CardLoadMore } from "@/component/card/CardLoadMore";
+import { Loading } from "@/component/loading/Loading";
 
 export const LectureWithCategory = () => {
   const param = useParams();

@@ -13,10 +13,10 @@ import {
   Skeleton,
 } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import { SwiperWrapper } from "./component/swiper/SwiperWrapper";
 import { SwiperSlide } from "swiper/react";
 import { Link } from "react-router-dom";
 import { Loading } from "./component/loading/Loading";
+import { SwiperWrapper } from "./component/swiper/SwiperWrapper";
 function App() {
   const { lectures, free_lectures, isLoading, category, setting } =
     useAppSelector((store) => store.app);

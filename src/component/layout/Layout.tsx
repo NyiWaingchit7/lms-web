@@ -1,9 +1,10 @@
+import { useAppDispatch } from "@/store/hooks";
+import { getAppSetting } from "@/store/slice/appSlice";
 import { ReactNode, useEffect } from "react";
-import { NavBar } from "./Navbar";
 import { TagLine } from "./Tagline";
+import { NavBar } from "./Navbar";
 import { Footer } from "./Footer";
-import { useAppDispatch } from "../../store/hooks";
-import { getAppSetting } from "../../store/slice/appSlice";
+
 interface Props {
   children: ReactNode;
 }

@@ -1,12 +1,12 @@
 import { Link, useParams } from "react-router-dom";
-import { Layout } from "../../component/layout/Layout";
-import { useAppDispatch, useAppSelector } from "../../store/hooks";
-import { Course } from "../../type/course";
+import { Layout } from "@/component/layout/Layout";
+import { useAppDispatch, useAppSelector } from "@/store/hooks";
+import { Course } from "@/type/course";
 import { useEffect, useState } from "react";
-import { courseDetail, courseLoading } from "../../store/slice/courseSlice";
-import { Title } from "../../component/layout/Title";
+import { courseDetail, courseLoading } from "@/store/slice/courseSlice";
+import { Title } from "@/component/layout/Title";
 import { Chip } from "@mui/material";
-import { Loading } from "../../component/loading/Loading";
+import { Loading } from "@/component/loading/Loading";
 
 export const CoursesDetail = () => {
   const data = useAppSelector((store) => store.courses.detail) as Course;
@@ -126,7 +126,7 @@ export const CoursesDetail = () => {
           ) : (
             ""
           )}
-          <p className="ms-5 mt-5"> {data?.description} </p>
+          <p className="md:ms-5 mt-5"> {data?.description} </p>
         </div>
       </div>
     </Layout>

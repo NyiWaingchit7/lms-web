@@ -1,5 +1,5 @@
+import { Course } from "@/type/course";
 import OpenInNewIcon from "@mui/icons-material/OpenInNew";
-import { Course } from "../../../type/course";
 import { Link } from "react-router-dom";
 interface Props {
   data: Course;

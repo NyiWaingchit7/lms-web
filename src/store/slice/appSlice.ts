@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { AppSlice } from "../../type/app";
-import { fetchFunction } from "../../utils/useFetchFunction";
+import { AppSlice } from "@/type/app";
+import { fetchFunction } from "@/utils/useFetchFunction";
 import toast from "react-hot-toast";
 const initialState: AppSlice = {
   isLoading: false,

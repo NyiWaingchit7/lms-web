@@ -1,17 +1,17 @@
 import { useEffect, useState } from "react";
-import { Layout } from "../../component/layout/Layout";
-import { useAppDispatch, useAppSelector } from "../../store/hooks";
+import { Layout } from "@/component/layout/Layout";
+import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import {
   cleanCourseSlice,
   courseLoading,
   handleGetCourses,
   pageIncrement,
-} from "../../store/slice/courseSlice";
+} from "@/store/slice/courseSlice";
 import { Skeleton } from "@mui/material";
-import { Title } from "../../component/layout/Title";
-import { CardLoadMore } from "../../component/card/CardLoadMore";
-import { Loading } from "../../component/loading/Loading";
-import { CourserListCard } from "../../component/card/course/CourseListCard";
+import { Title } from "@/component/layout/Title";
+import { CardLoadMore } from "@/component/card/CardLoadMore";
+import { Loading } from "@/component/loading/Loading";
+import { CourserListCard } from "@/component/card/course/CourseListCard";
 
 export const CoursesPage = () => {
   const dispatch = useAppDispatch();

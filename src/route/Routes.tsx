@@ -1,12 +1,13 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { CoursesPage } from "../pages/lecture/Lectures";
-import { CoursesDetail } from "../pages/lecture/LectureDetail";
-import { Login } from "../pages/login/Login";
-import { NotFound } from "../component/error/NotFount";
-import { Register } from "../pages/register/Register";
-import App from "../App";
-import { LectureWithCategory } from "../pages/category/LectureWithCategory";
-import ScrollToTop from "../component/layout/ScrollTop";
+
+import App from "@/App";
+import ScrollToTop from "@/component/layout/ScrollTop";
+import { CoursesPage } from "@/pages/lecture/Lectures";
+import { Login } from "@/pages/login/Login";
+import { Register } from "@/pages/register/Register";
+import { CoursesDetail } from "@/pages/lecture/LectureDetail";
+import { LectureWithCategory } from "@/pages/category/LectureWithCategory";
+import { NotFound } from "@/component/error/NotFount";
 
 export const Router = () => {
   return (

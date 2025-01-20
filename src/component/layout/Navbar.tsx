@@ -1,7 +1,7 @@
 import { Link, useLocation } from "react-router-dom";
 import MenuIcon from "@mui/icons-material/Menu";
-import { SideBarDrawer } from "./Drawer";
 import { useState } from "react";
+import { SideBarDrawer } from "./Drawer";
 export const NavBar = () => {
   const location = useLocation();
   const [open, setOpen] = useState(false);

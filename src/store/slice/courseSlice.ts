@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { CourseSlice } from "../../type/course";
-import { fetchFunction } from "../../utils/useFetchFunction";
+import { CourseSlice } from "@/type/course";
+import { fetchFunction } from "@/utils/useFetchFunction";
 import toast from "react-hot-toast";
 const initialState: CourseSlice = {
   isLoading: false,

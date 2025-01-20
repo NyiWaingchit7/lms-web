@@ -1,9 +1,9 @@
 import { TextField } from "@mui/material";
 import { Link } from "react-router-dom";
-import { Title } from "../../component/layout/Title";
-import { useAppDispatch, useAppSelector } from "../../store/hooks";
+import { Title } from "@/component/layout/Title";
+import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { useEffect } from "react";
-import { getAppSetting } from "../../store/slice/appSlice";
+import { getAppSetting } from "@/store/slice/appSlice";
 
 export const Login = () => {
   const dispatch = useAppDispatch();

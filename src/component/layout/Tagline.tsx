@@ -1,6 +1,6 @@
+import { useAppDispatch, useAppSelector } from "@/store/hooks";
+import { getAppTagLine } from "@/store/slice/appSlice";
 import { useEffect } from "react";
-import { useAppDispatch, useAppSelector } from "../../store/hooks";
-import { getAppTagLine } from "../../store/slice/appSlice";
 import Marquee from "react-fast-marquee";
 export const TagLine = () => {
   const dispatch = useAppDispatch();

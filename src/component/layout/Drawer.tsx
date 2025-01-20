@@ -1,7 +1,7 @@
 import { Drawer } from "@mui/material";
-import { navItem } from "./Navbar";
 import { Link } from "react-router-dom";
 import CloseIcon from "@mui/icons-material/Close";
+import { navItem } from "./Navbar";
 interface Props {
   open: boolean;
   setOpen: (datt?: any) => void;
