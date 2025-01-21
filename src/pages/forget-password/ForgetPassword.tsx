@@ -47,7 +47,7 @@ export const ForgetPassword = () => {
               <p className="tracking-[2rem] text-center">3455</p>
             </div>
           </div>
-          <div className="flex justify-center mt-3 relative">
+          <div className="flex justify-center mt-5 relative">
             <button className="login-btn z-1 w-full" style={{}}>
               Confirm
             </button>
