@@ -1,4 +1,4 @@
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { Layout } from "@/component/layout/Layout";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { Course } from "@/type/course";
@@ -14,14 +14,20 @@ export const CoursesDetail = () => {
   const id = Number(param.id);
   const dispatch = useAppDispatch();
   const loading = useAppSelector((store) => store.courses.isLoading);
+  const navigate = useNavigate();
   const [onPlay, setPlay] = useState<any>();
+  const navigation = () => {
+    navigate("/checkout", {
+      state: { data },
+    });
+  };
   useEffect(() => {
     dispatch(courseDetail({ id }));
     dispatch(courseLoading(true));
   }, []);
   useEffect(() => {
     setPlay(dummyVideo[0]);
-    console.log(onPlay);
+    // console.log(onPlay);
   }, []);
   return (
     <Layout>
@@ -105,9 +111,9 @@ export const CoursesDetail = () => {
           </div>
         )}
         <div className="container">
-          <div className="flex gap-5 items-center">
+          <div className="md:flex gap-5 items-center">
             <h2 className="font-semibold md:text-2xl">{data?.title}</h2>
-            <div className="flex gap-2 flex-wrap">
+            <div className="flex gap-2 flex-wrap mt-5 md:mt-0">
               {data?.categories?.map((item) => (
                 <Link to={`/categories/${item.id}/${item.name}`} key={item.id}>
                   <Chip label={item?.name} variant="outlined" color="success" />
@@ -116,12 +122,14 @@ export const CoursesDetail = () => {
             </div>
           </div>
           {data?.isPremium ? (
-            <div>
+            <div className="mt-5">
               <span className="font-semibold me-3">
                 {" "}
                 Price - {data?.discount_price || data?.price}MMK
               </span>
-              <button className="login-btn text-sm">Buy Now</button>
+              <button className="login-btn text-sm" onClick={navigation}>
+                Buy Now
+              </button>
             </div>
           ) : (
             ""

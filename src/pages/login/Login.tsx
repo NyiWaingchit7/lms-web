@@ -23,7 +23,9 @@ export const Login = () => {
           </h3>
         </div>
         <div className="bg-white w-full md:w-[500px] rounded-xl p-3 md:p-5 py-8 mt-3 ">
-          <h3 className="text-xl font-semibold mt-4 text-green">Login</h3>
+          <h3 className="text-xl font-semibold mt-4 text-green border-s-4 px-2 border-green">
+            Login
+          </h3>
           <div className="w-full mt-5 ">
             <TextField
               autoComplete="off"

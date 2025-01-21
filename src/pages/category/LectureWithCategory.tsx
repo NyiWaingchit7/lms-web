@@ -10,9 +10,9 @@ import { Skeleton } from "@mui/material";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { Layout } from "@/component/layout/Layout";
 import { Title } from "@/component/layout/Title";
-import { CourseCard } from "@/component/card/course/CourseCard";
 import { CardLoadMore } from "@/component/card/CardLoadMore";
 import { Loading } from "@/component/loading/Loading";
+import { CourserListCard } from "@/component/card/course/CourseListCard";
 
 export const LectureWithCategory = () => {
   const param = useParams();
@@ -63,7 +63,7 @@ export const LectureWithCategory = () => {
             </>
           ) : courses.length > 0 ? (
             courses.map((data) => (
-              <CourseCard key={data.id} data={data} shadow={true} />
+              <CourserListCard key={data.id} data={data} shadow={true} />
             ))
           ) : (
             <div className=" absolute inset-0 flex justify-center items-center h-[200px]">

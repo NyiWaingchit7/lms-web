@@ -17,6 +17,7 @@ import { SwiperSlide } from "swiper/react";
 import { Link } from "react-router-dom";
 import { Loading } from "./component/loading/Loading";
 import { SwiperWrapper } from "./component/swiper/SwiperWrapper";
+import { CourserListCard } from "./component/card/course/CourseListCard";
 function App() {
   const { lectures, free_lectures, isLoading, category, setting } =
     useAppSelector((store) => store.app);
@@ -55,7 +56,7 @@ function App() {
         </div>
       </div>
 
-      <div className="container mb-10 overflow-x-hidden">
+      <div className="container mb-10">
         <div className="flex justify-between items-center  gap-3">
           {Object.entries(data).map(([key, value]) => (
             <div className=" p-3 md:p-5 rounded-lg shadow-md" key={key}>
@@ -69,7 +70,9 @@ function App() {
       </div>
 
       <div className="container ">
-        <h3 className="card-header">Free Courses</h3>
+        <h3 className="card-header border-s-4 px-2 border-green">
+          Free Courses
+        </h3>
 
         <div className="">
           {isLoading ? (
@@ -89,7 +92,7 @@ function App() {
             <SwiperWrapper>
               {free_lectures.map((data) => (
                 <SwiperSlide key={data.id}>
-                  <CourseCard data={data} />
+                  <CourserListCard data={data} />
                 </SwiperSlide>
               ))}
             </SwiperWrapper>
@@ -101,7 +104,9 @@ function App() {
         </div>
       </div>
       <div className="container mb-10 overflow-x-hidden">
-        <h3 className="card-header">Premium Courses</h3>
+        <h3 className="card-header border-s-4 px-2 border-green">
+          Premium Courses
+        </h3>
 
         <div className="">
           {isLoading ? (
@@ -121,7 +126,7 @@ function App() {
             <SwiperWrapper>
               {lectures.map((data) => (
                 <SwiperSlide key={data.id}>
-                  <CourseCard data={data} />
+                  <CourserListCard data={data} />
                 </SwiperSlide>
               ))}
             </SwiperWrapper>
@@ -175,7 +180,7 @@ function App() {
         </div>
       </div>
       <div className="container">
-        <h3 className="card-header">FAQs</h3>
+        <h3 className="card-header border-s-4 px-2 border-green">FAQs</h3>
         <div className=" border border-green border-opacity-35  rounded-lg mt-3">
           {faq.map((data) => (
             <Accordion
