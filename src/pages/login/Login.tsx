@@ -44,7 +44,7 @@ export const Login = () => {
               label="Password"
             />
           </div>
-          <Link to="/" className="mt-5">
+          <Link to="/forget-password" className="mt-5">
             <p className="text-end underline text-green "> Forget password</p>
           </Link>
           <div className="flex justify-center mt-3 relative">
