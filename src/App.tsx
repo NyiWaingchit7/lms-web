@@ -1,7 +1,6 @@
 import { useEffect } from "react";
 import "./App.css";
 import Counter from "./component/card/Counter";
-import { CourseCard } from "./component/card/course/CourseCard";
 import { Layout } from "./component/layout/Layout";
 import { Title } from "./component/layout/Title";
 import { useAppDispatch, useAppSelector } from "./store/hooks";
