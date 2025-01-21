@@ -213,6 +213,7 @@ body {
   height: 30px !important;
   text-align: center;
   padding: 20px !important;
+  top: 45% !important;
 }
 .swiper-button-disabled {
   display: none !important;
@@ -248,7 +249,7 @@ body {
 }
 .course-card {
   position: relative;
-  height: 150px;
+  height: 200px;
   width: 100%;
 }
 .course-card::after {
@@ -261,7 +262,12 @@ body {
   content: "";
   transition: all 0.3s;
 }
-.course-title,
+.title-icon {
+  margin-left: -44px;
+  margin-right: 10px;
+  opacity: 0;
+  transition: all 0.3s ease !important;
+}
 .course-price,
 .course-detail-icon {
   transform: scale(0) !important;
@@ -276,11 +282,19 @@ body {
 .course-card:hover .course-detail-icon {
   transform: scale(1) !important;
 }
+.course-card:hover .title-icon {
+  opacity: 1;
+  margin-left: 0;
+}
 
 @media (max-width: 992px) {
   .course-title,
   .course-price,
   .course-detail-icon {
     transform: scale(1) !important;
+  }
+  .title-icon {
+    opacity: 1;
+    margin-left: 0;
   }
 }

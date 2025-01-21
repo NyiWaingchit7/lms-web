@@ -1,5 +1,6 @@
 import { Course } from "@/type/course";
 import OpenInNewIcon from "@mui/icons-material/OpenInNew";
+import SchoolIcon from "@mui/icons-material/School";
 import { Link } from "react-router-dom";
 interface Props {
   data: Course;
@@ -20,6 +21,7 @@ export const CourseCard = ({ data }: Props) => {
           <div className="p-5 relative text-white flex flex-col justify-between h-full">
             <div>
               <div className="flex">
+                <SchoolIcon className="title-icon" />
                 <h6 className=" mb-2 course-title font-semibold ">
                   {data.title}
                 </h6>
@@ -34,14 +36,14 @@ export const CourseCard = ({ data }: Props) => {
               <h6 className="me-1 text-sm">
                 {data.isPremium ? (
                   <div>
-                    <p className="text-xs sm:text-sm inline ">
+                    <p className="text-xs sm:text-sm inline font-medium ">
                       {data.discount_price
                         ? data.discount_price?.toLocaleString()
                         : data.price?.toLocaleString()}
                       MMK
                     </p>
                     {data.discount_price ? (
-                      <p className="line-through text-[10px] sm:text-xs sm:inline sm:ms-2">
+                      <p className="line-through text-[10px] sm:text-xs sm:inline sm:ms-2 font-medium">
                         {data.price?.toLocaleString()} MMK
                       </p>
                     ) : (

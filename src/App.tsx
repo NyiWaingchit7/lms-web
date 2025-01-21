@@ -17,6 +17,7 @@ import { Link } from "react-router-dom";
 import { Loading } from "./component/loading/Loading";
 import { SwiperWrapper } from "./component/swiper/SwiperWrapper";
 import { CourserListCard } from "./component/card/course/CourseListCard";
+import { CourseCard } from "./component/card/course/CourseCard";
 function App() {
   const { lectures, free_lectures, isLoading, category, setting } =
     useAppSelector((store) => store.app);
@@ -67,8 +68,37 @@ function App() {
           ))}
         </div>
       </div>
+      <div className="container mb-10">
+        <h3 className="card-header border-s-4 px-2 border-green">
+          Popular Courses
+        </h3>
+        {isLoading ? (
+          <div className="grid grid-cols-1 gap-1 xl:gap-3 md:grid-cols-3 mt-3">
+            {Array(4)
+              .fill(0)
+              .map((_, index) => (
+                <Skeleton
+                  animation="wave"
+                  key={index}
+                  variant="rounded"
+                  height={200}
+                />
+              ))}
+          </div>
+        ) : lectures.length > 0 ? (
+          <div className="grid grid-cols-1 gap-5 md:grid-cols-3 mt-3">
+            {lectures.map((data) => (
+              <CourseCard key={data.id} data={data} />
+            ))}
+          </div>
+        ) : (
+          <div className="flex justify-center items-center h-[200px]">
+            <p>There is no data</p>
+          </div>
+        )}
+      </div>
 
-      <div className="container ">
+      <div className="container mb-10">
         <h3 className="card-header border-s-4 px-2 border-green">
           Free Courses
         </h3>

@@ -1,46 +1,50 @@
+import { PasswordInput } from "@/component/form/PasswordInput";
 import { Title } from "@/component/layout/Title";
-import { TextField } from "@mui/material";
+import { useState } from "react";
 
 export const ForgetChangePassword = () => {
+  const [form, setForm] = useState({
+    new_password: "",
+    confirm_password: "",
+  });
+  const handleChangePassword = (e: any) => {
+    e.preventDefault();
+    console.log(form);
+  };
   return (
     <div className="bg-green min-h-screen flex  justify-center items-center ">
       <Title title="Change Passowrd" />
       <div className="mt-10 mx-3 flex  flex-col justify-center items-center">
-        {/* <div className="flex justify-center items-end gap-2">
-          <img src="/logo.png" className="w-20" alt="" />
-          <h3 className="text-4xl md:text-5xl text-white font-semibold">
-            {setting?.app_name || " Akone Learn"}
-          </h3>
-        </div> */}
-        <div className="bg-white w-full md:w-[500px] rounded-xl p-3 md:p-5 py-8 mt-3 ">
+        <form
+          onSubmit={handleChangePassword}
+          className="bg-white w-full md:w-[500px] rounded-xl p-3 md:p-5 py-8 mt-3 "
+        >
           <h3 className="text-xl font-semibold mt-4 text-green border-s-4 px-2 border-green">
             Create New Password
           </h3>
           <div className="w-full mt-5">
-            <TextField
-              autoComplete="off"
-              size="small"
-              fullWidth
-              required
+            <PasswordInput
               label="New Password"
+              value={form.new_password}
+              onChange={(e) => {
+                setForm({ ...form, new_password: e });
+              }}
             />
           </div>
           <div className="w-full mt-5">
-            <TextField
-              autoComplete="off"
-              size="small"
-              fullWidth
-              required
+            <PasswordInput
               label="Confirm Password"
+              value={form.confirm_password}
+              onChange={(e) => {
+                setForm({ ...form, confirm_password: e });
+              }}
             />
           </div>
 
           <div className="flex justify-center mt-3 relative">
-            <button className="login-btn z-1 w-full" style={{}}>
-              Confirm
-            </button>
+            <button className="login-btn z-1 w-full">Confirm</button>
           </div>
-        </div>
+        </form>
       </div>
     </div>
   );

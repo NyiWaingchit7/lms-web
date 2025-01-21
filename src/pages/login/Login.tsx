@@ -2,12 +2,23 @@ import { TextField } from "@mui/material";
 import { Link } from "react-router-dom";
 import { Title } from "@/component/layout/Title";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { getAppSetting } from "@/store/slice/appSlice";
-
+import { PasswordInput } from "@/component/form/PasswordInput";
+import { TextInput } from "@/component/form/TextInput";
 export const Login = () => {
   const dispatch = useAppDispatch();
   const { setting } = useAppSelector((store) => store.app);
+  const [form, setForm] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    password: "",
+  });
+  const handleLogin = (e: any) => {
+    e.preventDefault();
+    console.log(form);
+  };
   useEffect(() => {
     dispatch(getAppSetting());
   }, []);
@@ -22,35 +33,37 @@ export const Login = () => {
             {setting?.app_name || " Akone Learn"}
           </h3>
         </div>
-        <div className="bg-white w-full md:w-[500px] rounded-xl p-3 md:p-5 py-8 mt-3 ">
+        <form
+          onSubmit={handleLogin}
+          className="bg-white w-full md:w-[500px] rounded-xl p-3 md:p-5 py-8 mt-3 "
+        >
           <h3 className="text-xl font-semibold mt-4 text-green border-s-4 px-2 border-green">
             Login
           </h3>
           <div className="w-full mt-5 ">
-            <TextField
-              autoComplete="off"
-              size="small"
-              fullWidth
-              required
+            <TextInput
+              type="text"
+              value={form.email}
               label="Email"
+              onChange={(e) => {
+                setForm({ ...form, email: e });
+              }}
             />
           </div>
           <div className="w-full mt-5">
-            <TextField
-              autoComplete="off"
-              size="small"
-              fullWidth
-              required
+            <PasswordInput
               label="Password"
+              value={form.password}
+              onChange={(e) => {
+                setForm({ ...form, password: e });
+              }}
             />
           </div>
           <Link to="/forget-password" className="mt-5">
             <p className="text-end underline text-green "> Forget password</p>
           </Link>
           <div className="flex justify-center mt-3 relative">
-            <button className="login-btn z-1 w-full" style={{}}>
-              Log in
-            </button>
+            <button className="login-btn z-1 w-full">Log in</button>
           </div>
           <div className="mt-5">
             <p className="text-graydark">
@@ -60,7 +73,7 @@ export const Login = () => {
               </Link>
             </p>
           </div>
-        </div>
+        </form>
       </div>
     </div>
   );
