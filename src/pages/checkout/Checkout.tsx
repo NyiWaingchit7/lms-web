@@ -2,7 +2,7 @@ import { Layout } from "@/component/layout/Layout";
 import { Title } from "@/component/layout/Title";
 import { TextField } from "@mui/material";
 import { useLocation } from "react-router-dom";
-
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 export const Checkout = () => {
   const location = useLocation();
   const { data } = location.state || {};
@@ -10,10 +10,10 @@ export const Checkout = () => {
     <Layout>
       <Title title="Checkout" />
       <div className="container">
-        <div className="bg-white relative shadow-sm max-w-screen-md mx-auto mt-10 p-5 rounded-md">
+        <div className="relative flex max-w-screen-md mx-auto mt-5 p-5 rounded-md ">
           {data ? (
-            <div>
-              <h3 className="text-xl font-semibold mt-4 text-green border-s-4 px-2 border-green">
+            <div className="curve-card p-5">
+              <h3 className="text-xl font-semibold text-green border-s-4 px-2 border-green">
                 Checkout
               </h3>
               <div className="md:flex gap-5 mt-5">
@@ -51,6 +51,12 @@ export const Checkout = () => {
               <p>There is no course choosen.</p>
             </div>
           )}
+          <div className="checkout-icon cursor-pointer w-[50px] h-[50px] right-5 absolute flex justify-center items-center rounded-full bg-green">
+            <ShoppingCartIcon
+              className="text-white "
+              sx={{ fontSize: "1.5rem" }}
+            />
+          </div>
         </div>
       </div>
     </Layout>
