@@ -7,9 +7,16 @@ import { getAppSetting } from "@/store/slice/appSlice";
 
 import { PasswordInput } from "@/component/form/PasswordInput";
 import { TextInput } from "@/component/form/TextInput";
+import {
+  accountRegister,
+  registerVerify,
+  setOTP,
+} from "@/store/slice/authSlice";
 export const Register = () => {
   const dispatch = useAppDispatch();
   const { setting } = useAppSelector((store) => store.app);
+  const { otp_code } = useAppSelector((store) => store.auth);
+  const [code, setCode] = useState("");
   const [form, setForm] = useState({
     name: "",
     email: "",
@@ -18,10 +25,18 @@ export const Register = () => {
   });
   const handleRegister = (e: any) => {
     e.preventDefault();
+    dispatch(accountRegister({ ...form }));
     console.log(form);
+  };
+  const handleVeifty = (e: any) => {
+    e.preventDefault();
+    dispatch(registerVerify({ ...form, code: Number(code) }));
   };
   useEffect(() => {
     dispatch(getAppSetting());
+    return () => {
+      setOTP(null);
+    };
   }, []);
   return (
     <div className="bg-green min-h-screen flex  justify-center items-center ">
@@ -78,18 +93,24 @@ export const Register = () => {
               autoComplete="off"
               size="small"
               fullWidth
-              required
               label="Enter Your Otp code"
               className="flex-1"
+              onChange={(e) => setCode(e.target.value)}
             />
-            <div className="flex-1 mt-5 sm:mt-0 border border-green border-dashed text-graydark  py-2 rounded-md text-center">
-              <p className="tracking-[2rem]">3455</p>
+            <div className="flex-1 mt-5 sm:mt-0 border border-green border-dashed text-graydark  py-2 rounded-md flex justify-between px-3 items-center ">
+              <p className="tracking-[10px] text-center">{otp_code}</p>{" "}
+              <button className="text-green cursor-pointer font-medium hover:underline">
+                Get
+              </button>
             </div>
           </div>
           <div className="flex justify-center mt-3 relative">
-            <button className="login-btn z-1 w-full" style={{}}>
+            <div
+              className="login-btn text-center z-1 w-full cursor-pointer"
+              onClick={handleVeifty}
+            >
               Register
-            </button>
+            </div>
           </div>
           <div className="mt-5">
             <p className="text-graydark">

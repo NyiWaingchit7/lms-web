@@ -3,7 +3,11 @@ import { Layout } from "@/component/layout/Layout";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { Course } from "@/type/course";
 import { useEffect, useState } from "react";
-import { courseDetail, courseLoading } from "@/store/slice/courseSlice";
+import {
+  courseDetail,
+  courseLoading,
+  setCourseDetail,
+} from "@/store/slice/courseSlice";
 import { Title } from "@/component/layout/Title";
 import { Chip } from "@mui/material";
 import { Loading } from "@/component/loading/Loading";
@@ -24,6 +28,9 @@ export const CoursesDetail = () => {
   useEffect(() => {
     dispatch(courseDetail({ id }));
     dispatch(courseLoading(true));
+    return () => {
+      dispatch(setCourseDetail(null));
+    };
   }, []);
   useEffect(() => {
     setPlay(dummyVideo[0]);

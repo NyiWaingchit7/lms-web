@@ -351,21 +351,38 @@ body {
       var(--circles-space) / calc(100% - var(--circle-r)) 100% no-repeat
       no-repeat;
 }
-.checkout-icon:hover {
-  animation: bounce 2s infinite;
+.checkout-icon {
+  position: relative;
 }
-@keyframes bounce {
-  0%,
-  20%,
-  50%,
-  80%,
+.checkout-icon::before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  right: 0px;
+  border-radius: 50%;
+  animation: wave 1s linear alternate infinite;
+  inset: 0;
+  opacity: 0.3;
+  z-index: 1;
+}
+@keyframes wave {
+  0% {
+    box-shadow: 0 0 2px 0px #0d5a69;
+  }
+
+  25% {
+    box-shadow: 0 0 2px 3px #0d5a69;
+  }
+
+  50% {
+    box-shadow: 0 0 2px 6px #0d5a69;
+  }
+
+  75% {
+    box-shadow: 0 0 2px 3px #0d5a69;
+  }
   100% {
-    transform: translateY(0);
-  }
-  40% {
-    transform: translateY(-20px);
-  }
-  60% {
-    transform: translateY(-15px);
+    box-shadow: 0 0 2px 0px #0d5a69;
   }
 }
