@@ -4,15 +4,53 @@ import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { useEffect, useState } from "react";
 import { getAppSetting } from "@/store/slice/appSlice";
 import { TextInput } from "@/component/form/TextInput";
+import { forgetPassword, forgetVerify, setOTP } from "@/store/slice/authSlice";
+import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 export const ForgetPassword = () => {
   const dispatch = useAppDispatch();
   const { setting } = useAppSelector((store) => store.app);
+  const { otp_code } = useAppSelector((store) => store.auth);
+  const navigate = useNavigate();
   const [form, setForm] = useState({
     email: "",
   });
+  const [code, setCode] = useState("");
+  const handleForget = (e: any) => {
+    e.preventDefault();
+    dispatch(
+      forgetPassword({
+        ...form,
+        onSuccess: () => {
+          toast.success("Enter the otp code we have sent.");
+        },
+      })
+    );
+  };
+  const handleVerify = (e: any) => {
+    e.preventDefault();
+    if (!code) {
+      toast.error("Please enter otp code.");
+      return;
+    }
+    dispatch(
+      forgetVerify({
+        ...form,
+        code: Number(code),
+        onSuccess: () => {
+          navigate("/forget-password-change", {
+            state: { email: form.email },
+          });
+        },
+      })
+    );
+  };
   useEffect(() => {
     dispatch(getAppSetting());
+    return () => {
+      setOTP(null);
+    };
   }, []);
   return (
     <div className="bg-green min-h-screen flex  justify-center items-center ">
@@ -47,18 +85,25 @@ export const ForgetPassword = () => {
               required
               label="Enter Your Otp code"
               className="flex-1"
+              onChange={(e) => setCode(e.target.value)}
             />
             <div className="flex-1 mt-5 sm:mt-0 border border-green border-dashed text-graydark  py-2 rounded-md flex justify-between px-3 items-center ">
-              <p className="tracking-[10px] text-center">3455</p>{" "}
-              <p className="text-green cursor-pointer font-medium hover:underline">
+              <p className="tracking-[10px] text-center">{otp_code}</p>{" "}
+              <button
+                onClick={handleForget}
+                className="text-green cursor-pointer font-medium hover:underline"
+              >
                 Get
-              </p>
+              </button>
             </div>
           </div>
           <div className="flex justify-center mt-5 relative">
-            <button className="login-btn z-1 w-full" style={{}}>
+            <div
+              className="login-btn z-1 w-full text-center"
+              onClick={handleVerify}
+            >
               Confirm
-            </button>
+            </div>
           </div>
         </form>
       </div>

@@ -16,6 +16,7 @@ const initialState: AuthSlice = {
   profile: null,
   my_courses: [],
   otp_code: null,
+  token: "",
 };
 export const getProfile = createAsyncThunk(
   "get/profile",
@@ -61,7 +62,7 @@ export const accountRegister = createAsyncThunk(
 );
 export const registerVerify = createAsyncThunk(
   "account/register-verify",
-  async (option: AccountRegister, thunkApi) => {
+  async (option: AccountRegister) => {
     try {
       const { name, email, password, code, onSuccess } = option;
       const { data, response } = await fetchFunction({
@@ -77,6 +78,8 @@ export const registerVerify = createAsyncThunk(
       if (!response.ok) {
         toast.error(data.message);
       } else {
+        localStorage.setItem("token", data.token);
+
         onSuccess && onSuccess();
       }
     } catch (error) {
@@ -86,11 +89,11 @@ export const registerVerify = createAsyncThunk(
 );
 export const accountLogin = createAsyncThunk(
   "account/logins",
-  async (option: AccountLogin, thunkApi) => {
+  async (option: AccountLogin) => {
     try {
-      const { email, password } = option;
+      const { email, password, onSuccess } = option;
       const { data, response } = await fetchFunction({
-        url: "auth/register",
+        url: "auth/log-in",
         method: "POST",
         body: JSON.stringify({
           name,
@@ -101,7 +104,8 @@ export const accountLogin = createAsyncThunk(
       if (!response.ok) {
         toast.error(data.message);
       } else {
-        thunkApi.dispatch(setProfile(null));
+        onSuccess && onSuccess();
+        localStorage.setItem("token", data.token);
       }
     } catch (error) {
       console.log(error);
@@ -109,10 +113,10 @@ export const accountLogin = createAsyncThunk(
   }
 );
 export const forgetPassword = createAsyncThunk(
-  "account/logins",
+  "account/forget-password",
   async (option: ForgetPassword, thunkApi) => {
     try {
-      const { email } = option;
+      const { email, onSuccess } = option;
       const { data, response } = await fetchFunction({
         url: "auth/forget-password",
         method: "POST",
@@ -123,7 +127,8 @@ export const forgetPassword = createAsyncThunk(
       if (!response.ok) {
         toast.error(data.message);
       } else {
-        thunkApi.dispatch(setOTP(null));
+        thunkApi.dispatch(setOTP(data.code));
+        onSuccess && onSuccess();
       }
     } catch (error) {
       console.log(error);
@@ -134,7 +139,7 @@ export const forgetVerify = createAsyncThunk(
   "account/forget-verify",
   async (option: ForgetPassword, thunkApi) => {
     try {
-      const { email, code } = option;
+      const { email, code, onSuccess } = option;
       const { data, response } = await fetchFunction({
         url: "auth/forget-verify",
         method: "POST",
@@ -147,6 +152,8 @@ export const forgetVerify = createAsyncThunk(
         toast.error(data.message);
       } else {
         thunkApi.dispatch(setOTP(null));
+
+        onSuccess && onSuccess();
       }
     } catch (error) {
       console.log(error);
@@ -156,20 +163,22 @@ export const forgetVerify = createAsyncThunk(
 
 export const createPassword = createAsyncThunk(
   "account/create-passwored",
-  async (option: CreatePassword, thunkApi) => {
+  async (option: CreatePassword) => {
     try {
-      const { new_password, confirm_password } = option;
+      const { new_password, confirm_password, email, onSuccess } = option;
       const { data, response } = await fetchFunction({
         url: "auth/forget-password-change",
         method: "POST",
         body: JSON.stringify({
           new_password,
           confirm_password,
+          email,
         }),
       });
       if (!response.ok) {
         toast.error(data.message);
       } else {
+        onSuccess && onSuccess();
         toast.success(data.message);
       }
     } catch (error) {
@@ -180,7 +189,7 @@ export const createPassword = createAsyncThunk(
 
 export const changePassword = createAsyncThunk(
   "account/change-passwored",
-  async (option: ChangePassword, thunkApi) => {
+  async (option: ChangePassword) => {
     try {
       const { old_password, new_password, confirm_password } = option;
       const { data, response } = await fetchFunction({
@@ -213,8 +222,11 @@ export const authSlice = createSlice({
     setOTP: (state, action) => {
       state.otp_code = action.payload;
     },
+    setToken: (state, action) => {
+      state.token = action.payload;
+    },
   },
 });
 
-export const { setProfile, setOTP } = authSlice.actions;
+export const { setProfile, setOTP, setToken } = authSlice.actions;
 export default authSlice.reducer;

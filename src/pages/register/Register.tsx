@@ -1,5 +1,5 @@
 import { TextField } from "@mui/material";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Title } from "@/component/layout/Title";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { useEffect, useState } from "react";
@@ -12,6 +12,7 @@ import {
   registerVerify,
   setOTP,
 } from "@/store/slice/authSlice";
+import toast from "react-hot-toast";
 export const Register = () => {
   const dispatch = useAppDispatch();
   const { setting } = useAppSelector((store) => store.app);
@@ -23,6 +24,7 @@ export const Register = () => {
     phone: "",
     password: "",
   });
+  const navigate = useNavigate();
   const handleRegister = (e: any) => {
     e.preventDefault();
     dispatch(accountRegister({ ...form }));
@@ -30,7 +32,20 @@ export const Register = () => {
   };
   const handleVeifty = (e: any) => {
     e.preventDefault();
-    dispatch(registerVerify({ ...form, code: Number(code) }));
+
+    if (!code) {
+      toast.error("Please enter otp code.");
+      return;
+    }
+    dispatch(
+      registerVerify({
+        ...form,
+        code: Number(code),
+        onSuccess: () => {
+          navigate("/");
+        },
+      })
+    );
   };
   useEffect(() => {
     dispatch(getAppSetting());

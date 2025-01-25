@@ -1,15 +1,30 @@
 import { PasswordInput } from "@/component/form/PasswordInput";
 import { Title } from "@/component/layout/Title";
+import { useAppDispatch } from "@/store/hooks";
+import { createPassword } from "@/store/slice/authSlice";
 import { useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 
 export const ForgetChangePassword = () => {
   const [form, setForm] = useState({
     new_password: "",
     confirm_password: "",
   });
+  const location = useLocation();
+  const navigate = useNavigate();
+  const dispatch = useAppDispatch();
+  const email = location.state?.email;
   const handleChangePassword = (e: any) => {
+    dispatch(
+      createPassword({
+        ...form,
+        email,
+        onSuccess: () => {
+          navigate("/");
+        },
+      })
+    );
     e.preventDefault();
-    console.log(form);
   };
   return (
     <div className="bg-green min-h-screen flex  justify-center items-center ">

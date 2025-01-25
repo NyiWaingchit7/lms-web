@@ -1,4 +1,5 @@
 import { Course } from "./course";
+import { Purchase } from "./purchase";
 
 export interface BaseOption {
   onSuccess?: (data?: any) => void;
@@ -11,7 +12,7 @@ export interface Profile {
   password?: string;
   phone?: string;
   assetUrl: string;
-  token: string;
+  Purchase: Purchase[];
 }
 
 export interface AuthSlice {
@@ -20,6 +21,7 @@ export interface AuthSlice {
   error: Error | null;
   my_courses: Course[];
   otp_code: number | null;
+  token: string;
 }
 
 export interface AccountRegister extends BaseOption {
@@ -45,6 +47,7 @@ export interface ForgetPassword extends BaseOption {
 }
 
 export interface CreatePassword extends BaseOption {
+  email: string;
   new_password: string;
   confirm_password: string;
 }
