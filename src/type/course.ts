@@ -1,5 +1,10 @@
 import { Category } from "./category";
-
+export interface PopularLecture {
+  title: string;
+  id?: number;
+  lectureId: string;
+  lecture: Course;
+}
 export interface Course {
   id?: number;
   title: string;

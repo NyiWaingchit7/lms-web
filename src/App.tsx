@@ -19,8 +19,14 @@ import { SwiperWrapper } from "./component/swiper/SwiperWrapper";
 import { CourserListCard } from "./component/card/course/CourseListCard";
 import { CourseCard } from "./component/card/course/CourseCard";
 function App() {
-  const { lectures, free_lectures, isLoading, category, setting } =
-    useAppSelector((store) => store.app);
+  const {
+    lectures,
+    free_lectures,
+    isLoading,
+    category,
+    setting,
+    popular_lectures,
+  } = useAppSelector((store) => store.app);
 
   const dispatch = useAppDispatch();
   useEffect(() => {
@@ -87,8 +93,8 @@ function App() {
           </div>
         ) : lectures.length > 0 ? (
           <div className="grid grid-cols-1 gap-5 md:grid-cols-3 mt-3">
-            {lectures.map((data) => (
-              <CourseCard key={data.id} data={data} />
+            {popular_lectures.map((data) => (
+              <CourseCard key={data.id} data={data.lecture} />
             ))}
           </div>
         ) : (

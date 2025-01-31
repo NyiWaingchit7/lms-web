@@ -8,6 +8,7 @@ const initialState: AppSlice = {
   lectures: [],
   tagLines: [],
   free_lectures: [],
+  popular_lectures: [],
   setting: null,
   pages: [],
   payment: [],
@@ -20,9 +21,11 @@ export const getAppLecture = createAsyncThunk(
       thunkApi.dispatch(setAppLoading(true));
       const preLec = await getAppPreLecture();
       const freeLec = await getAppFreeLecture();
+      const popularLec = await getAppPopularLecture();
 
       thunkApi.dispatch(setAppLecture(preLec));
       thunkApi.dispatch(setAppFree(freeLec));
+      thunkApi.dispatch(setPopularLecture(popularLec));
 
       thunkApi.dispatch(setAppLoading(false));
     } catch (error) {
@@ -48,6 +51,20 @@ export const getAppFreeLecture = async () => {
   try {
     const { response, data } = await fetchFunction({
       url: "lectures?isPremium=false",
+    });
+    if (!response.ok) {
+      toast.error(data.message);
+      return;
+    }
+    return data.data.data;
+  } catch (error) {
+    console.log(error);
+  }
+};
+export const getAppPopularLecture = async () => {
+  try {
+    const { response, data } = await fetchFunction({
+      url: "popular-lectures",
     });
     if (!response.ok) {
       toast.error(data.message);
@@ -114,6 +131,9 @@ export const appSlice = createSlice({
     setAppLecture: (state, action) => {
       state.lectures = action.payload;
     },
+    setPopularLecture: (state, action) => {
+      state.popular_lectures = action.payload;
+    },
     setAppFree: (state, action) => {
       state.free_lectures = action.payload;
     },
@@ -147,5 +167,6 @@ export const {
   setAppLoading,
   setAppFree,
   setCategory,
+  setPopularLecture,
 } = appSlice.actions;
 export default appSlice.reducer;

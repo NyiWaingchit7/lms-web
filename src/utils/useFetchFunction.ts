@@ -15,7 +15,7 @@ export const fetchFunction = async ({
 }: Props) => {
   const options = {
     method,
-    headers: headers ? headers : headerOptions(),
+    headers: headers ? headers : await headerOptions(),
     body,
   };
   const response = await fetch(`${config.baseUrl}/${url}`, options);
