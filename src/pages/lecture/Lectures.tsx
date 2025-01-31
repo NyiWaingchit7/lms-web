@@ -11,7 +11,7 @@ import { Skeleton } from "@mui/material";
 import { Title } from "@/component/layout/Title";
 import { CardLoadMore } from "@/component/card/CardLoadMore";
 import { Loading } from "@/component/loading/Loading";
-import { CourserListCard } from "@/component/card/course/CourseListCard";
+import { CourserListCardV2 } from "@/component/card/course/CourseListCardV2";
 
 export const CoursesPage = () => {
   const dispatch = useAppDispatch();
@@ -41,7 +41,7 @@ export const CoursesPage = () => {
       <Title title="Courses" />
       <div className="container">
         <div></div>
-        <div className="relative grid grid-cols-1 gap-1 xl:gap-3 md:grid-cols-4 mt-5">
+        <div className="relative grid grid-cols-1 gap-2 xl:gap-5 md:grid-cols-4 mt-5">
           {isLoading ? (
             <>
               {Array(4)
@@ -58,7 +58,7 @@ export const CoursesPage = () => {
             </>
           ) : courses.length > 0 ? (
             courses.map((data) => (
-              <CourserListCard key={data.id} data={data} shadow={true} />
+              <CourserListCardV2 key={data.id} data={data} listing={true} />
             ))
           ) : (
             <div className=" absolute inset-0 flex justify-center items-center h-[200px]">

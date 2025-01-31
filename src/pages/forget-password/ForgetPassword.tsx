@@ -6,7 +6,7 @@ import { getAppSetting } from "@/store/slice/appSlice";
 import { TextInput } from "@/component/form/TextInput";
 import { forgetPassword, forgetVerify, setOTP } from "@/store/slice/authSlice";
 import toast from "react-hot-toast";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export const ForgetPassword = () => {
   const dispatch = useAppDispatch();
@@ -58,7 +58,10 @@ export const ForgetPassword = () => {
 
       <div className="w-full mx-3 flex  flex-col justify-center items-center ">
         <div className="flex justify-center items-end gap-2">
-          <img src="/logo.png" className="w-20" alt="" />
+          <Link to={"/"}>
+            {" "}
+            <img src="/logo.png" className="w-20" alt="" />
+          </Link>
           <h3 className="text-4xl md:text-5xl text-white font-semibold">
             {setting?.app_name || " Akone Learn"}
           </h3>

@@ -4,6 +4,12 @@
 @tailwind components;
 @tailwind utilities;
 *,
+:root {
+  --primary-color: #0d5a69;
+  --white-color: #f8f8ff;
+  --secondary-color: #888;
+  --danger-color: #ff0000;
+}
 html {
   margin: 0;
   padding: 0;
@@ -11,7 +17,7 @@ html {
   scroll-behavior: smooth;
 }
 body {
-  background-color: #f8f8ff;
+  background-color: var(--white-color);
 }
 .cherry-bomb-one-regular {
   font-family: "Cherry Bomb One", serif;
@@ -30,10 +36,10 @@ body {
     @apply bg-white bg-opacity-20 backdrop-blur-md  border border-white/20 z-20;
   }
   .card-header {
-    @apply font-semibold  md:text-lg;
+    @apply font-semibold  md:text-lg mb-3;
   }
   .glass-card {
-    @apply absolute top-0 left-0 w-full h-full flex bg-black bg-opacity-5 backdrop-blur-[3px] justify-center items-center  bg-black/50 opacity-0 hover:opacity-100 rounded-t-lg transition-opacity duration-500 ease-in-out;
+    @apply absolute top-0 left-0 w-full h-full flex justify-center items-center;
   }
 }
 .glass-card:hover .course-detail-icon {
@@ -50,7 +56,7 @@ body {
   transform: scale(0);
   bottom: 0;
   left: 0;
-  background-color: white;
+  background-color: var(--white-color);
   transition: transform 0.3s ease-out;
   transform-origin: left;
 }
@@ -66,7 +72,7 @@ body {
   transform: scale(0);
   bottom: 0;
   left: 0;
-  background-color: white;
+  background-color: var(--white-color);
   transition: transform 0.3s ease-out;
   transform-origin: left;
   transform: scale(1);
@@ -82,17 +88,17 @@ body {
 }
 
 .no-arrows::-webkit-scrollbar-button {
-  display: none !important; /* Completely hide the arrows */
+  display: none !important;
 }
 
 .no-arrows::-webkit-scrollbar-thumb {
-  background: #888; /* Thumb color */
-  border-radius: 6px; /* Optional: Rounded thumb */
+  background: var(--secondary-color);
+  border-radius: 6px;
 }
 
 .no-arrows::-webkit-scrollbar-track {
-  background: #f4f4f4; /* Track color */
-  border-radius: 6px; /* Optional: Rounded track */
+  background: var(--white-color);
+  border-radius: 6px;
 }
 
 .no-scrollbar {
@@ -104,8 +110,8 @@ body {
 }
 .btn-login {
   padding: 8px 15px;
-  border: 1px solid #f4f4f4;
-  color: #f4f4f4;
+  border: 1px solid var(--white-color);
+  color: var(--white-color);
   border-radius: 10px;
   position: relative;
   overflow: hidden;
@@ -118,7 +124,7 @@ body {
   left: 100%;
   width: 200px;
   height: 150px;
-  background-color: #f4f4f4;
+  background-color: var(--white-color);
   transition: all 0.4s;
   border-radius: 10px;
   z-index: -1;
@@ -139,15 +145,15 @@ body {
 
 .loadmore-btn {
   padding: 5px 10px;
-  color: #f4f4f4;
-  background-color: #0d5a69;
+  color: var(--white-color);
+  background-color: var(--primary-color);
   border-radius: 10px;
 }
 
 .dot {
   width: 15px;
   height: 15px;
-  background-color: #0d5a69;
+  background-color: var(--primary-color);
   border-radius: 50%;
   animation: dotPulse 1.5s infinite ease-in-out;
 }
@@ -173,7 +179,7 @@ body {
 
 .login-btn {
   padding: 8px 15px;
-  border: 1px solid #0d5a69;
+  border: 1px solid var(--primary-color);
   color: black;
   border-radius: 5px;
   position: relative;
@@ -187,7 +193,7 @@ body {
   left: 0;
   width: 100%;
   height: 0%;
-  background-color: #0d5a69;
+  background-color: var(--primary-color);
   transition: height 0.3s ease;
   z-index: -1;
 }
@@ -195,19 +201,19 @@ body {
   height: 100%;
 }
 .login-btn:hover {
-  color: #f4f4f4;
+  color: var(--white-color);
 }
 .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
-  border: 1px dashed #0d5a69 !important;
+  border: 1px dashed var(--primary-color) !important;
 }
 .MuiInputLabel-root.Mui-focused {
-  color: #0d5a69 !important;
+  color: var(--primary-color) !important;
 }
 .swiper-button-prev,
 .swiper-button-next {
-  color: #f4f4f4 !important;
+  color: var(--white-color) !important;
   font-weight: bold;
-  background-color: #0d5a69;
+  background-color: var(--primary-color);
   border-radius: 50%;
   width: 30px !important;
   height: 30px !important;
@@ -219,7 +225,7 @@ body {
   display: none !important;
 }
 .swiper-pagination-bullet-active {
-  background-color: #0d5a69 !important;
+  background-color: var(--primary-color) !important;
 }
 .swiper-button-prev::after,
 .swiper-button-next::after {
@@ -230,7 +236,7 @@ body {
 }
 .not-found {
   font-weight: 700;
-  color: #0d5a69;
+  color: var(--primary-color);
 }
 .iframe {
   width: 300px;
@@ -286,7 +292,18 @@ body {
   opacity: 1;
   margin-left: 0;
 }
-
+.yes-btn {
+  padding: 5px 20px;
+  border-radius: 8px;
+  background-color: var(--primary-color);
+  color: var(--white-color);
+}
+.no-btn {
+  padding: 5px 20px;
+  border-radius: 8px;
+  background-color: var(--secondary-color);
+  color: var(--white-color);
+}
 @media (max-width: 992px) {
   .course-title,
   .course-price,
@@ -368,21 +385,21 @@ body {
 }
 @keyframes wave {
   0% {
-    box-shadow: 0 0 2px 0px #0d5a69;
+    box-shadow: 0 0 2px 0px var(--primary-color);
   }
 
   25% {
-    box-shadow: 0 0 2px 3px #0d5a69;
+    box-shadow: 0 0 2px 3px var(--primary-color);
   }
 
   50% {
-    box-shadow: 0 0 2px 6px #0d5a69;
+    box-shadow: 0 0 2px 6px var(--primary-color);
   }
 
   75% {
-    box-shadow: 0 0 2px 3px #0d5a69;
+    box-shadow: 0 0 2px 3px var(--primary-color);
   }
   100% {
-    box-shadow: 0 0 2px 0px #0d5a69;
+    box-shadow: 0 0 2px 0px var(--primary-color);
   }
 }

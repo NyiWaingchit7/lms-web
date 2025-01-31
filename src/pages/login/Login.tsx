@@ -36,7 +36,10 @@ export const Login = () => {
 
       <div className="w-full mx-3 flex  flex-col justify-center items-center ">
         <div className="flex justify-center items-end gap-2">
-          <img src="/logo.png" className="w-20" alt="" />
+          <Link to={"/"}>
+            {" "}
+            <img src="/logo.png" className="w-20" alt="" />
+          </Link>
           <h3 className="text-4xl md:text-5xl text-white font-semibold">
             {setting?.app_name || " Akone Learn"}
           </h3>

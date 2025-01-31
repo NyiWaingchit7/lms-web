@@ -16,8 +16,8 @@ import { SwiperSlide } from "swiper/react";
 import { Link } from "react-router-dom";
 import { Loading } from "./component/loading/Loading";
 import { SwiperWrapper } from "./component/swiper/SwiperWrapper";
-import { CourserListCard } from "./component/card/course/CourseListCard";
 import { CourseCard } from "./component/card/course/CourseCard";
+import { CourserListCardV2 } from "./component/card/course/CourseListCardV2";
 function App() {
   const {
     lectures,
@@ -38,7 +38,7 @@ function App() {
       <Title title="Home" />
       {isLoading ? <Loading /> : ""}
       <div
-        className="mb-10 h-[162px] md:h-[400px] md:bg-center"
+        className="mb-5 h-[162px] md:h-[500px] md:bg-center"
         style={{
           backgroundImage: `url(/banner.jpg)`,
           backgroundSize: "100%",
@@ -80,7 +80,7 @@ function App() {
         </h3>
         {isLoading ? (
           <div className="grid grid-cols-1 gap-1 xl:gap-3 md:grid-cols-3 mt-3">
-            {Array(4)
+            {Array(3)
               .fill(0)
               .map((_, index) => (
                 <Skeleton
@@ -127,7 +127,7 @@ function App() {
             <SwiperWrapper>
               {free_lectures.map((data) => (
                 <SwiperSlide key={data.id}>
-                  <CourserListCard data={data} />
+                  <CourserListCardV2 data={data} />
                 </SwiperSlide>
               ))}
             </SwiperWrapper>
@@ -161,7 +161,7 @@ function App() {
             <SwiperWrapper>
               {lectures.map((data) => (
                 <SwiperSlide key={data.id}>
-                  <CourserListCard data={data} />
+                  <CourserListCardV2 data={data} />
                 </SwiperSlide>
               ))}
             </SwiperWrapper>
