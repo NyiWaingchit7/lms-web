@@ -13,16 +13,12 @@ export const fetchFunction = async ({
   body,
   headers,
 }: Props) => {
-  try {
-    const options = {
-      method,
-      headers: headers ? headers : await headerOptions(),
-      body,
-    };
-    const response = await fetch(`${config.baseUrl}/${url}`, options);
-    const data = await response.json();
-    return { response, data };
-  } catch (error) {
-    console.log(error);
-  }
+  const options = {
+    method,
+    headers: headers ? headers : await headerOptions(),
+    body,
+  };
+  const response = await fetch(`${config.baseUrl}/${url}`, options);
+  const data = await response.json();
+  return { response, data };
 };
