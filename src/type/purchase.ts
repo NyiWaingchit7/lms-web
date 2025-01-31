@@ -1,9 +1,9 @@
-import { Student } from "./auth";
+import { Profile } from "./auth";
 import { Course } from "./course";
 
 export interface Purchase {
   id?: number;
-  student?: Student;
+  student?: Profile;
   lecture?: Course;
   studentId?: number;
   lectureId?: number;
@@ -16,7 +16,7 @@ export interface PurchaseSlice {
   items: Purchase[];
   data: Purchase;
   isLoading: boolean;
-  students: Student[];
+  students: Profile[];
   lectures: Course[];
 }
 
