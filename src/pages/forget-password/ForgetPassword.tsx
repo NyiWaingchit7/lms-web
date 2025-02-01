@@ -30,10 +30,7 @@ export const ForgetPassword = () => {
   };
   const handleVerify = (e: any) => {
     e.preventDefault();
-    if (!code) {
-      toast.error("Please enter otp code.");
-      return;
-    }
+
     dispatch(
       forgetVerify({
         ...form,
@@ -49,7 +46,7 @@ export const ForgetPassword = () => {
   useEffect(() => {
     dispatch(getAppSetting());
     return () => {
-      setOTP(null);
+      dispatch(setOTP(null));
     };
   }, []);
   return (
@@ -66,49 +63,55 @@ export const ForgetPassword = () => {
             {setting?.app_name || " Akone Learn"}
           </h3>
         </div>
-        <form className="bg-white w-full md:w-[500px] rounded-xl p-3 md:p-5 py-8 mt-3 ">
-          <h3 className="text-xl font-semibold mt-4 text-green border-s-4 px-2 border-green">
-            Forget Password
-          </h3>
-          <div className="w-full mt-5 ">
-            <TextInput
-              value={form.email}
-              onChange={(e) => {
-                setForm({ ...form, email: e });
-              }}
-              type="text"
-              label="Enter your email"
-            />
-          </div>
-          <div className="w-full mt-5 sm:flex  items-center gap-3">
-            <TextField
-              autoComplete="off"
-              size="small"
-              fullWidth
-              required
-              label="Enter Your Otp code"
-              className="flex-1"
-              onChange={(e) => setCode(e.target.value)}
-            />
-            <div className="flex-1 mt-5 sm:mt-0 border border-green border-dashed text-graydark  py-2 rounded-md flex justify-between px-3 items-center ">
-              <p className="tracking-[10px] text-center">{otp_code}</p>{" "}
-              <button
-                onClick={handleForget}
-                className="text-green cursor-pointer font-medium hover:underline"
-              >
-                Get
+        <div className="bg-white w-full md:w-[500px] rounded-xl p-3 md:p-5 py-8 mt-3 ">
+          {otp_code ? (
+            <form onSubmit={handleVerify}>
+              <h3 className="text-xl font-semibold mt-4 text-green border-s-4 px-2 border-green">
+                Verify Otp
+              </h3>
+              <div className="w-full mt-5  items-center gap-3">
+                <div className="flex-1 mb-5 flex justify-center sm:mt-0 border border-green  text-graydark  py-2 rounded-md px-3 items-center ">
+                  <p className="tracking-[10px] h-[20px] text-center text-xl">
+                    {otp_code || "32235"}
+                  </p>{" "}
+                </div>
+                <TextField
+                  autoComplete="off"
+                  size="small"
+                  fullWidth
+                  label="Enter Your Otp code"
+                  className="flex-1"
+                  onChange={(e) => setCode(e.target.value)}
+                />
+              </div>
+              <button className="login-btn text-center z-1 w-full cursor-pointer mt-5">
+                Verify
               </button>
-            </div>
-          </div>
-          <div className="flex justify-center mt-5 relative">
-            <div
-              className="login-btn z-1 w-full text-center"
-              onClick={handleVerify}
-            >
-              Confirm
-            </div>
-          </div>
-        </form>
+            </form>
+          ) : (
+            <form onSubmit={handleForget}>
+              <h3 className="text-xl font-semibold mt-4 text-green border-s-4 px-2 border-green">
+                Forget Password
+              </h3>
+              <div className="w-full mt-5 ">
+                <TextInput
+                  value={form.email}
+                  onChange={(e) => {
+                    setForm({ ...form, email: e });
+                  }}
+                  type="text"
+                  label="Enter your email"
+                />
+              </div>
+
+              <div className="flex justify-center mt-5 relative">
+                <button className="login-btn z-1 w-full text-center">
+                  Get Code
+                </button>
+              </div>
+            </form>
+          )}
+        </div>
       </div>
     </div>
   );

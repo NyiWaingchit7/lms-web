@@ -16,4 +16,5 @@ export interface AppSlice {
   error: Error | null;
   category: Category[];
   popular_lectures: PopularLecture[];
+  counts: { [key: string]: string | null } | null;
 }

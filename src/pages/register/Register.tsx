@@ -27,16 +27,19 @@ export const Register = () => {
   const navigate = useNavigate();
   const handleRegister = (e: any) => {
     e.preventDefault();
-    dispatch(accountRegister({ ...form }));
+    dispatch(
+      accountRegister({
+        ...form,
+        onSuccess: () => {
+          toast.success("Enter the otp code we have sent.");
+        },
+      })
+    );
     console.log(form);
   };
   const handleVeifty = (e: any) => {
     e.preventDefault();
 
-    if (!code) {
-      toast.error("Please enter otp code.");
-      return;
-    }
     dispatch(
       registerVerify({
         ...form,
@@ -50,7 +53,7 @@ export const Register = () => {
   useEffect(() => {
     dispatch(getAppSetting());
     return () => {
-      setOTP(null);
+      dispatch(setOTP(null));
     };
   }, []);
   return (
@@ -66,79 +69,86 @@ export const Register = () => {
             {setting?.app_name || "Akone Learn"}
           </h3>
         </div>
-        <form
-          onSubmit={handleRegister}
-          className="bg-white w-full md:w-[500px] rounded-xl p-3 md:p-5 py-8 mt-3 "
-        >
-          <h3 className="text-xl font-semibold mt-4 text-green border-s-4 px-2 border-green">
-            Register
-          </h3>
-          <div className="w-full mt-5 ">
-            <TextInput
-              value={form.name}
-              type="text"
-              label="Name"
-              onChange={(e) => setForm({ ...form, name: e })}
-            />
-          </div>
-          <div className="w-full mt-5 ">
-            <TextInput
-              type="text"
-              value={form.email}
-              label="Email"
-              onChange={(e) => setForm({ ...form, email: e })}
-            />
-          </div>
-          <div className="w-full mt-5 ">
-            <TextInput
-              type="text"
-              value={form.phone}
-              label="Phone"
-              onChange={(e) => setForm({ ...form, phone: e })}
-            />
-          </div>
-          <div className="w-full mt-5">
-            <PasswordInput
-              label="Password"
-              value={form.password}
-              onChange={(e) => {
-                setForm({ ...form, password: e });
-              }}
-            />
-          </div>
-          <div className="w-full mt-5 sm:flex  items-center gap-3">
-            <TextField
-              autoComplete="off"
-              size="small"
-              fullWidth
-              label="Enter Your Otp code"
-              className="flex-1"
-              onChange={(e) => setCode(e.target.value)}
-            />
-            <div className="flex-1 mt-5 sm:mt-0 border border-green border-dashed text-graydark  py-2 rounded-md flex justify-between px-3 items-center ">
-              <p className="tracking-[10px] text-center">{otp_code}</p>{" "}
-              <button className="text-green cursor-pointer font-medium hover:underline">
-                Get
+        <div className="bg-white w-full md:w-[500px] rounded-xl p-3 md:p-5 py-8 mt-3 ">
+          {otp_code ? (
+            <form onSubmit={handleVeifty}>
+              <h3 className="text-xl font-semibold mt-4 text-green border-s-4 px-2 border-green">
+                Verify Otp
+              </h3>
+              <div className="w-full mt-5  items-center gap-3">
+                <div className="flex-1 mb-5 flex justify-center sm:mt-0 border border-green  text-graydark  py-2 rounded-md px-3 items-center ">
+                  <p className="tracking-[10px] h-[20px] text-center text-xl">
+                    {otp_code || "32235"}
+                  </p>{" "}
+                </div>
+                <TextField
+                  autoComplete="off"
+                  size="small"
+                  fullWidth
+                  label="Enter Your Otp code"
+                  className="flex-1"
+                  onChange={(e) => setCode(e.target.value)}
+                />
+              </div>
+              <button className="login-btn text-center z-1 w-full cursor-pointer mt-5">
+                Verify
               </button>
-            </div>
-          </div>
-          <div className="flex justify-center mt-3 relative">
-            <div
-              className="login-btn text-center z-1 w-full cursor-pointer"
-              onClick={handleVeifty}
-            >
-              Register
-            </div>
-          </div>
-          <div className="mt-5">
-            <p className="text-graydark">
-              Already have an account?
-              <Link to={"/log-in"} className="underline text-green ">
-                Log in
-              </Link>
-            </p>
-          </div>
-        </form>
+            </form>
+          ) : (
+            <form onSubmit={handleRegister}>
+              <h3 className="text-xl font-semibold mt-4 text-green border-s-4 px-2 border-green">
+                Register
+              </h3>
+              <div className="w-full mt-5 ">
+                <TextInput
+                  value={form.name}
+                  type="text"
+                  label="Name"
+                  onChange={(e) => setForm({ ...form, name: e })}
+                />
+              </div>
+              <div className="w-full mt-5 ">
+                <TextInput
+                  type="text"
+                  value={form.email}
+                  label="Email"
+                  onChange={(e) => setForm({ ...form, email: e })}
+                />
+              </div>
+              <div className="w-full mt-5 ">
+                <TextInput
+                  type="text"
+                  value={form.phone}
+                  label="Phone"
+                  onChange={(e) => setForm({ ...form, phone: e })}
+                />
+              </div>
+              <div className="w-full mt-5">
+                <PasswordInput
+                  label="Password"
+                  value={form.password}
+                  onChange={(e) => {
+                    setForm({ ...form, password: e });
+                  }}
+                />
+              </div>
+
+              <div className="flex justify-center mt-3 relative">
+                <button className="login-btn text-center z-1 w-full cursor-pointer">
+                  Register
+                </button>
+              </div>
+              <div className="mt-5">
+                <p className="text-graydark">
+                  Already have an account?
+                  <Link to={"/log-in"} className="underline text-green ">
+                    Log in
+                  </Link>
+                </p>
+              </div>
+            </form>
+          )}
+        </div>
       </div>
     </div>
   );

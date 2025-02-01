@@ -45,7 +45,7 @@ export const CourserListCardV2 = ({ data, listing }: Props) => {
           )}
         </div>
         <small>
-          {data?.Lesson?.length ? ` ${data?.Lesson?.length} lessons` : "zero"}
+          {data?.Lesson?.length ? ` ${data?.Lesson?.length} lessons` : ""}
         </small>
       </div>
     </Link>

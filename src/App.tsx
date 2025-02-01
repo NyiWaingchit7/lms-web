@@ -4,7 +4,7 @@ import Counter from "./component/card/Counter";
 import { Layout } from "./component/layout/Layout";
 import { Title } from "./component/layout/Title";
 import { useAppDispatch, useAppSelector } from "./store/hooks";
-import { getAppLecture, getCategory } from "./store/slice/appSlice";
+import { getAppLecture, getCategory, getHome } from "./store/slice/appSlice";
 import {
   Accordion,
   AccordionDetails,
@@ -26,11 +26,13 @@ function App() {
     category,
     setting,
     popular_lectures,
+    counts,
   } = useAppSelector((store) => store.app);
 
   const dispatch = useAppDispatch();
   useEffect(() => {
     dispatch(getAppLecture());
+    dispatch(getHome());
     dispatch(getCategory());
   }, []);
   return (
@@ -38,7 +40,7 @@ function App() {
       <Title title="Home" />
       {isLoading ? <Loading /> : ""}
       <div
-        className="mb-5 h-[162px] md:h-[500px] md:bg-center"
+        className="mb-5 h-[162px] md:h-[500px] md:bg-center home-banner"
         style={{
           backgroundImage: `url(/banner.jpg)`,
           backgroundSize: "100%",
@@ -64,14 +66,17 @@ function App() {
 
       <div className="container mb-10">
         <div className="flex justify-between items-center  gap-3">
-          {Object.entries(data).map(([key, value]) => (
-            <div className=" p-3 md:p-5 rounded-lg shadow-md" key={key}>
-              <Counter end={value} />
-              <p className="text-center text-xs sm:text-sm capitalize">
-                {key.replace("_", " ")}
-              </p>
-            </div>
-          ))}
+          {counts &&
+            Object.entries(counts).map(([key, value]) => (
+              <div className=" p-3 md:p-5 rounded-lg shadow-md" key={key}>
+                {value !== undefined && value !== null && (
+                  <Counter end={Number(value)} />
+                )}
+                <p className="text-center text-xs sm:text-sm capitalize">
+                  {key.replace("_", " ")}
+                </p>
+              </div>
+            ))}
         </div>
       </div>
       <div className="container mb-10">

@@ -13,6 +13,7 @@ const initialState: AppSlice = {
   pages: [],
   payment: [],
   category: [],
+  counts: null,
 };
 export const getAppLecture = createAsyncThunk(
   "get/lecture",
@@ -124,6 +125,21 @@ export const getCategory = createAsyncThunk(
     }
   }
 );
+export const getHome = createAsyncThunk("get/home", async (_, thunkApi) => {
+  try {
+    const { response, data } = await fetchFunction({
+      url: "home",
+    });
+    if (!response.ok) {
+      toast.error(data.message);
+    }
+    console.log(data);
+
+    thunkApi.dispatch(setAppCount(data));
+  } catch (error) {
+    console.log(error);
+  }
+});
 export const appSlice = createSlice({
   name: "appSlice",
   initialState,
@@ -155,6 +171,9 @@ export const appSlice = createSlice({
     setCategory: (state, action) => {
       state.category = action.payload;
     },
+    setAppCount: (state, action) => {
+      state.counts = action.payload;
+    },
   },
 });
 
@@ -168,5 +187,6 @@ export const {
   setAppFree,
   setCategory,
   setPopularLecture,
+  setAppCount,
 } = appSlice.actions;
 export default appSlice.reducer;
