@@ -1,4 +1,4 @@
-@import "color";
+@use "color" as color;
 
 .home-banner {
   position: relative;
@@ -33,7 +33,7 @@
     transform: scale(0);
     bottom: 0;
     left: 0;
-    background-color: $white-color;
+    background-color: color.$white-color;
     transition: transform 0.3s ease-out;
     transform-origin: left;
   }
@@ -50,7 +50,7 @@
   transform: scale(0);
   bottom: 0;
   left: 0;
-  background-color: $white-color;
+  background-color: color.$white-color;
   transition: transform 0.3s ease-out;
   transform-origin: left;
   transform: scale(1);
@@ -66,11 +66,11 @@
     display: none !important;
   }
   &::-webkit-scrollbar-thumb {
-    background: $secondary-color;
+    background: color.$secondary-color;
     border-radius: 6px;
   }
   &::-webkit-scrollbar-track {
-    background: $white-color;
+    background: color.$white-color;
     border-radius: 6px;
   }
 }
@@ -84,8 +84,8 @@
 }
 .btn-login {
   padding: 8px 15px;
-  border: 1px solid $white-color;
-  color: $white-color;
+  border: 1px solid color.$white-color;
+  color: color.$white-color;
   border-radius: 10px;
   position: relative;
   overflow: hidden;
@@ -97,7 +97,7 @@
     left: 100%;
     width: 200px;
     height: 150px;
-    background-color: $white-color;
+    background-color: color.$white-color;
     transition: all 0.4s;
     border-radius: 10px;
     z-index: -1;
@@ -120,15 +120,15 @@
 
 .loadmore-btn {
   padding: 5px 10px;
-  color: $white-color;
-  background-color: $primary-color;
+  color: color.$white-color;
+  background-color: color.$primary-color;
   border-radius: 10px;
 }
 
 .dot {
   width: 15px;
   height: 15px;
-  background-color: $primary-color;
+  background-color: color.$primary-color;
   border-radius: 50%;
   animation: dotPulse 1.5s infinite ease-in-out;
   &:nth-child(2) {
@@ -152,7 +152,7 @@
 
 .login-btn {
   padding: 8px 15px;
-  border: 1px solid $primary-color;
+  border: 1px solid color.$primary-color;
   color: black;
   border-radius: 5px;
   position: relative;
@@ -165,7 +165,7 @@
     left: 0;
     width: 100%;
     height: 0%;
-    background-color: $primary-color;
+    background-color: color.$primary-color;
     transition: height 0.3s ease;
     z-index: -1;
   }
@@ -173,21 +173,21 @@
     height: 100%;
   }
   &:hover {
-    color: $white-color;
+    color: color.$white-color;
   }
 }
 
 .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
-  border: 1px dashed $primary-color !important;
+  border: 1px dashed color.$primary-color !important;
 }
 .MuiInputLabel-root.Mui-focused {
-  color: $primary-color !important;
+  color: color.$primary-color !important;
 }
 .swiper-button-prev,
 .swiper-button-next {
-  color: $white-color !important;
+  color: color.$white-color !important;
   font-weight: bold;
-  background-color: $primary-color;
+  background-color: color.$primary-color;
   border-radius: 50%;
   width: 30px !important;
   height: 30px !important;
@@ -202,7 +202,7 @@
   display: none !important;
 }
 .swiper-pagination-bullet-active {
-  background-color: $primary-color !important;
+  background-color: color.$primary-color !important;
 }
 // .swiper-button-prev::after,
 // .swiper-button-next::after {
@@ -214,7 +214,7 @@
 }
 .not-found {
   font-weight: 700;
-  color: $primary-color;
+  color: color.$primary-color;
 }
 .iframe {
   width: 300px;
@@ -290,14 +290,14 @@
 .yes-btn {
   padding: 5px 20px;
   border-radius: 8px;
-  background-color: $primary-color;
-  color: $white-color;
+  background-color: color.$primary-color;
+  color: color.$white-color;
 }
 .no-btn {
   padding: 5px 20px;
   border-radius: 8px;
-  background-color: $secondary-color;
-  color: $white-color;
+  background-color: color.$secondary-color;
+  color: color.$white-color;
 }
 
 .curve-card {
@@ -371,21 +371,21 @@
 
 @keyframes wave {
   0% {
-    box-shadow: 0 0 2px 0px $primary-color;
+    box-shadow: 0 0 2px 0px color.$primary-color;
   }
 
   25% {
-    box-shadow: 0 0 2px 3px $primary-color;
+    box-shadow: 0 0 2px 3px color.$primary-color;
   }
 
   50% {
-    box-shadow: 0 0 2px 6px $primary-color;
+    box-shadow: 0 0 2px 6px color.$primary-color;
   }
 
   75% {
-    box-shadow: 0 0 2px 3px $primary-color;
+    box-shadow: 0 0 2px 3px color.$primary-color;
   }
   100% {
-    box-shadow: 0 0 2px 0px $primary-color;
+    box-shadow: 0 0 2px 0px color.$primary-color;
   }
 }
