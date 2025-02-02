@@ -16,7 +16,6 @@ import { Toaster } from "react-hot-toast";
 import { PrivateRoutes } from "./PrivateRoute";
 import { Profile } from "@/pages/profile/Profile";
 import ErrorBoundary from "@/component/error/ErrorBoundary";
-import { GoogleLogin } from "@/component/auth/GoogleLogin";
 
 export const Router = () => {
   return (
