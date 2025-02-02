@@ -6,6 +6,7 @@ import { getAppSetting } from "@/store/slice/appSlice";
 import { PasswordInput } from "@/component/form/PasswordInput";
 import { TextInput } from "@/component/form/TextInput";
 import { accountLogin } from "@/store/slice/authSlice";
+import { GoogleLogin } from "@/component/auth/GoogleLogin";
 export const Login = () => {
   const dispatch = useAppDispatch();
   const { setting } = useAppSelector((store) => store.app);
@@ -83,6 +84,9 @@ export const Login = () => {
                 Register
               </Link>
             </p>
+          </div>
+          <div className="mt-5">
+            <GoogleLogin title="Log in" />
           </div>
         </form>
       </div>
