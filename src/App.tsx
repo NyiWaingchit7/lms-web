@@ -4,7 +4,7 @@ import Counter from "./component/card/Counter";
 import { Layout } from "./component/layout/Layout";
 import { Title } from "./component/layout/Title";
 import { useAppDispatch, useAppSelector } from "./store/hooks";
-import { getAppLecture, getCategory } from "./store/slice/appSlice";
+import { getAppLecture, getCategory, getHome } from "./store/slice/appSlice";
 import {
   Accordion,
   AccordionDetails,
@@ -16,15 +16,23 @@ import { SwiperSlide } from "swiper/react";
 import { Link } from "react-router-dom";
 import { Loading } from "./component/loading/Loading";
 import { SwiperWrapper } from "./component/swiper/SwiperWrapper";
-import { CourserListCard } from "./component/card/course/CourseListCard";
 import { CourseCard } from "./component/card/course/CourseCard";
+import { CourserListCardV2 } from "./component/card/course/CourseListCardV2";
 function App() {
-  const { lectures, free_lectures, isLoading, category, setting } =
-    useAppSelector((store) => store.app);
+  const {
+    lectures,
+    free_lectures,
+    isLoading,
+    category,
+    setting,
+    popular_lectures,
+    counts,
+  } = useAppSelector((store) => store.app);
 
   const dispatch = useAppDispatch();
   useEffect(() => {
     dispatch(getAppLecture());
+    dispatch(getHome());
     dispatch(getCategory());
   }, []);
   return (
@@ -32,7 +40,7 @@ function App() {
       <Title title="Home" />
       {isLoading ? <Loading /> : ""}
       <div
-        className="mb-10 h-[162px] md:h-[400px] md:bg-center"
+        className="mb-5 h-[162px] md:h-[500px] md:bg-center home-banner"
         style={{
           backgroundImage: `url(/banner.jpg)`,
           backgroundSize: "100%",
@@ -58,14 +66,17 @@ function App() {
 
       <div className="container mb-10">
         <div className="flex justify-between items-center  gap-3">
-          {Object.entries(data).map(([key, value]) => (
-            <div className=" p-3 md:p-5 rounded-lg shadow-md" key={key}>
-              <Counter end={value} />
-              <p className="text-center text-xs sm:text-sm capitalize">
-                {key.replace("_", " ")}
-              </p>
-            </div>
-          ))}
+          {counts &&
+            Object.entries(counts).map(([key, value]) => (
+              <div className=" p-3 md:p-5 rounded-lg shadow-md" key={key}>
+                {value !== undefined && value !== null && (
+                  <Counter end={Number(value)} />
+                )}
+                <p className="text-center text-xs sm:text-sm capitalize">
+                  {key.replace("_", " ")}
+                </p>
+              </div>
+            ))}
         </div>
       </div>
       <div className="container mb-10">
@@ -74,7 +85,7 @@ function App() {
         </h3>
         {isLoading ? (
           <div className="grid grid-cols-1 gap-1 xl:gap-3 md:grid-cols-3 mt-3">
-            {Array(4)
+            {Array(3)
               .fill(0)
               .map((_, index) => (
                 <Skeleton
@@ -87,8 +98,8 @@ function App() {
           </div>
         ) : lectures.length > 0 ? (
           <div className="grid grid-cols-1 gap-5 md:grid-cols-3 mt-3">
-            {lectures.map((data) => (
-              <CourseCard key={data.id} data={data} />
+            {popular_lectures.map((data) => (
+              <CourseCard key={data.id} data={data.lecture} />
             ))}
           </div>
         ) : (
@@ -121,7 +132,7 @@ function App() {
             <SwiperWrapper>
               {free_lectures.map((data) => (
                 <SwiperSlide key={data.id}>
-                  <CourserListCard data={data} />
+                  <CourserListCardV2 data={data} />
                 </SwiperSlide>
               ))}
             </SwiperWrapper>
@@ -155,7 +166,7 @@ function App() {
             <SwiperWrapper>
               {lectures.map((data) => (
                 <SwiperSlide key={data.id}>
-                  <CourserListCard data={data} />
+                  <CourserListCardV2 data={data} />
                 </SwiperSlide>
               ))}
             </SwiperWrapper>

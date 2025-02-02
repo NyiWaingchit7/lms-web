@@ -1,13 +1,15 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Title } from "@/component/layout/Title";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { useEffect, useState } from "react";
 import { getAppSetting } from "@/store/slice/appSlice";
 import { PasswordInput } from "@/component/form/PasswordInput";
 import { TextInput } from "@/component/form/TextInput";
+import { accountLogin } from "@/store/slice/authSlice";
 export const Login = () => {
   const dispatch = useAppDispatch();
   const { setting } = useAppSelector((store) => store.app);
+  const navigate = useNavigate();
   const [form, setForm] = useState({
     name: "",
     email: "",
@@ -16,7 +18,14 @@ export const Login = () => {
   });
   const handleLogin = (e: any) => {
     e.preventDefault();
-    console.log(form);
+    dispatch(
+      accountLogin({
+        ...form,
+        onSuccess: () => {
+          navigate("/");
+        },
+      })
+    );
   };
   useEffect(() => {
     dispatch(getAppSetting());
@@ -27,7 +36,10 @@ export const Login = () => {
 
       <div className="w-full mx-3 flex  flex-col justify-center items-center ">
         <div className="flex justify-center items-end gap-2">
-          <img src="/logo.png" className="w-20" alt="" />
+          <Link to={"/"}>
+            {" "}
+            <img src="/logo.png" className="w-20" alt="" />
+          </Link>
           <h3 className="text-4xl md:text-5xl text-white font-semibold">
             {setting?.app_name || " Akone Learn"}
           </h3>

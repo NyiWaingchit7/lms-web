@@ -8,10 +8,12 @@ const initialState: AppSlice = {
   lectures: [],
   tagLines: [],
   free_lectures: [],
+  popular_lectures: [],
   setting: null,
   pages: [],
   payment: [],
   category: [],
+  counts: null,
 };
 export const getAppLecture = createAsyncThunk(
   "get/lecture",
@@ -20,9 +22,11 @@ export const getAppLecture = createAsyncThunk(
       thunkApi.dispatch(setAppLoading(true));
       const preLec = await getAppPreLecture();
       const freeLec = await getAppFreeLecture();
+      const popularLec = await getAppPopularLecture();
 
       thunkApi.dispatch(setAppLecture(preLec));
       thunkApi.dispatch(setAppFree(freeLec));
+      thunkApi.dispatch(setPopularLecture(popularLec));
 
       thunkApi.dispatch(setAppLoading(false));
     } catch (error) {
@@ -48,6 +52,20 @@ export const getAppFreeLecture = async () => {
   try {
     const { response, data } = await fetchFunction({
       url: "lectures?isPremium=false",
+    });
+    if (!response.ok) {
+      toast.error(data.message);
+      return;
+    }
+    return data.data.data;
+  } catch (error) {
+    console.log(error);
+  }
+};
+export const getAppPopularLecture = async () => {
+  try {
+    const { response, data } = await fetchFunction({
+      url: "popular-lectures",
     });
     if (!response.ok) {
       toast.error(data.message);
@@ -107,12 +125,30 @@ export const getCategory = createAsyncThunk(
     }
   }
 );
+export const getHome = createAsyncThunk("get/home", async (_, thunkApi) => {
+  try {
+    const { response, data } = await fetchFunction({
+      url: "home",
+    });
+    if (!response.ok) {
+      toast.error(data.message);
+    }
+    console.log(data);
+
+    thunkApi.dispatch(setAppCount(data));
+  } catch (error) {
+    console.log(error);
+  }
+});
 export const appSlice = createSlice({
   name: "appSlice",
   initialState,
   reducers: {
     setAppLecture: (state, action) => {
       state.lectures = action.payload;
+    },
+    setPopularLecture: (state, action) => {
+      state.popular_lectures = action.payload;
     },
     setAppFree: (state, action) => {
       state.free_lectures = action.payload;
@@ -135,6 +171,9 @@ export const appSlice = createSlice({
     setCategory: (state, action) => {
       state.category = action.payload;
     },
+    setAppCount: (state, action) => {
+      state.counts = action.payload;
+    },
   },
 });
 
@@ -147,5 +186,7 @@ export const {
   setAppLoading,
   setAppFree,
   setCategory,
+  setPopularLecture,
+  setAppCount,
 } = appSlice.actions;
 export default appSlice.reducer;

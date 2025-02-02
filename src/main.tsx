@@ -1,4 +1,5 @@
 import { createRoot } from "react-dom/client";
+import "@/assets/scss/main.scss";
 import "./index.css";
 import { Router } from "./route/Routes.tsx";
 import { Provider } from "react-redux";

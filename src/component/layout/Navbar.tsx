@@ -5,6 +5,7 @@ import { SideBarDrawer } from "./Drawer";
 export const NavBar = () => {
   const location = useLocation();
   const [open, setOpen] = useState(false);
+  const token = localStorage.getItem("token");
 
   return (
     <div className="bg-green  sticky top-0 z-10">
@@ -38,10 +39,27 @@ export const NavBar = () => {
             </div>
           </div>
         </div>
-        <div className="">
-          <Link to={"/log-in"}>
-            <button className="btn-login">Log in</button>
-          </Link>
+        <div>
+          {token ? (
+            <div>
+              <Link to={"/profile"}>
+                <img
+                  src="/default.jpg"
+                  className="w-10 h-10 rounded-full"
+                  alt="profile"
+                />
+              </Link>
+            </div>
+          ) : (
+            <div className="flex gap-3 items-center">
+              <Link to={"/log-in"}>
+                <button className="btn-login">Log in</button>
+              </Link>
+              <Link to={"/register"}>
+                <p className="text-lg text-white cursor-pointer">Register</p>
+              </Link>
+            </div>
+          )}
         </div>
       </div>
       <SideBarDrawer open={open} setOpen={setOpen} />

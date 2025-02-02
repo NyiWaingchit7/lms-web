@@ -7,6 +7,8 @@ interface Props {
   shadow?: boolean;
 }
 export const CourseCard = ({ data }: Props) => {
+  console.log(data);
+
   return (
     <Link to={`/courses/${data.id}`}>
       <div className="relative group course-card cursor-pointer">
@@ -36,12 +38,6 @@ export const CourseCard = ({ data }: Props) => {
               <h6 className="me-1 text-sm">
                 {data.isPremium ? (
                   <div>
-                    <p className="text-xs sm:text-sm inline font-medium ">
-                      {data.discount_price
-                        ? data.discount_price?.toLocaleString()
-                        : data.price?.toLocaleString()}
-                      MMK
-                    </p>
                     {data.discount_price ? (
                       <p className="line-through text-[10px] sm:text-xs sm:inline sm:ms-2 font-medium">
                         {data.price?.toLocaleString()} MMK
@@ -49,6 +45,12 @@ export const CourseCard = ({ data }: Props) => {
                     ) : (
                       ""
                     )}
+                    <p className="text-xs sm:text-sm inline font-medium ">
+                      {data.discount_price
+                        ? data.discount_price?.toLocaleString()
+                        : data.price?.toLocaleString()}
+                      MMK
+                    </p>
                   </div>
                 ) : (
                   <p className="font-medium inline ">FREE</p>

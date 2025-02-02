@@ -1,5 +1,5 @@
 import { Category } from "./category";
-import { Course } from "./course";
+import { Course, PopularLecture } from "./course";
 import { Page } from "./page";
 import { PaymentAccount } from "./payment";
 import { Setting } from "./setting";
@@ -15,4 +15,6 @@ export interface AppSlice {
   payment: PaymentAccount[];
   error: Error | null;
   category: Category[];
+  popular_lectures: PopularLecture[];
+  counts: { [key: string]: string | null } | null;
 }
