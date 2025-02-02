@@ -25,7 +25,7 @@ const Counter = ({ end = 12 }: { end: number }) => {
   return (
     <motion.h3
       ref={ref}
-      className="text-center text-xl sm:text-2xl font-semibold"
+      className="text-center text-sm sm:text-2xl font-semibold"
     >
       {displayValue} +
     </motion.h3>
