@@ -16,6 +16,7 @@ import { Toaster } from "react-hot-toast";
 import { PrivateRoutes } from "./PrivateRoute";
 import { Profile } from "@/pages/profile/Profile";
 import ErrorBoundary from "@/component/error/ErrorBoundary";
+import { AuthRoutes } from "./AuthRoute";
 
 export const Router = () => {
   return (
@@ -33,13 +34,16 @@ export const Router = () => {
             Component={LectureWithCategory}
           />
           <Route path="*" Component={NotFound} />
-          <Route path="/forget-password" Component={ForgetPassword} />
-          <Route
-            path="/forget-password-change"
-            Component={ForgetChangePassword}
-          />
-          <Route path="/register" Component={Register} />
-          <Route path="/log-in" Component={Login} />
+          <Route element={<AuthRoutes />}>
+            <Route path="/forget-password" Component={ForgetPassword} />
+            <Route
+              path="/forget-password-change"
+              Component={ForgetChangePassword}
+            />
+            <Route path="/register" Component={Register} />
+            <Route path="/log-in" Component={Login} />
+          </Route>
+
           <Route element={<PrivateRoutes />}>
             <Route path="/change-password" Component={ChangePassword} />
             <Route path="/checkout" Component={Checkout} />
