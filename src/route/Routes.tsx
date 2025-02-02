@@ -16,7 +16,6 @@ import { Toaster } from "react-hot-toast";
 import { PrivateRoutes } from "./PrivateRoute";
 import { Profile } from "@/pages/profile/Profile";
 import ErrorBoundary from "@/component/error/ErrorBoundary";
-import { GoogleLogin } from "@/pages/test/GoogleLogin";
 
 export const Router = () => {
   return (
@@ -26,7 +25,6 @@ export const Router = () => {
       <ErrorBoundary>
         <Routes>
           <Route path="/" Component={App} />
-          <Route path="/test" Component={GoogleLogin} />
 
           <Route path="/courses" Component={CoursesPage} />
           <Route path="/courses/:id" Component={CoursesDetail} />

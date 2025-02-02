@@ -13,6 +13,7 @@ import {
   setOTP,
 } from "@/store/slice/authSlice";
 import toast from "react-hot-toast";
+import { GoogleLogin } from "@/component/auth/GoogleLogin";
 export const Register = () => {
   const dispatch = useAppDispatch();
   const { setting } = useAppSelector((store) => store.app);
@@ -145,6 +146,9 @@ export const Register = () => {
                     Log in
                   </Link>
                 </p>
+              </div>
+              <div className="mt-5">
+                <GoogleLogin title="Register" />
               </div>
             </form>
           )}

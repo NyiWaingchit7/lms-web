@@ -1,8 +1,10 @@
 import { config } from "@/utils/config";
 import { generateToken } from "@/utils/headerOption";
 import { useEffect } from "react";
-
-export const GoogleLogin = () => {
+interface Props {
+  title: string;
+}
+export const GoogleLogin = ({ title }: Props) => {
   const handleGoogleLogin = async () => {
     const token = await generateToken();
     const url = `${config.baseUrl}/auth/google?api_token=${token}`;
@@ -32,8 +34,12 @@ export const GoogleLogin = () => {
 
   return (
     <div>
-      <button className="login-btn" onClick={handleGoogleLogin}>
-        Log in
+      <button
+        className=" w-full flex items-center justify-center font-semibold border border-green rounded-md p-2"
+        onClick={handleGoogleLogin}
+      >
+        <img src="/google.png" alt="google" className="w-7" /> {title} with
+        Google
       </button>
     </div>
   );
