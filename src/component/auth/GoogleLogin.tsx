@@ -21,6 +21,8 @@ export const GoogleLogin = ({ title }: Props) => {
     const { token } = event.data;
 
     if (token) {
+      console.log(token);
+
       localStorage.setItem("token", token);
       navigate("/");
     }
