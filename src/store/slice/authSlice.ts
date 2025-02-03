@@ -15,7 +15,6 @@ const initialState: AuthSlice = {
   error: null,
   profile: null,
   my_courses: [],
-  otp_code: null,
   token: "",
 };
 export const getProfile = createAsyncThunk(
@@ -36,9 +35,9 @@ export const getProfile = createAsyncThunk(
 );
 export const accountRegister = createAsyncThunk(
   "account/register",
-  async (option: AccountRegister, thunkApi) => {
+  async (option: AccountRegister) => {
     try {
-      const { name, email, password } = option;
+      const { name, email, password, onSuccess } = option;
       const { data, response } = await fetchFunction({
         url: "auth/register",
         method: "POST",
@@ -51,9 +50,7 @@ export const accountRegister = createAsyncThunk(
       if (!response.ok) {
         toast.error(data.message);
       } else {
-        console.log(data.code);
-
-        thunkApi.dispatch(setOTP(data.code));
+        onSuccess && onSuccess(data.message);
       }
     } catch (error) {
       console.log(error);
@@ -114,7 +111,7 @@ export const accountLogin = createAsyncThunk(
 );
 export const forgetPassword = createAsyncThunk(
   "account/forget-password",
-  async (option: ForgetPassword, thunkApi) => {
+  async (option: ForgetPassword) => {
     try {
       const { email, onSuccess } = option;
       const { data, response } = await fetchFunction({
@@ -127,7 +124,6 @@ export const forgetPassword = createAsyncThunk(
       if (!response.ok) {
         toast.error(data.message);
       } else {
-        thunkApi.dispatch(setOTP(data.code));
         onSuccess && onSuccess();
       }
     } catch (error) {
@@ -137,7 +133,7 @@ export const forgetPassword = createAsyncThunk(
 );
 export const forgetVerify = createAsyncThunk(
   "account/forget-verify",
-  async (option: ForgetPassword, thunkApi) => {
+  async (option: ForgetPassword) => {
     try {
       const { email, code, onSuccess } = option;
       const { data, response } = await fetchFunction({
@@ -151,8 +147,6 @@ export const forgetVerify = createAsyncThunk(
       if (!response.ok) {
         toast.error(data.message);
       } else {
-        thunkApi.dispatch(setOTP(null));
-
         onSuccess && onSuccess();
       }
     } catch (error) {
@@ -219,14 +213,12 @@ export const authSlice = createSlice({
     setProfile: (state, action) => {
       state.profile = action.payload;
     },
-    setOTP: (state, action) => {
-      state.otp_code = action.payload;
-    },
+
     setToken: (state, action) => {
       state.token = action.payload;
     },
   },
 });
 
-export const { setProfile, setOTP, setToken } = authSlice.actions;
+export const { setProfile, setToken } = authSlice.actions;
 export default authSlice.reducer;

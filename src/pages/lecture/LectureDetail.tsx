@@ -109,7 +109,7 @@ export const CoursesDetail = () => {
                 </div>
               </div>
             ) : (
-              <div className="container relative my-5 h-[300px] bg-secondary shadow-sm rounded-lg ">
+              <div className="container relative my-5 h-[300px] bg-black/5 shadow-sm rounded-lg ">
                 <p className="text-center absolute top-1/2 left-1/2 translate-y-1/2 -translate-x-1/2">
                   There is no lesson yet!
                 </p>
