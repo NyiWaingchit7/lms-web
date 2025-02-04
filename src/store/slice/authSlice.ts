@@ -25,9 +25,10 @@ export const getProfile = createAsyncThunk(
         url: "auth/my-profile",
       });
       if (!response.ok) {
-        toast.error(data.message);
+        data.message && toast.error(data.message);
+      } else {
+        thunkApi.dispatch(setProfile(null));
       }
-      thunkApi.dispatch(setProfile(null));
     } catch (error) {
       console.log(error);
     }
@@ -48,7 +49,7 @@ export const accountRegister = createAsyncThunk(
         }),
       });
       if (!response.ok) {
-        toast.error(data.message);
+        data.message && toast.error(data.message);
       } else {
         onSuccess && onSuccess(data.message);
       }
@@ -73,7 +74,7 @@ export const registerVerify = createAsyncThunk(
         }),
       });
       if (!response.ok) {
-        toast.error(data.message);
+        data.message && toast.error(data.message);
       } else {
         localStorage.setItem("token", data.token);
 
@@ -99,7 +100,7 @@ export const accountLogin = createAsyncThunk(
         }),
       });
       if (!response.ok) {
-        toast.error(data.message);
+        data.message && toast.error(data.message);
       } else {
         onSuccess && onSuccess();
         localStorage.setItem("token", data.token);
@@ -122,7 +123,7 @@ export const forgetPassword = createAsyncThunk(
         }),
       });
       if (!response.ok) {
-        toast.error(data.message);
+        data.message && toast.error(data.message);
       } else {
         onSuccess && onSuccess();
       }
@@ -145,7 +146,7 @@ export const forgetVerify = createAsyncThunk(
         }),
       });
       if (!response.ok) {
-        toast.error(data.message);
+        data.message && toast.error(data.message);
       } else {
         onSuccess && onSuccess();
       }
@@ -170,7 +171,7 @@ export const createPassword = createAsyncThunk(
         }),
       });
       if (!response.ok) {
-        toast.error(data.message);
+        data.message && toast.error(data.message);
       } else {
         onSuccess && onSuccess();
         toast.success(data.message);
@@ -196,7 +197,7 @@ export const changePassword = createAsyncThunk(
         }),
       });
       if (!response.ok) {
-        toast.error(data.message);
+        data.message && toast.error(data.message);
       } else {
         toast.success(data.message);
       }

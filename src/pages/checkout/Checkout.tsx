@@ -1,19 +1,37 @@
 import { Layout } from "@/component/layout/Layout";
 import { Title } from "@/component/layout/Title";
-import { TextField, Tooltip } from "@mui/material";
-import { useLocation } from "react-router-dom";
+import { Tooltip } from "@mui/material";
+import { useLocation, useNavigate } from "react-router-dom";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { useEffect, useState } from "react";
 import { courseDetail, setCourseDetail } from "@/store/slice/courseSlice";
 import SchoolIcon from "@mui/icons-material/School";
 import { Course } from "@/type/course";
+import { createCheckout } from "@/store/slice/checkoutSlice";
+import { PaymentScreenShot } from "@/component/checkout/PaymentScreenshot";
+import toast from "react-hot-toast";
 export const Checkout = () => {
   const location = useLocation();
   const { data } = location.state || {};
   const dispatch = useAppDispatch();
   const course = useAppSelector((store) => store.courses.detail) as Course;
   const [isCheckout, setCheckout] = useState(true);
+  const [payment_assetUrl, setPayment] = useState("");
+  const navigate = useNavigate();
+  const handleCheckout = () => {
+    dispatch(
+      createCheckout({
+        lectureId: data.id as number,
+        total_price: data.discount_price || data.price,
+        payment_assetUrl,
+        onSuccess: () => {
+          toast.success("We will sent email about purchasement.");
+          navigate("/courses");
+        },
+      })
+    );
+  };
   useEffect(() => {
     if (data) {
       dispatch(courseDetail({ id: Number(data.id) }));
@@ -47,9 +65,23 @@ export const Checkout = () => {
                       </h3>
                     </div>
                   </div>
-                  <div className="mt-5">
-                    <label htmlFor="payment">Choose Payment screenshoot</label>
-                    <TextField id="payment" fullWidth type="file" />
+                  <div className="mt-5 ">
+                    {/* <label htmlFor="payment">Choose Payment screenshoot</label>
+                    <TextField id="payment" fullWidth type="file" /> */}
+                    {/* <div className="w-full h-[300px] bg-black/5 flex justify-center items-center rounded-md">
+                      <p className="text-body">!no image selected</p>
+                    </div>
+                    <div className="flex justify-center mt-5">
+                      <label className="px-4 py-2 border border-green text-xs sm:text-sm  rounded-3xl cursor-pointer hover:bg-black/5 transition-all duration-300 ease-in">
+                        <input type="file" className="hidden" />
+                        Select your payment screenshot
+                      </label>
+                    </div> */}
+                    <PaymentScreenShot
+                      onChange={(value) => {
+                        setPayment(value);
+                      }}
+                    />
                   </div>
                   <div className="mt-5">
                     <small className=" text-center d-block">
@@ -59,7 +91,11 @@ export const Checkout = () => {
                     </small>
                   </div>
                   <div className="mt-5 flex justify-center">
-                    <button className="login-btn z-1 w-full" style={{}}>
+                    <button
+                      className="login-btn z-1 w-full"
+                      style={{}}
+                      onClick={handleCheckout}
+                    >
                       Confirm
                     </button>
                   </div>
@@ -70,9 +106,9 @@ export const Checkout = () => {
                     Course Outlines
                   </h3>
                   <div className="mt-5">
-                    {course?.Lesson.map((data, i) => (
+                    {course?.Lesson.map((data) => (
                       <h3 key={data?.id} className="font-medium">
-                        {i + 1} - {data?.title}
+                        - {data?.title}
                       </h3>
                     ))}
                   </div>
@@ -92,7 +128,7 @@ export const Checkout = () => {
               onClick={() => {
                 setCheckout(!isCheckout);
               }}
-              className="checkout-icon cursor-pointer w-[50px] h-[50px] right-13 absolute flex justify-center items-center rounded-full bg-green"
+              className="checkout-icon cursor-pointer w-[50px] h-[50px] right-5 absolute flex justify-center items-center rounded-full bg-green"
             >
               {isCheckout ? (
                 <SchoolIcon

@@ -12,7 +12,6 @@ export const TextInput = ({ label, value, onChange, type }: Props) => {
       autoComplete="off"
       size="small"
       fullWidth
-      required
       type={type}
       label={label}
       value={value || ""}

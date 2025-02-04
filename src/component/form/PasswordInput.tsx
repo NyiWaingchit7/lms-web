@@ -15,7 +15,6 @@ export const PasswordInput = ({ label, value, onChange }: Props) => {
       autoComplete="off"
       size="small"
       fullWidth
-      required
       type={show}
       label={label}
       value={value || ""}
