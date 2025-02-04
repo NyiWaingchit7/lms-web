@@ -1,18 +1,19 @@
-import { TextField } from "@mui/material";
 import { Title } from "@/component/layout/Title";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { useEffect, useState } from "react";
 import { getAppSetting } from "@/store/slice/appSlice";
 import { TextInput } from "@/component/form/TextInput";
-import { forgetPassword, forgetVerify, setOTP } from "@/store/slice/authSlice";
+import { forgetPassword, forgetVerify } from "@/store/slice/authSlice";
 import toast from "react-hot-toast";
 import { Link, useNavigate } from "react-router-dom";
+import { MuiOtpInput } from "mui-one-time-password-input";
 
 export const ForgetPassword = () => {
   const dispatch = useAppDispatch();
   const { setting } = useAppSelector((store) => store.app);
-  const { otp_code } = useAppSelector((store) => store.auth);
   const navigate = useNavigate();
+  const [isOtp, setIsOtp] = useState(false);
+
   const [form, setForm] = useState({
     email: "",
   });
@@ -24,6 +25,7 @@ export const ForgetPassword = () => {
         ...form,
         onSuccess: () => {
           toast.success("Enter the otp code we have sent.");
+          setIsOtp(true);
         },
       })
     );
@@ -45,9 +47,6 @@ export const ForgetPassword = () => {
   };
   useEffect(() => {
     dispatch(getAppSetting());
-    return () => {
-      dispatch(setOTP(null));
-    };
   }, []);
   return (
     <div className="bg-green min-h-screen flex  justify-center items-center ">
@@ -64,25 +63,32 @@ export const ForgetPassword = () => {
           </h3>
         </div>
         <div className="bg-white w-full md:w-[500px] rounded-xl p-3 md:p-5 py-8 mt-3 ">
-          {otp_code ? (
+          {isOtp ? (
             <form onSubmit={handleVerify}>
               <h3 className="text-xl font-semibold mt-4 text-green border-s-4 px-2 border-green">
                 Verify Otp
               </h3>
               <div className="w-full mt-5  items-center gap-3">
-                <div className="flex-1 mb-5 flex justify-center sm:mt-0 border border-green  text-graydark  py-2 rounded-md px-3 items-center ">
-                  <p className="tracking-[10px] h-[20px] text-center text-xl">
-                    {otp_code || "32235"}
-                  </p>{" "}
+                <div className="my-5">
+                  <p>
+                    Please enter 6 digit code sent to{" "}
+                    <span className="text-green"> {form.email} </span>
+                  </p>
                 </div>
-                <TextField
-                  autoComplete="off"
-                  size="small"
-                  fullWidth
-                  label="Enter Your Otp code"
-                  className="flex-1"
-                  onChange={(e) => setCode(e.target.value)}
-                />
+
+                <div className="my-5">
+                  <MuiOtpInput
+                    sx={{
+                      marginTop: 1,
+                    }}
+                    className="w-[370px] mx-auto"
+                    length={6}
+                    value={code}
+                    onChange={(newValue) => {
+                      setCode(newValue);
+                    }}
+                  />
+                </div>
               </div>
               <button className="login-btn text-center z-1 w-full cursor-pointer mt-5">
                 Verify

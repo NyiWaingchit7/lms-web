@@ -20,7 +20,6 @@ export interface AuthSlice {
   profile: Profile | null;
   error: Error | null;
   my_courses: Course[];
-  otp_code: number | null;
   token: string;
 }
 
