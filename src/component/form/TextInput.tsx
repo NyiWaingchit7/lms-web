@@ -5,8 +5,15 @@ interface Props {
   value: string;
   onChange: (data?: any) => void;
   type: string;
+  helperText?: string | false | undefined;
 }
-export const TextInput = ({ label, value, onChange, type }: Props) => {
+export const TextInput = ({
+  label,
+  value,
+  onChange,
+  type,
+  helperText,
+}: Props) => {
   return (
     <TextField
       autoComplete="off"
@@ -18,6 +25,8 @@ export const TextInput = ({ label, value, onChange, type }: Props) => {
       onChange={(e) => {
         onChange(e.target.value);
       }}
+      error={helperText ? true : false}
+      helperText={helperText}
     />
   );
 };
