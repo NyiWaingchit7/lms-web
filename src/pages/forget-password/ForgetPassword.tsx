@@ -20,6 +20,10 @@ export const ForgetPassword = () => {
   const [code, setCode] = useState("");
   const handleForget = (e: any) => {
     e.preventDefault();
+    if (!form.email) {
+      toast.error("Enter Your Email.");
+      return;
+    }
     dispatch(
       forgetPassword({
         ...form,

@@ -6,8 +6,14 @@ interface Props {
   label: string;
   value: string;
   onChange: (data?: any) => void;
+  helperText?: string | false | undefined;
 }
-export const PasswordInput = ({ label, value, onChange }: Props) => {
+export const PasswordInput = ({
+  label,
+  value,
+  onChange,
+  helperText,
+}: Props) => {
   const [show, setShow] = useState("password");
 
   return (
@@ -21,6 +27,8 @@ export const PasswordInput = ({ label, value, onChange }: Props) => {
       onChange={(e) => {
         onChange(e.target.value);
       }}
+      error={helperText ? true : false}
+      helperText={helperText}
       InputProps={{
         endAdornment:
           show === "text" ? (
