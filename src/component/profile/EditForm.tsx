@@ -10,12 +10,6 @@ interface Props {
   data: Profile;
 }
 export const ProfileEdit = ({ data }: Props) => {
-  const defaultForm = {
-    name: "",
-    email: "",
-    phone: "",
-    password: "",
-  };
   const dispatch = useAppDispatch();
   const validationSchema = Yup.object().shape({
     name: Yup.string().required("Username is required."),
