@@ -8,15 +8,14 @@ import { Register } from "@/pages/register/Register";
 import { CoursesDetail } from "@/pages/lecture/LectureDetail";
 import { LectureWithCategory } from "@/pages/category/LectureWithCategory";
 import { NotFound } from "@/component/error/NotFount";
-import { ChangePassword } from "@/pages/change-password/ChangePassword";
 import { ForgetPassword } from "@/pages/forget-password/ForgetPassword";
 import { ForgetChangePassword } from "@/pages/forget-change/ForgetChangePassword";
 import { Checkout } from "@/pages/checkout/Checkout";
 import { Toaster } from "react-hot-toast";
 import { PrivateRoutes } from "./PrivateRoute";
-import { Profile } from "@/pages/profile/Profile";
 import ErrorBoundary from "@/component/error/ErrorBoundary";
 import { AuthRoutes } from "./AuthRoute";
+import { AccountProfile } from "@/pages/profile/Profile";
 
 export const Router = () => {
   return (
@@ -45,9 +44,8 @@ export const Router = () => {
           </Route>
 
           <Route element={<PrivateRoutes />}>
-            <Route path="/change-password" Component={ChangePassword} />
             <Route path="/checkout" Component={Checkout} />
-            <Route path="/profile" Component={Profile} />
+            <Route path="/profile" Component={AccountProfile} />
           </Route>
         </Routes>
       </ErrorBoundary>

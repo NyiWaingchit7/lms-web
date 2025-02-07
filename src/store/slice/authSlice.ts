@@ -4,6 +4,7 @@ import {
   AuthSlice,
   ChangePassword,
   CreatePassword,
+  EditAccount,
   ForgetPassword,
 } from "@/type/auth";
 import { fetchFunction } from "@/utils/useFetchFunction";
@@ -207,12 +208,49 @@ export const changePassword = createAsyncThunk(
   }
 );
 
+export const myProfile = createAsyncThunk("my-profile", async (_, thunkApi) => {
+  try {
+    const { response, data } = await fetchFunction({ url: "auth/my-profile" });
+    if (!response.ok) {
+      data.message && toast.error(data.message);
+      return;
+    } else {
+      thunkApi.dispatch(setProfile(data.student));
+    }
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+export const editProfile = createAsyncThunk(
+  "my-profile",
+  async (option: EditAccount, thunkApi) => {
+    try {
+      const { onSuccess, ...rest } = option;
+      const { response, data } = await fetchFunction({
+        url: "auth/edit-profile",
+        method: "POST",
+        body: JSON.stringify({ ...rest }),
+      });
+      if (!response.ok) {
+        data.message && toast.error(data.message);
+        return;
+      } else {
+        thunkApi.dispatch(setProfile(data.student));
+        onSuccess && onSuccess();
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
+);
+
 export const authSlice = createSlice({
   name: "authSlice",
   initialState,
   reducers: {
     setProfile: (state, action) => {
-      state.profile = action.payload;
+      state.profile = { ...state.profile, ...action.payload };
     },
 
     setToken: (state, action) => {
