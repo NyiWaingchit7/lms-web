@@ -29,4 +29,7 @@ body {
   .glass-card {
     @apply absolute top-0 left-0 w-full h-full flex justify-center items-center;
   }
+  .tab-text {
+    @apply !text-xs sm:!text-sm !capitalize !px-3 sm:!px-10;
+  }
 }

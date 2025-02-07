@@ -13,6 +13,7 @@ export interface Profile {
   phone?: string;
   assetUrl: string;
   Purchase: Purchase[];
+  lectures: Course[];
 }
 
 export interface AuthSlice {
@@ -49,4 +50,10 @@ export interface CreatePassword extends BaseOption {
   email: string;
   new_password: string;
   confirm_password: string;
+}
+export interface EditAccount extends BaseOption {
+  name: string;
+  email: string;
+  phone?: string;
+  assetUrl: string;
 }

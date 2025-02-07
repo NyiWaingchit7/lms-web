@@ -6,6 +6,7 @@ interface Props {
   onChange: (data?: any) => void;
   type: string;
   helperText?: string | false | undefined;
+  disable?: boolean;
 }
 export const TextInput = ({
   label,
@@ -13,6 +14,7 @@ export const TextInput = ({
   onChange,
   type,
   helperText,
+  disable = false,
 }: Props) => {
   return (
     <TextField
@@ -27,6 +29,7 @@ export const TextInput = ({
       }}
       error={helperText ? true : false}
       helperText={helperText}
+      disabled={disable}
     />
   );
 };

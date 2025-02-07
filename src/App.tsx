@@ -65,10 +65,13 @@ function App() {
       </div>
 
       <div className="container mb-10">
-        <div className="flex justify-between items-center  gap-3">
+        <div className="md:flex justify-between items-center grid grid-cols-2 md:grid-cols-none  gap-3">
           {counts &&
             Object.entries(counts).map(([key, value]) => (
-              <div className=" p-3 md:p-5 rounded-lg shadow-md" key={key}>
+              <div
+                className="md:w-[200px] p-3 md:p-5 rounded-lg shadow-md"
+                key={key}
+              >
                 {value !== undefined && value !== null && (
                   <Counter end={Number(value)} />
                 )}

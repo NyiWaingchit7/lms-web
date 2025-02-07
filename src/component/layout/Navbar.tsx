@@ -2,10 +2,12 @@ import { Link, useLocation } from "react-router-dom";
 import MenuIcon from "@mui/icons-material/Menu";
 import { useState } from "react";
 import { SideBarDrawer } from "./Drawer";
+import { useAppSelector } from "@/store/hooks";
 export const NavBar = () => {
   const location = useLocation();
   const [open, setOpen] = useState(false);
   const token = localStorage.getItem("token");
+  const { profile } = useAppSelector((store) => store.auth);
 
   return (
     <div className="bg-green  sticky top-0 z-10">
@@ -44,8 +46,8 @@ export const NavBar = () => {
             <div>
               <Link to={"/profile"}>
                 <img
-                  src="/default.jpg"
-                  className="w-10 h-10 rounded-full"
+                  src={profile?.assetUrl || "/default.jpg"}
+                  className="w-10 h-10  object-cover rounded-full"
                   alt="profile"
                 />
               </Link>
