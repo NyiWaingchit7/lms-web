@@ -1,19 +1,18 @@
 import { Layout } from "@/component/layout/Layout";
 import { Title } from "@/component/layout/Title";
-import { useNavigate } from "react-router-dom";
 import Tab from "@mui/material/Tab";
 import TabContext from "@mui/lab/TabContext";
 import TabList from "@mui/lab/TabList";
 import TabPanel from "@mui/lab/TabPanel";
 import { useEffect, useState } from "react";
-import { Box, Paper } from "@mui/material";
+import { Box } from "@mui/material";
 import { ChangePassword } from "@/component/profile/ChangePassword";
 import { ProfileDetail } from "@/component/profile/ProfileDetail";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { myProfile } from "@/store/slice/authSlice";
 import { Profile } from "@/type/auth";
 export const AccountProfile = () => {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const [value, setValue] = useState("1");
   const { profile } = useAppSelector((store) => store.auth);
   const dispatch = useAppDispatch();
