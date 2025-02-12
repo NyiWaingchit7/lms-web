@@ -10,10 +10,11 @@ interface Props {
   children: ReactNode;
 }
 export const Layout = ({ children }: Props) => {
+  const token = localStorage.getItem("token")
   const dispatch = useAppDispatch();
   useEffect(() => {
     dispatch(getAppSetting());
-    dispatch(getProfile());
+ token &&   dispatch(getProfile());
   }, []);
   return (
     <div className="flex flex-col min-h-screen">

@@ -34,7 +34,6 @@ export const CoursesDetail = () => {
   }, []);
   useEffect(() => {
     setPlay(dummyVideo[0]);
-    // console.log(onPlay);
   }, []);
   return (
     <Layout>

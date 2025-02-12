@@ -29,7 +29,6 @@ export const ProfileEdit = ({ data }: Props) => {
           },
         })
       );
-      console.log(value);
     },
   });
   return (

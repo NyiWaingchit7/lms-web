@@ -9,7 +9,6 @@ export const ChangePassword = () => {
   });
   const handleChangePassword = (e: any) => {
     e.preventDefault();
-    console.log(form);
   };
   return (
     <div className="">

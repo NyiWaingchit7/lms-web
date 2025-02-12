@@ -11,17 +11,18 @@ export const GoogleLogin = ({ title }: Props) => {
     const token = await generateToken();
     const url = `${config.baseUrl}/auth/google?api_token=${token}`;
     window.open(url, "_blank", "width=800,height=600");
+    window.addEventListener("message", handleMessage);
   };
 
   const handleMessage = (event: MessageEvent) => {
     if (event.origin !== `${config.backendUrl}` || !event.data?.token) {
+      
       return;
     }
 
     const { token } = event.data;
 
     if (token) {
-      console.log(token);
 
       localStorage.setItem("token", token);
       navigate("/");

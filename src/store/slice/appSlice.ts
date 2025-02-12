@@ -133,7 +133,6 @@ export const getHome = createAsyncThunk("get/home", async (_, thunkApi) => {
     if (!response.ok) {
       toast.error(data.message);
     }
-    console.log(data);
 
     thunkApi.dispatch(setAppCount(data));
   } catch (error) {
