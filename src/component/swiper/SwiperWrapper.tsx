@@ -24,14 +24,14 @@ export const SwiperWrapper = ({ children }: Props) => {
         slidesPerView={1}
         breakpoints={{
           640: {
-            slidesPerView: 3,
+            slidesPerView: 2,
             spaceBetween: 30,
           },
           768: {
-            slidesPerView: 3,
+            slidesPerView: 2,
             spaceBetween: 30,
           },
-          1024: {
+          992: {
             slidesPerView: 4,
             spaceBetween: 30,
           },
@@ -54,7 +54,7 @@ export const SwiperWrapper = ({ children }: Props) => {
         ]}
         pagination={{ clickable: true }}
         navigation
-        className="mx-auto  !pb-10"
+        className="mx-auto  lg:!pb-10"
         speed={1000}
       >
         {children}

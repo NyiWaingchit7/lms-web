@@ -183,34 +183,53 @@
 .MuiInputLabel-root.Mui-focused {
   color: color.$primary-color !important;
 }
-.swiper-button-prev,
-.swiper-button-next {
-  color: color.$white-color !important;
-  font-weight: bold;
-  background-color: color.$primary-color;
-  border-radius: 50%;
-  width: 30px !important;
-  height: 30px !important;
-  text-align: center;
-  padding: 20px !important;
-  top: 45% !important;
-  &::after {
-    font-size: 15px !important;
+.swiper {
+  .swiper-button-prev,
+  .swiper-button-next {
+    color: color.$white-color !important;
+    font-weight: bold;
+    background-color: color.$primary-color;
+    border-radius: 50%;
+    width: 30px !important;
+    height: 30px !important;
+    text-align: center;
+    padding: 20px !important;
+    top: 45% !important;
+    opacity: 0;
+    transition: all 0.3s ease-in-out;
+    &::after {
+      font-size: 15px !important;
+    }
+    @media screen and (max-width: 768px) {
+      opacity: 1;
+    }
   }
-}
-.swiper-button-disabled {
-  display: none !important;
-}
-.swiper-pagination-bullet-active {
-  background-color: color.$primary-color !important;
-}
-// .swiper-button-prev::after,
-// .swiper-button-next::after {
-//   font-size: 15px !important;
+  .swiper-button-disabled {
+    display: none !important;
+  }
+  .swiper-pagination-bullet-active {
+    background-color: color.$primary-color !important;
+  }
 
-// }
-.swiper-pagination {
-  margin-top: 20px !important;
+  .swiper-pagination {
+    margin-top: 20px !important;
+    @media screen and (max-width: 768px) {
+      display: none;
+    }
+  }
+  .swiper-pagination-bullet {
+    transition: all 0.2s ease-in-out;
+  }
+  .swiper-pagination-bullet-active {
+    width: 30px !important;
+    border-radius: 10px !important;
+  }
+  &:hover {
+    .swiper-button-prev,
+    .swiper-button-next {
+      opacity: 1;
+    }
+  }
 }
 .not-found {
   font-weight: 700;
