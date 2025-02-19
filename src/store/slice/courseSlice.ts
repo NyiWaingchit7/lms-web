@@ -43,8 +43,8 @@ export const handleGetCourses = createAsyncThunk(
         toast.error(data.message);
         return;
       } else {
-        thunkApi.dispatch(setCourses(data.data.data));
-        thunkApi.dispatch(hasMorePage(data.data.has_more_pages));
+        thunkApi.dispatch(setCourses(data.data));
+        thunkApi.dispatch(hasMorePage(data.has_more_pages));
 
         thunkApi.dispatch(courseLoading(false));
       }

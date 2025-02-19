@@ -43,7 +43,7 @@ export const getAppPreLecture = async () => {
       toast.error(data.message);
       return;
     }
-    return data.data.data;
+    return data.data;
   } catch (error) {
     console.log(error);
   }
@@ -57,7 +57,7 @@ export const getAppFreeLecture = async () => {
       toast.error(data.message);
       return;
     }
-    return data.data.data;
+    return data.data;
   } catch (error) {
     console.log(error);
   }
@@ -71,7 +71,7 @@ export const getAppPopularLecture = async () => {
       toast.error(data.message);
       return;
     }
-    return data.data.data;
+    return data.data;
   } catch (error) {
     console.log(error);
   }
@@ -103,7 +103,7 @@ export const getAppTagLine = createAsyncThunk(
       if (!response.ok) {
         toast.error(data.message);
       }
-      thunkApi.dispatch(setAppTagline(data.data.data));
+      thunkApi.dispatch(setAppTagline(data.data));
     } catch (error) {
       console.log(error);
     }
@@ -119,7 +119,7 @@ export const getCategory = createAsyncThunk(
       if (!response.ok) {
         toast.error(data.message);
       }
-      thunkApi.dispatch(setCategory(data.data.data));
+      thunkApi.dispatch(setCategory(data.data));
     } catch (error) {
       console.log(error);
     }

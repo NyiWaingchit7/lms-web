@@ -14,7 +14,7 @@ export const TagLine = () => {
       <div className="bg-brown text-white py-1 md:py-3">
         <Marquee className="container" direction="right" speed={100}>
           <div className="flex gap-17">
-            {tagLines.map((d) => (
+            {tagLines?.map((d) => (
               <p className="text-xs sm:text-sm" key={d.id}>
                 {d.title}
               </p>

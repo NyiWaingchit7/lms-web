@@ -39,6 +39,7 @@ export const GoogleLogin = ({ title }: Props) => {
   return (
     <div>
       <button
+      type="reset"
         className=" w-full flex items-center justify-center font-semibold border border-green rounded-md p-2"
         onClick={handleGoogleLogin}
       >

@@ -99,7 +99,7 @@ function App() {
                 />
               ))}
           </div>
-        ) : lectures.length > 0 ? (
+        ) : lectures?.length > 0 ? (
           <div className="grid grid-cols-1 gap-5 md:grid-cols-3 mt-3">
             {popular_lectures.map((data) => (
               <CourseCard key={data.id} data={data.lecture} />
@@ -131,7 +131,7 @@ function App() {
                   />
                 ))}
             </div>
-          ) : free_lectures.length > 0 ? (
+          ) : free_lectures?.length > 0 ? (
             <SwiperWrapper>
               {free_lectures.map((data) => (
                 <SwiperSlide key={data.id}>
@@ -165,7 +165,7 @@ function App() {
                   />
                 ))}
             </div>
-          ) : lectures.length > 0 ? (
+          ) : lectures?.length > 0 ? (
             <SwiperWrapper>
               {lectures.map((data) => (
                 <SwiperSlide key={data.id}>
@@ -196,7 +196,7 @@ function App() {
                   />
                 ))}
             </div>
-          ) : category.length > 0 ? (
+          ) : category?.length > 0 ? (
             <div className="flex justify-between gap-4 items-center overflow-x-auto no-scrollbar">
               {category.map((data) => (
                 <Link
