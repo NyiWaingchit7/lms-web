@@ -10,15 +10,15 @@ interface Props {
   children: ReactNode;
 }
 export const Layout = ({ children }: Props) => {
-  const token = localStorage.getItem("token")
+  const token = localStorage.getItem("token");
   const dispatch = useAppDispatch();
   useEffect(() => {
     dispatch(getAppSetting());
- token &&   dispatch(getProfile());
+    token && dispatch(getProfile());
   }, []);
   return (
     <div className="flex flex-col min-h-screen">
-      <TagLine />
+      {/* <TagLine /> */}
       <NavBar />
       <div className="flex-grow">{children}</div>
       <Footer />

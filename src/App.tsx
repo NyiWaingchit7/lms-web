@@ -13,17 +13,17 @@ import {
 } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { SwiperSlide } from "swiper/react";
-import { Link } from "react-router-dom";
 import { Loading } from "./component/loading/Loading";
 import { SwiperWrapper } from "./component/swiper/SwiperWrapper";
 import { CourseCard } from "./component/card/course/CourseCard";
 import { CourserListCardV2 } from "./component/card/course/CourseListCardV2";
+import AOS from "aos";
+import "aos/dist/aos.css";
 function App() {
   const {
     lectures,
     free_lectures,
     isLoading,
-    category,
     setting,
     popular_lectures,
     counts,
@@ -34,13 +34,17 @@ function App() {
     dispatch(getAppLecture());
     dispatch(getHome());
     dispatch(getCategory());
+    AOS.init({
+      duration: 1000,
+      once: true,
+    });
   }, []);
   return (
     <Layout>
       <Title title="Home" />
       {isLoading ? <Loading /> : ""}
       <div
-        className="mb-5 h-[162px] md:h-[500px] md:bg-center home-banner"
+        className="mb-5 h-[162px] md:h-[450px] md:bg-center home-banner"
         style={{
           backgroundImage: `url(/banner.jpg)`,
           backgroundSize: "100%",
@@ -71,6 +75,7 @@ function App() {
               <div
                 className="md:w-[200px] p-3 md:p-5 rounded-lg shadow-md"
                 key={key}
+                data-aos="fade-up"
               >
                 {value !== undefined && value !== null && (
                   <Counter end={Number(value)} />
@@ -180,7 +185,7 @@ function App() {
           )}
         </div>
       </div>
-      <div className="container mb-10">
+      {/* <div className="container mb-10">
         <div className="">
           {isLoading ? (
             <div className="grid grid-cols-1 gap-1 xl:gap-3 md:grid-cols-4 mt-5">
@@ -221,7 +226,7 @@ function App() {
             </div>
           )}
         </div>
-      </div>
+      </div> */}
       <div className="container">
         <h3 className="card-header border-s-4 px-2 border-green">FAQs</h3>
         <div className=" border border-green border-opacity-35  rounded-lg mt-3">

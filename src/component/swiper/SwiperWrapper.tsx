@@ -43,7 +43,7 @@ export const SwiperWrapper = ({ children }: Props) => {
           depth: 0,
           modifier: 0,
         }}
-        autoplay={{ delay: 5000 }}
+        autoplay={{ delay: 5000, pauseOnMouseEnter: true }}
         modules={[
           EffectCoverflow,
           Navigation,

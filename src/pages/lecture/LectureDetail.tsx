@@ -86,7 +86,7 @@ export const CoursesDetail = () => {
                       </div>
                     ))} */}
 
-                    {dummyVideo.map((item) => (
+                    {dummyVideo.map((item, idx) => (
                       <div
                         key={item.title}
                         className={`border border-black border-opacity-20 flex items-center gap-3 cursor-pointer rounded-lg p-4 shadow-sm hover:border-opacity-90 transition duration-300 ${
@@ -94,10 +94,14 @@ export const CoursesDetail = () => {
                             ? "border-2 !border-green"
                             : ""
                         }`}
-                        onClick={() => setPlay(item)}
+                        onClick={() => !data.isPremium && setPlay(item)}
                       >
                         <img
-                          src={"/logo.png"}
+                          src={
+                            data.isPremium && idx !== 0
+                              ? "/lock.png"
+                              : "/logo.png"
+                          }
                           className="w-15 h-15 object-cover rounded-lg"
                           alt=""
                         />
