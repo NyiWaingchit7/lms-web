@@ -1,7 +1,6 @@
 import { useAppDispatch } from "@/store/hooks";
 import { getAppSetting } from "@/store/slice/appSlice";
 import { ReactNode, useEffect } from "react";
-import { TagLine } from "./Tagline";
 import { NavBar } from "./Navbar";
 import { Footer } from "./Footer";
 import { getProfile } from "@/store/slice/authSlice";
