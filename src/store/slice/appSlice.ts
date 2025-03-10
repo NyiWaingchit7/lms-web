@@ -172,6 +172,25 @@ export const getHome = createAsyncThunk("get/home", async (_, thunkApi) => {
     console.log(error);
   }
 });
+
+export const getPayment = createAsyncThunk(
+  "get/payment",
+  async (_, thunkapi) => {
+    try {
+      const { response, data } = await fetchFunction({
+        url: "payments",
+      });
+      if (!response.ok) {
+        toast.error(data.message);
+      } else {
+        thunkapi.dispatch(setAppPayment(data.data));
+        console.log(data.data);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
+);
 export const appSlice = createSlice({
   name: "appSlice",
   initialState,

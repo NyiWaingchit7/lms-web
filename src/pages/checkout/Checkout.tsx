@@ -1,6 +1,11 @@
 import { Layout } from "@/component/layout/Layout";
 import { Title } from "@/component/layout/Title";
-import { Tooltip } from "@mui/material";
+import {
+  Accordion,
+  AccordionDetails,
+  AccordionSummary,
+  Tooltip,
+} from "@mui/material";
 import { useLocation, useNavigate } from "react-router-dom";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
@@ -11,6 +16,9 @@ import { Course } from "@/type/course";
 import { createCheckout } from "@/store/slice/checkoutSlice";
 import { PaymentScreenShot } from "@/component/checkout/PaymentScreenshot";
 import toast from "react-hot-toast";
+import { getPayment } from "@/store/slice/appSlice";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+
 export const Checkout = () => {
   const location = useLocation();
   const { data } = location.state || {};
@@ -19,6 +27,7 @@ export const Checkout = () => {
   const [isCheckout, setCheckout] = useState(true);
   const [payment_assetUrl, setPayment] = useState("");
   const navigate = useNavigate();
+  const { payment } = useAppSelector((store) => store.app);
   const handleCheckout = () => {
     dispatch(
       createCheckout({
@@ -35,6 +44,7 @@ export const Checkout = () => {
   useEffect(() => {
     if (data) {
       dispatch(courseDetail({ id: Number(data.id) }));
+      dispatch(getPayment());
     }
     return () => {
       dispatch(setCourseDetail(null));
@@ -44,7 +54,7 @@ export const Checkout = () => {
     <Layout>
       <Title title="Checkout" />
       <div className="container">
-        <div className="relative flex max-w-screen-md mx-auto p-5 rounded-md ">
+        <div className="relative flex max-w-screen-md mx-auto  md:p-5 rounded-md ">
           {data ? (
             <div className="curve-card p-5 w-full">
               {isCheckout ? (
@@ -58,12 +68,44 @@ export const Checkout = () => {
                       className="h-[150px] max-[300px] object-cover rounded-lg"
                       alt=""
                     />
+
                     <div className="flex flex-col justify-center mt-3 md:mt-0">
                       <h3 className="font-medium">Course : {data?.title}</h3>
                       <h3 className="font-medium">
                         Price : {data?.discount_price || data?.price}MMK
                       </h3>
                     </div>
+                  </div>
+                  <div>
+                    <Accordion
+                      disableGutters
+                      className="w-full !shadow-none border-b-[1px] border-opacity-35 border-green py-2 !bg-transparent"
+                    >
+                      <AccordionSummary
+                        expandIcon={<ExpandMoreIcon />}
+                        className="font-semibold !text-black !text-opacity-70 transition duration-300 hover:!text-opacity-100 active:!text-opacity-100"
+                      >
+                        Payment method
+                      </AccordionSummary>
+                      <AccordionDetails className="text-xs md:text-sm">
+                        {payment.map((item) => (
+                          <div className="flex  gap-5">
+                            <img
+                              src={item.payment_bank.assetUrl}
+                              alt={item.name}
+                              className="w-25 h-20 object-cover"
+                            />
+                            <div className="flex flex-col">
+                              <span>{item.name}</span>
+                              <span>{item.phone_number}</span>
+                              <small className=" capitalize">
+                                {item.payment_bank.name}
+                              </small>
+                            </div>
+                          </div>
+                        ))}
+                      </AccordionDetails>
+                    </Accordion>
                   </div>
                   <div className="mt-5 ">
                     {/* <label htmlFor="payment">Choose Payment screenshoot</label>
