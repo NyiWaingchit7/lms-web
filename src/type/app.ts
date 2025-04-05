@@ -18,4 +18,5 @@ export interface AppSlice {
   popular_lectures: PopularLecture[];
   counts: { [key: string]: string | null } | null;
   faq: { question: string; answer: string }[];
+  lastFetch: null | number;
 }

@@ -33,8 +33,9 @@ export const CoursesDetail = () => {
     };
   }, []);
   useEffect(() => {
-    setPlay(dummyVideo[0]);
-  }, []);
+    setPlay(data?.Lesson[0]);
+  }, [data]);
+
   return (
     <Layout>
       <Title title={data?.title || ""} />
@@ -54,9 +55,12 @@ export const CoursesDetail = () => {
               <div className="container">
                 <div className="md:grid border border-black shadow-sm border-opacity-10 rounded-lg p-3 py-10  md:grid-cols-2 gap-3">
                   <div className="">
-                    <div className="w-full md:h-[400px]">
+                    <div className="w-full md:h-[400px] rounded-lg overflow-hidden">
                       <iframe
-                        src={onPlay?.url}
+                        src={
+                          onPlay?.assetVideo ||
+                          "https://www.youtube.com/embed/Zp3IGrP8N9k"
+                        }
                         title="YouTube video player"
                         allow="autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                         className="w-full h-full"
@@ -64,7 +68,7 @@ export const CoursesDetail = () => {
                       ></iframe>
                     </div>
 
-                    <div className="">
+                    <div className="mt-3">
                       <h3 className="text-lg font-semibold">
                         {/* {data?.Lesson[0]?.title} */}
                         {onPlay?.title}
@@ -86,12 +90,12 @@ export const CoursesDetail = () => {
                       </div>
                     ))} */}
 
-                    {dummyVideo.map((item, idx) => (
+                    {data.Lesson.map((item, idx) => (
                       <div
                         key={item.title}
                         className={`border border-black border-opacity-20 flex items-center gap-3 cursor-pointer rounded-lg p-4 shadow-sm hover:border-opacity-90 transition duration-300 ${
                           item?.title === onPlay?.title
-                            ? "border-2 !border-green"
+                            ? "border !border-green"
                             : ""
                         }`}
                         onClick={() => !data.isPremium && setPlay(item)}
@@ -100,7 +104,7 @@ export const CoursesDetail = () => {
                           src={
                             data.isPremium && idx !== 0
                               ? "/lock.png"
-                              : "/logo.png"
+                              : item.assetImage
                           }
                           className="w-15 h-15 object-cover rounded-lg"
                           alt=""
@@ -114,7 +118,7 @@ export const CoursesDetail = () => {
             ) : (
               <div className="container relative my-5 h-[300px] bg-black/5 shadow-sm rounded-lg ">
                 <p className="text-center absolute top-1/2 left-1/2 translate-y-1/2 -translate-x-1/2">
-                  There is no lesson yet!
+                  There is no video yet!
                 </p>
               </div>
             )}

@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { ProfileEdit } from "./EditForm";
 import { Profile } from "@/type/auth";
+import CancelIcon from "@mui/icons-material/Cancel";
+
 interface Props {
   data: Profile;
 }
@@ -9,7 +11,16 @@ export const ProfileDetail = ({ data }: Props) => {
   return (
     <div>
       {isEdit ? (
-        <ProfileEdit data={data} />
+        <ProfileEdit
+          child={
+            <CancelIcon
+              className="text-green"
+              onClick={() => setEdit(false)}
+              sx={{ cursor: "pointer" }}
+            />
+          }
+          data={data}
+        />
       ) : (
         <div>
           <h3 className="text-xl font-semibold mt-4 text-green border-s-4 px-2 border-green">

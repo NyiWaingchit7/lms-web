@@ -14,6 +14,7 @@ const initialState: AppSlice = {
   payment: [],
   category: [],
   counts: null,
+  lastFetch: null,
   faq: [
     {
       question: "What courses are available on the website?",
@@ -209,6 +210,7 @@ export const appSlice = createSlice({
     },
     setAppSetting: (state, action) => {
       state.setting = action.payload;
+      state.lastFetch = Date.now();
     },
     setAppPages: (state, action) => {
       state.pages = action.payload;

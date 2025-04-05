@@ -3,11 +3,13 @@ import MenuIcon from "@mui/icons-material/Menu";
 import { useState } from "react";
 import { SideBarDrawer } from "./Drawer";
 import { useAppSelector } from "@/store/hooks";
+import { Avatar } from "@mui/material";
 export const NavBar = () => {
   const location = useLocation();
   const [open, setOpen] = useState(false);
   const token = localStorage.getItem("token");
   const { profile } = useAppSelector((store) => store.auth);
+  console.log(profile);
 
   return (
     <div className="bg-green  sticky top-0 z-10">
@@ -43,12 +45,15 @@ export const NavBar = () => {
         </div>
         <div>
           {token ? (
-            <div>
+            <div className="flex gap-2">
+              <div className=" flex-col items-end text-white lg:flex hidden">
+                <h3 className="font-medium text-sm"> {profile?.name} </h3>
+                <small> {profile?.email} </small>
+              </div>
               <Link to={"/profile"}>
-                <img
+                <Avatar
+                  alt={profile?.name}
                   src={profile?.assetUrl || "/default.jpg"}
-                  className="w-10 h-10  object-cover rounded-full"
-                  alt="profile"
                 />
               </Link>
             </div>

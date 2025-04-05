@@ -51,7 +51,7 @@ export const AccountProfile = () => {
                 </button> */}
               </TabList>
             </Box>
-            <TabPanel value="1">
+            <TabPanel value="1" keepMounted>
               <ProfileDetail data={profile as Profile} />
             </TabPanel>
             <TabPanel value="2">
@@ -59,7 +59,7 @@ export const AccountProfile = () => {
                 profile.lectures?.map((item) => (
                   <div
                     key={item.id}
-                    className="flex items-center justify-between gap-10 p-3 border border-black !border-opacity-10 hover:shadow-md transition-all duration-300 ease-in-out max-w-screen-sm rounded-xl"
+                    className="flex items-center justify-between gap-10 p-3 border border-black !border-opacity-10  transition-all duration-300 ease-in-out max-w-screen-sm rounded-xl"
                   >
                     <div className="flex items-center gap-5 md:gap-10">
                       <img

@@ -1,4 +1,4 @@
-import { useAppDispatch } from "@/store/hooks";
+import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { getAppSetting } from "@/store/slice/appSlice";
 import { ReactNode, useEffect } from "react";
 import { NavBar } from "./Navbar";
@@ -10,10 +10,17 @@ interface Props {
 }
 export const Layout = ({ children }: Props) => {
   const token = localStorage.getItem("token");
+  const { profile } = useAppSelector((store) => store.auth);
+  const { lastFetch } = useAppSelector((store) => store.app);
   const dispatch = useAppDispatch();
+  const now = Date.now();
+  const duration = 15 * 60 * 1000;
+
   useEffect(() => {
-    dispatch(getAppSetting());
-    token && dispatch(getProfile());
+    if (!lastFetch || now - lastFetch > duration) {
+      dispatch(getAppSetting());
+    }
+    token && !profile && dispatch(getProfile());
   }, []);
   return (
     <div className="flex flex-col min-h-screen">

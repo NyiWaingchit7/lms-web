@@ -28,7 +28,7 @@ export const getProfile = createAsyncThunk(
       if (!response.ok) {
         data.message && toast.error(data.message);
       } else {
-        thunkApi.dispatch(setProfile(null));
+        thunkApi.dispatch(setProfile(data.student));
       }
     } catch (error) {
       console.log(error);

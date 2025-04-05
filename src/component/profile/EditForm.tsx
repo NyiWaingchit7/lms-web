@@ -6,10 +6,12 @@ import { ImageInput } from "../form/ImageInput";
 import { useAppDispatch } from "@/store/hooks";
 import { editProfile, getProfile } from "@/store/slice/authSlice";
 import toast from "react-hot-toast";
+import { ReactNode } from "react";
 interface Props {
   data: Profile;
+  child: ReactNode;
 }
-export const ProfileEdit = ({ data }: Props) => {
+export const ProfileEdit = ({ data, child }: Props) => {
   const dispatch = useAppDispatch();
   const validationSchema = Yup.object().shape({
     name: Yup.string().required("Username is required."),
@@ -33,9 +35,12 @@ export const ProfileEdit = ({ data }: Props) => {
   });
   return (
     <form onSubmit={formik.handleSubmit} className="max-w-screen-sm">
-      <h3 className="text-xl font-semibold mt-4 text-green border-s-4 px-2 border-green">
-        Edit Profile
-      </h3>
+      <div className="flex justify-between mt-4">
+        <h3 className="text-xl font-semibold  text-green border-s-4 px-2 border-green">
+          Edit Profile
+        </h3>
+        {child}
+      </div>
       <div className="w-full mt-5 ">
         <TextInput
           value={formik.values.name}
