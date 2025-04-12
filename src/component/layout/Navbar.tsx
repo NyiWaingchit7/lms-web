@@ -9,7 +9,6 @@ export const NavBar = () => {
   const [open, setOpen] = useState(false);
   const token = localStorage.getItem("token");
   const { profile } = useAppSelector((store) => store.auth);
-  console.log(profile);
 
   return (
     <div className="bg-green  sticky top-0 z-10">

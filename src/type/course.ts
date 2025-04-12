@@ -33,4 +33,5 @@ export interface CourseSlice {
   error: Error | null;
   detail: Course | null;
   loadmore_button: boolean;
+  links: Object[];
 }

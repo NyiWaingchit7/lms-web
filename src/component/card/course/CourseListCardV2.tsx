@@ -19,9 +19,21 @@ export const CourserListCardV2 = ({ data, listing }: Props) => {
           alt=""
         />
       </div>
-      <h3 className="text-xs md:text-lg font-semibold my-3 px-3">
-        {data.title}
-      </h3>
+      <div className="my-3 px-3">
+        <h3 className="text-xs md:text-lg font-semibold ">{data.title}</h3>
+        {data.categories.slice(0, 3).map((el) => (
+          <small
+            key={el.id}
+            className=" bg-green text-white px-2 py-1 rounded-md text-[9px] mr-1"
+          >
+            {el.name}
+          </small>
+        ))}
+        {data.categories.length > 3 && (
+          <small className=" font-medium"> + 1 </small>
+        )}
+      </div>
+
       <div className="bg-black/5 text-black p-3 flex justify-between items-center">
         <div>
           {data.isPremium ? (

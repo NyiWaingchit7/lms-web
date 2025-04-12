@@ -15,15 +15,13 @@ export const GoogleLogin = ({ title }: Props) => {
   };
 
   const handleMessage = (event: MessageEvent) => {
-    if (event.origin !== `${config.backendUrl}` || !event.data?.token) {
-      
+    if (!config.baseUrl.startsWith(event.origin) || !event.data?.token) {
       return;
     }
 
     const { token } = event.data;
 
     if (token) {
-
       localStorage.setItem("token", token);
       navigate("/");
     }
@@ -39,7 +37,7 @@ export const GoogleLogin = ({ title }: Props) => {
   return (
     <div>
       <button
-      type="reset"
+        type="reset"
         className=" w-full flex items-center justify-center font-semibold border border-green rounded-md p-2"
         onClick={handleGoogleLogin}
       >

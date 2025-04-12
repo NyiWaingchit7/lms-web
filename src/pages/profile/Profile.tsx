@@ -11,8 +11,9 @@ import { ProfileDetail } from "@/component/profile/ProfileDetail";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { myProfile } from "@/store/slice/authSlice";
 import { Profile } from "@/type/auth";
+import { useNavigate } from "react-router-dom";
 export const AccountProfile = () => {
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
   const [value, setValue] = useState("1");
   const { profile } = useAppSelector((store) => store.auth);
   const dispatch = useAppDispatch();
@@ -53,6 +54,15 @@ export const AccountProfile = () => {
             </Box>
             <TabPanel value="1" keepMounted>
               <ProfileDetail data={profile as Profile} />
+              <button
+                className="text-red"
+                onClick={() => {
+                  localStorage.removeItem("token");
+                  navigate("/");
+                }}
+              >
+                Log out
+              </button>
             </TabPanel>
             <TabPanel value="2">
               {profile?.lectures?.length ? (

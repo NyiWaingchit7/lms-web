@@ -10,6 +10,7 @@ const initialState: CourseSlice = {
   page: 1,
   detail: null,
   loadmore_button: false,
+  links: [],
 };
 
 export const handleGetCourses = createAsyncThunk(
@@ -34,6 +35,7 @@ export const handleGetCourses = createAsyncThunk(
         searchKey,
         isPremium: isPremium?.toString(),
         categoryId: categoryId?.toString() || "",
+        limit: "9",
       };
       const queryString = new URLSearchParams(param).toString();
       const { data, response } = await fetchFunction({
@@ -45,6 +47,7 @@ export const handleGetCourses = createAsyncThunk(
       } else {
         thunkApi.dispatch(setCourses(data.data));
         thunkApi.dispatch(hasMorePage(data.has_more_pages));
+        thunkApi.dispatch(setLinks(data.links));
 
         thunkApi.dispatch(courseLoading(false));
       }
@@ -74,7 +77,7 @@ export const courseSlice = createSlice({
   initialState,
   reducers: {
     setCourses: (state, action) => {
-      state.items = [...state.items, ...action.payload];
+      state.items = action.payload;
     },
     setCourseDetail: (state, action) => {
       state.detail = action.payload;
@@ -91,9 +94,13 @@ export const courseSlice = createSlice({
     setLoadMore: (state, action) => {
       state.loadmore_button = action.payload;
     },
+    setLinks: (state, action) => {
+      state.links = action.payload;
+    },
     clearCourses: (state) => {
       state.items = [];
     },
+
     cleanCourseSlice: (state) => {
       state.isLoading = false;
       state.items = [];
@@ -113,5 +120,6 @@ export const {
   clearCourses,
   setCourseDetail,
   cleanCourseSlice,
+  setLinks,
 } = courseSlice.actions;
 export default courseSlice.reducer;

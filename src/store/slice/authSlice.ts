@@ -27,6 +27,7 @@ export const getProfile = createAsyncThunk(
       });
       if (!response.ok) {
         data.message && toast.error(data.message);
+        localStorage.removeItem("token");
       } else {
         thunkApi.dispatch(setProfile(data.student));
       }
