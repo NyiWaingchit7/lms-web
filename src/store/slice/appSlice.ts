@@ -148,7 +148,7 @@ export const getCategory = createAsyncThunk(
   async (_, thunkApi) => {
     try {
       const { response, data } = await fetchFunction({
-        url: "categories",
+        url: "categories?limit=99999",
       });
       if (!response.ok) {
         toast.error(data.message);

@@ -34,7 +34,7 @@ export const CourserListCardV2 = ({ data, listing }: Props) => {
         )}
       </div>
 
-      <div className="bg-black/5 text-black p-3 flex justify-between items-center">
+      <div className="bg-black/5 text-black p-3 flex justify-between items-center mt-auto">
         <div>
           {data.isPremium ? (
             <div>

@@ -3,12 +3,12 @@ import { useSearchParams } from "react-router-dom";
 
 export const getQuery = () => {
   const [searchParams] = useSearchParams();
-  const page = parseInt(searchParams.get("page") || "1", 10);
-  const searchKey = searchParams.get("searchKey") || "";
+
   return useMemo(() => {
-    return {
-      page,
-      searchKey,
-    };
-  }, [page, searchKey]);
+    const params = {} as any;
+    for (const [key, value] of searchParams.entries()) {
+      params[key] = value;
+    }
+    return params;
+  }, [searchParams]);
 };

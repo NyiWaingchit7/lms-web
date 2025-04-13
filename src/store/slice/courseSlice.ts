@@ -2,6 +2,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { CourseSlice } from "@/type/course";
 import { fetchFunction } from "@/utils/useFetchFunction";
 import toast from "react-hot-toast";
+import { buildQuery } from "@/utils/buildQury";
 const initialState: CourseSlice = {
   isLoading: false,
   items: [],
@@ -11,6 +12,7 @@ const initialState: CourseSlice = {
   detail: null,
   loadmore_button: false,
   links: [],
+  total: 0,
 };
 
 export const handleGetCourses = createAsyncThunk(
@@ -22,10 +24,10 @@ export const handleGetCourses = createAsyncThunk(
       isPremium = "",
       categoryId = null,
     }: {
-      page?: number;
+      page?: number | string;
       searchKey?: string;
-      isPremium?: string;
-      categoryId?: null | number;
+      isPremium?: string | boolean;
+      categoryId?: null | number | string;
     },
     thunkApi
   ) => {
@@ -37,9 +39,11 @@ export const handleGetCourses = createAsyncThunk(
         categoryId: categoryId?.toString() || "",
         limit: "9",
       };
-      const queryString = new URLSearchParams(param).toString();
+      // const queryString = new URLSearchParams(param).toString();
+      thunkApi.dispatch(courseLoading(true));
+      const query = buildQuery(param);
       const { data, response } = await fetchFunction({
-        url: `lectures?${queryString}`,
+        url: `lectures${query}`,
       });
       if (!response.ok) {
         toast.error(data.message);
@@ -48,7 +52,7 @@ export const handleGetCourses = createAsyncThunk(
         thunkApi.dispatch(setCourses(data.data));
         thunkApi.dispatch(hasMorePage(data.has_more_pages));
         thunkApi.dispatch(setLinks(data.links));
-
+        thunkApi.dispatch(setTotal(data.total));
         thunkApi.dispatch(courseLoading(false));
       }
     } catch (error) {
@@ -100,6 +104,9 @@ export const courseSlice = createSlice({
     clearCourses: (state) => {
       state.items = [];
     },
+    setTotal: (state, action) => {
+      state.total = action.payload;
+    },
 
     cleanCourseSlice: (state) => {
       state.isLoading = false;
@@ -121,5 +128,6 @@ export const {
   setCourseDetail,
   cleanCourseSlice,
   setLinks,
+  setTotal,
 } = courseSlice.actions;
 export default courseSlice.reducer;

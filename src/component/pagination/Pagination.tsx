@@ -1,25 +1,42 @@
-import { useEffect } from "react";
-import { Link } from "react-router-dom";
+import { useLimitedPaginations } from "@/utils/useLimitPagination";
 
 interface Props {
   links: any[];
+  paginations: number;
+  perPage?: number;
+  page: string;
+  paginated: (data?: any) => void;
 }
-export const Pagination = ({ links }: Props) => {
-  useEffect(() => {}, [links]);
+export const Pagination = ({ paginations, page, paginated }: Props) => {
+  const data = useLimitedPaginations(paginations, Number(page));
+
   return (
-    <div className="flex gap-2 mt-5">
-      {links?.length > 3 &&
-        links.map((d, i) => (
-          <Link
-            to={d.url}
-            key={i}
-            className={`${
-              d.active ? "bg-black text-white" : ""
-            } px-4 py-2 rounded-md  capitalize`}
-          >
-            {d.label}
-          </Link>
-        ))}
+    <div className="mt-5">
+      {paginations ? (
+        <div className="flex gap-3">
+          <button>
+            <i className="fa-solid fa-angle-left"></i>
+          </button>
+          {data.map((d, i) => (
+            <button
+              key={i}
+              className={`px-3 py-1 rounded-md text-sm ${
+                page == d ? "bg-green text-white " : ""
+              }`}
+              onClick={() => {
+                paginated(d);
+              }}
+            >
+              {d}
+            </button>
+          ))}
+          <button>
+            <i className="fa-solid fa-chevron-right"></i>
+          </button>
+        </div>
+      ) : (
+        ""
+      )}
     </div>
   );
 };
