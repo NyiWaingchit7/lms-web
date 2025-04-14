@@ -11,16 +11,12 @@ export const NavBar = () => {
   const { profile } = useAppSelector((store) => store.auth);
 
   return (
-    <div className="bg-green  sticky top-0 z-10">
-      <div className="container flex justify-between items-center overflow-x-hidden">
+    <div className="bg-green  sticky top-0 z-10 py-2 md:py-1">
+      <div className="container flex justify-between items-center">
         <div className="flex items-center gap-5 md:gap-32">
           <div className="">
             <Link to={"/"}>
-              <img
-                src="/logo.png"
-                alt="logo"
-                className="w-14 md:w-20 mx-auto fill-white"
-              />
+              <img src="/logo.png" alt="logo" className="w-8 md:w-14 mx-auto" />
             </Link>
           </div>
           <div>
@@ -57,12 +53,12 @@ export const NavBar = () => {
               </Link>
             </div>
           ) : (
-            <div className="flex gap-3 items-center">
+            <div className="flex gap-3 items-center text-sm">
               <Link to={"/log-in"}>
-                <button className="btn-login">Log in</button>
+                <button className="btn-login py-1 md:py-2">Log in</button>
               </Link>
               <Link to={"/register"}>
-                <p className="text-lg text-white cursor-pointer">Register</p>
+                <p className=" text-white cursor-pointer">Register</p>
               </Link>
             </div>
           )}

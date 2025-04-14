@@ -3,5 +3,11 @@ import { Outlet } from "react-router-dom";
 
 export const PrivateRoutes = () => {
   const accessToken = localStorage.getItem("token");
-  return accessToken ? <Outlet /> : <AuthDialog />;
+  return accessToken ? (
+    <Outlet />
+  ) : (
+    <AuthDialog>
+      <Outlet />
+    </AuthDialog>
+  );
 };

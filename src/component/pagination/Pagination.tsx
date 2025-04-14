@@ -9,19 +9,24 @@ interface Props {
 }
 export const Pagination = ({ paginations, page, paginated }: Props) => {
   const data = useLimitedPaginations(paginations, Number(page));
+  const current = Number(page);
 
   return (
     <div className="mt-5">
       {paginations ? (
         <div className="flex gap-3">
-          <button>
+          <button
+            onClick={() => {
+              current > 1 && paginated(current - 1);
+            }}
+          >
             <i className="fa-solid fa-angle-left"></i>
           </button>
           {data.map((d, i) => (
             <button
               key={i}
               className={`px-3 py-1 rounded-md text-sm ${
-                page == d ? "bg-green text-white " : ""
+                current == d ? "bg-green text-white " : ""
               }`}
               onClick={() => {
                 paginated(d);
@@ -30,7 +35,11 @@ export const Pagination = ({ paginations, page, paginated }: Props) => {
               {d}
             </button>
           ))}
-          <button>
+          <button
+            onClick={() => {
+              paginations > current && paginated(current + 1);
+            }}
+          >
             <i className="fa-solid fa-chevron-right"></i>
           </button>
         </div>

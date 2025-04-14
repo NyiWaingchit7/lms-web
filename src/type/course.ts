@@ -36,3 +36,9 @@ export interface CourseSlice {
   links: Object[];
   total: number;
 }
+
+export interface FilterKeysType {
+  page: string;
+  isPremium: string | boolean;
+  categories: number[];
+}
