@@ -1,12 +1,10 @@
 import { config } from "@/utils/config";
 import { generateToken } from "@/utils/headerOption";
 import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 interface Props {
   title: string;
 }
 export const GoogleLogin = ({ title }: Props) => {
-  const navigate = useNavigate();
   const handleGoogleLogin = async () => {
     const token = await generateToken();
     const url = `${config.baseUrl}/auth/google?api_token=${token}`;
@@ -23,7 +21,7 @@ export const GoogleLogin = ({ title }: Props) => {
 
     if (token) {
       localStorage.setItem("token", token);
-      navigate("/");
+      window.history.back();
     }
   };
   useEffect(() => {

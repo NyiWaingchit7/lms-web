@@ -9,7 +9,7 @@ interface Props {
 export const ProfileDetail = ({ data }: Props) => {
   const [isEdit, setEdit] = useState(false);
   return (
-    <div>
+    <div className="w-full">
       {isEdit ? (
         <ProfileEdit
           child={

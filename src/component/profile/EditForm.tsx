@@ -34,7 +34,7 @@ export const ProfileEdit = ({ data, child }: Props) => {
     },
   });
   return (
-    <form onSubmit={formik.handleSubmit} className="max-w-screen-sm">
+    <form onSubmit={formik.handleSubmit} className="">
       <div className="flex justify-between mt-4">
         <h3 className="text-xl font-semibold  text-green border-s-4 px-2 border-green">
           Edit Profile

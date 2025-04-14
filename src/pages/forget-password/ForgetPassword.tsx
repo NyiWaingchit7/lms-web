@@ -1,17 +1,15 @@
-import { Title } from "@/component/layout/Title";
-import { useAppDispatch, useAppSelector } from "@/store/hooks";
+import { useAppDispatch } from "@/store/hooks";
 import { useEffect, useState } from "react";
 import { getAppSetting } from "@/store/slice/appSlice";
 import { TextInput } from "@/component/form/TextInput";
 import { forgetPassword, forgetVerify } from "@/store/slice/authSlice";
 import toast from "react-hot-toast";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { MuiOtpInput } from "mui-one-time-password-input";
 import { AuthLayout } from "@/component/layout/AuthLayout";
 
 export const ForgetPassword = () => {
   const dispatch = useAppDispatch();
-  const { setting } = useAppSelector((store) => store.app);
   const navigate = useNavigate();
   const [isOtp, setIsOtp] = useState(false);
 

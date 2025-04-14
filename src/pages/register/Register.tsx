@@ -1,6 +1,5 @@
 import { Link, useNavigate } from "react-router-dom";
-import { Title } from "@/component/layout/Title";
-import { useAppDispatch, useAppSelector } from "@/store/hooks";
+import { useAppDispatch } from "@/store/hooks";
 import { useEffect, useState } from "react";
 import { getAppSetting } from "@/store/slice/appSlice";
 import { MuiOtpInput } from "mui-one-time-password-input";
@@ -14,7 +13,6 @@ import { useFormik } from "formik";
 import { AuthLayout } from "@/component/layout/AuthLayout";
 export const Register = () => {
   const dispatch = useAppDispatch();
-  const { setting } = useAppSelector((store) => store.app);
   const [code, setCode] = useState("");
   const [isOtp, setIsOtp] = useState(false);
   const defaultForm = {
