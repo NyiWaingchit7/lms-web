@@ -16,6 +16,7 @@ import { PrivateRoutes } from "./PrivateRoute";
 import ErrorBoundary from "@/component/error/ErrorBoundary";
 import { AuthRoutes } from "./AuthRoute";
 import { AccountProfile } from "@/pages/profile/Profile";
+import { ThankYou } from "@/pages/thank-you/ThankYou";
 
 export const Router = () => {
   return (
@@ -46,6 +47,7 @@ export const Router = () => {
           <Route element={<PrivateRoutes />}>
             <Route path="/checkout" Component={Checkout} />
             <Route path="/profile" Component={AccountProfile} />
+            <Route path="/thank-you" Component={ThankYou} />
           </Route>
         </Routes>
       </ErrorBoundary>

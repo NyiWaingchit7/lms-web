@@ -36,7 +36,9 @@ export const Checkout = () => {
         payment_assetUrl,
         onSuccess: () => {
           toast.success("We will sent email about purchasement.");
-          navigate("/courses");
+          navigate("/thank-you", {
+            state: { data },
+          });
         },
       })
     );
@@ -89,7 +91,7 @@ export const Checkout = () => {
                       </AccordionSummary>
                       <AccordionDetails className="text-xs md:text-sm">
                         {payment.map((item) => (
-                          <div className="flex  gap-5">
+                          <div key={item.id} className="flex  gap-5">
                             <img
                               src={item.payment_bank.assetUrl}
                               alt={item.name}

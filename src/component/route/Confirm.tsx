@@ -16,11 +16,12 @@ export const AuthDialog = ({ children }: Props) => {
     <div>
       {children}
       <Dialog open={open} className=" mx-auto">
-        <DialogTitle className="text-green !font-bold !text-xl">
-          Authentication
+        <DialogTitle className="!font-semibold !text-xl">
+          <i className="fa-solid fa-lock text-yellow-400"></i> Hold up!
         </DialogTitle>
-        <DialogContent className="w-[350px]">
-          You need to log in first!
+        <DialogContent className="w-[450px] text-xs md:text-sm">
+          This area is for VIPs only — and that means logged-in users. Wanna
+          sign in now?
         </DialogContent>
         <DialogActions>
           <button
