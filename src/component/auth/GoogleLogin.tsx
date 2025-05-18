@@ -7,7 +7,7 @@ interface Props {
 export const GoogleLogin = ({ title }: Props) => {
   const handleGoogleLogin = async () => {
     const token = await generateToken();
-    const url = `${config.baseUrl}/auth/google?api_token=${token}`;
+    const url = `${config.baseUrl}/api/v1/auth/google?api_token=${token}`;
     window.open(url, "_blank", "width=800,height=600");
     window.addEventListener("message", handleMessage);
   };
