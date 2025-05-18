@@ -1,4 +1,3 @@
-import { config } from "./config";
 import { headerOptions } from "./headerOption";
 
 interface Props {
