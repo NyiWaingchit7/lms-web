@@ -18,7 +18,7 @@ export const fetchFunction = async ({
     headers: headers ? headers : await headerOptions(),
     body,
   };
-  const response = await fetch(`${config.baseUrl}/${url}`, options);
+  const response = await fetch(`/api/${url}`, options);
   const data = await response.json();
   return { response, data };
 };
